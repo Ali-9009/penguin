@@ -256,7 +256,7 @@ export default function ResearchShowcase() {
             INTERACTIVE SHOWCASE
         ========================= */}
 
-        <div className="relative mx-auto h-[520px] w-full max-w-[1300px] sm:h-[620px] lg:h-160">
+        <div className="relative mx-auto h-110 w-full max-w-[1300px] sm:h-140 lg:h-160">
           {/* CENTER GLOW */}
 
           <div
@@ -269,23 +269,19 @@ export default function ResearchShowcase() {
               TWO CENTER PRODUCTS
           ========================= */}
 
-          {/* CENTER LOGO */}
           <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center">
             <div
               data-showcase-product
-              className="relative flex h-40 w-[180px] items-center justify-center rounded-3xl border border-[#C8E6EF] bg-white/80 p-5 shadow-[0_15px_50px_rgba(7,85,143,0.12),0_0_35px_rgba(4,193,202,0.08)] backdrop-blur-xl sm:w-[280px] sm:p-8 lg:w-[360px] lg:p-10"
+              className="relative flex w-[200px] items-center justify-center rounded-[24px] border border-[#C8E6EF] bg-white/90 p-4 shadow-[0_15px_50px_rgba(7,85,143,0.12),0_0_35px_rgba(4,193,202,0.08)] backdrop-blur-xl sm:w-[220px] sm:rounded-[26px] lg:w-[280px] lg:rounded-[30px] lg:p-5"
             >
-              {/* INNER BORDER */}
-              <div className="pointer-events-none absolute inset-[6px] rounded-[22px] border border-white/80 sm:rounded-[30px] lg:rounded-[38px]" />
-
-              {/* LOGO */}
-              <div className="showcase-float-center relative h-full w-full">
+              <div className="showcase-float-center relative w-full">
                 <Image
                   src="/assets/penguin-logo.png"
                   alt="Penguin Peptides"
-                  fill
-                  sizes="(max-width: 640px) 140px, (max-width: 1024px) 216px, 280px"
-                  className="object-contain drop-shadow-[0_12px_25px_rgba(7,59,104,0.10)]"
+                  width={400}
+                  height={160}
+                  sizes="(max-width: 640px) 168px, (max-width: 1024px) 188px, 240px"
+                  className="block h-auto w-full object-contain"
                 />
               </div>
             </div>
