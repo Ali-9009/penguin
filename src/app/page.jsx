@@ -3,8 +3,8 @@ import CTASection from "@/components/CTASection";
 import Faqs from "@/components/Faqs";
 import Hero from "@/components/Hero";
 import HowItWorks from "@/components/HowItWorks";
-// import LabVerification from "@/components/LabVerification";
 import ProductGrid from "@/components/ProductGrid";
+import ResearchShowcase from "@/components/ResearchShowcase";
 import USShippingCoverage from "@/components/shipping/USShippingCoverage";
 import WhyChooseUs from "@/components/WhyChooseUs";
 
@@ -17,7 +17,7 @@ export default function HomePage() {
 
       <HowItWorks />
       <Bestsellers />
-
+      <ResearchShowcase />
       <Faqs />
       <USShippingCoverage />
       <CTASection />
