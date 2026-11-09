@@ -153,7 +153,7 @@ export default function ResearchCTA() {
 
         <h2
           id="research-cta-heading"
-          className="font-heading max-w-[850px] text-[clamp(2.3rem,6vw,4.8rem)] leading-[1.08] font-extrabold tracking-[-0.06em] text-white"
+          className="font-heading max-w-[1100px] text-[clamp(2.8rem,9vw,4.5rem)] leading-[1.05] font-extrabold tracking-[-0.06em] text-white sm:text-[clamp(4rem,7vw,6rem)] lg:text-[clamp(5rem,7vw,7rem)]"
         >
           Research Peptides.
           <br />
@@ -162,22 +162,12 @@ export default function ResearchCTA() {
           </span>
         </h2>
 
-        {/* DESCRIPTION */}
-
-        <p className="text-md mt-4 max-w-[490px] text-[#A7BCCB]">
-          Explore our collection of research peptides and blends in a variety of
-          strengths for laboratory applications.
-        </p>
-
         {/* CTA BUTTONS */}
 
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3 sm:mt-10">
           {/* PRIMARY */}
 
-          <Link
-            href="/shop"
-            className="group relative inline-flex h-10 items-center justify-center gap-2.5 overflow-hidden rounded-full bg-gradient-to-r from-[#07558F] via-[#0878A5] to-[#04AEBB] px-4 text-[12px] font-semibold text-white shadow-[0_10px_30px_rgba(4,193,202,0.17)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_15px_35px_rgba(4,193,202,0.25)] sm:h-12 sm:px-8 sm:text-[13px]"
-          >
+          <Link href="/shop" className="btn-gradient">
             <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
 
             <span className="relative z-10">Shop Research Peptides</span>

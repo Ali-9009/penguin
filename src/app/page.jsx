@@ -16,10 +16,13 @@ export default function HomePage() {
   return (
     <main>
       <section
-        data-aos="fade-up"
-        className="relative w-full overflow-hidden bg-[#EAF7FA]"
+        aria-labelledby="hero-heading"
+        className="relative h-[calc(100dvh-110px)] w-full overflow-hidden bg-[#EAF7FA] sm:h-[calc(100dvh-115px)] lg:h-[calc(100dvh-110px)]"
       >
-        {/* BACKGROUND IMAGES */}
+        {/* =====================================
+      BACKGROUND IMAGES
+  ===================================== */}
+
         <div className="absolute inset-0">
           {/* MOBILE + TABLET */}
           <Image
@@ -42,23 +45,32 @@ export default function HomePage() {
           />
         </div>
 
+        {/* =====================================
+      BACKGROUND OVERLAYS
+  ===================================== */}
+
         {/* MOBILE OVERLAY */}
         <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-[#F2FAFC]/65 via-transparent to-transparent lg:hidden" />
 
         {/* DESKTOP OVERLAY */}
         <div className="pointer-events-none absolute inset-0 hidden bg-linear-to-r from-[#F2FAFC]/55 via-transparent to-transparent lg:block" />
 
-        {/* HERO CONTENT */}
-        <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex w-full flex-col items-center pt-16 pb-100 text-center sm:pt-20 sm:pb-[450px] md:pt-14 md:pb-140 lg:min-h-[650px] lg:items-start lg:justify-center lg:py-20 lg:text-left xl:min-h-[700px]">
+        {/* =====================================
+      HERO CONTENT
+  ===================================== */}
+
+        <div className="relative z-10 mx-auto h-full w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex h-full w-full flex-col items-center justify-start pt-12 text-center sm:pt-10 md:pt-12 lg:items-start lg:justify-center lg:py-0 lg:text-left">
             <div className="relative z-30 w-full max-w-[560px] lg:max-w-[620px]">
               {/* EYEBROW */}
+
               <div
                 data-hero-eyebrow
-                className="mb-5 inline-flex items-center gap-2.5 rounded-full border border-[#D6EAF0] bg-white/90 px-4 py-2.5 shadow-[0_5px_20px_rgba(7,85,143,0.04)]"
+                className="mb-4 inline-flex items-center gap-2.5 rounded-full border border-[#D6EAF0] bg-white/90 px-4 py-2.5 shadow-[0_5px_20px_rgba(7,85,143,0.04)] sm:mb-5"
               >
                 <span className="relative flex h-2 w-2">
                   <span className="bg-secondary/40 absolute inset-0 animate-ping rounded-full" />
+
                   <span className="bg-secondary relative h-2 w-2 rounded-full" />
                 </span>
 
@@ -67,50 +79,52 @@ export default function HomePage() {
                 </span>
               </div>
 
-              {/* HEADING */}
+              {/* =====================================
+            HEADING
+        ===================================== */}
+
               <h1
                 id="hero-heading"
                 data-hero-heading
-                className="font-heading text-primary max-w-[620px] text-[clamp(2.3rem,8vw,3.5rem)] leading-[1.08] font-extrabold tracking-[-0.055em] sm:text-[clamp(3rem,5vw,4rem)] lg:text-[clamp(3.2rem,4vw,4.8rem)]"
+                className="font-heading text-primary max-w-[620px] text-[clamp(2rem,8vw,3.3rem)] leading-[1.08] font-extrabold tracking-[-0.055em] sm:text-[clamp(2.8rem,5vw,4rem)] lg:text-[clamp(3.2rem,4vw,4.8rem)]"
               >
                 Precision in
                 <br />
                 <span className="text-secondary-dark">Every Discovery.</span>
               </h1>
 
-              {/* DESCRIPTION */}
+              {/* =====================================
+            DESCRIPTION
+        ===================================== */}
+
               <p
                 data-hero-description
-                className="mx-auto mt-6 max-w-[530px] font-sans text-[14px] leading-[1.75] text-[#657F8B] sm:mt-7 sm:text-[16px] lg:mx-0"
+                className="mx-auto mt-4 max-w-[530px] font-sans text-[13px] leading-[1.7] sm:mt-6 sm:text-[16px] lg:mx-0"
               >
                 Discover premium research peptides in a variety of strengths and
                 formulations for laboratory research.
               </p>
 
-              {/* BUTTONS */}
+              {/* =====================================
+            BUTTONS
+        ===================================== */}
+
               <div
                 data-hero-buttons
-                className="mt-8 flex flex-wrap items-center justify-center gap-3 sm:mt-9 lg:justify-start"
+                className="mt-6 flex flex-wrap items-center justify-center gap-3 sm:mt-8 lg:justify-start"
               >
                 {/* PRIMARY BUTTON */}
-                <Link
-                  href="/shop"
-                  className="group relative inline-flex h-11 items-center justify-center gap-3 overflow-hidden rounded-full bg-gradient-to-r from-[#07558F] via-[#0878A5] to-[#04AEBB] px-5 text-[13px] font-semibold text-white shadow-[0_8px_24px_rgba(7,85,143,0.20)] transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_14px_32px_rgba(7,85,143,0.28)] active:translate-y-0 sm:h-[52px] sm:px-8 sm:text-[14px]"
-                >
-                  <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
 
-                  <span className="relative z-10">Explore Collection</span>
-
-                  <ArrowUpRight
-                    size={18}
-                    className="relative z-10 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                  />
+                <Link href="/shop" className="btn-gradient">
+                  Explore Collection
+                  <ArrowUpRight size={18} />
                 </Link>
 
                 {/* SECONDARY BUTTON */}
+
                 <Link
                   href="/about-us"
-                  className="group text-primary hover:border-primary inline-flex h-11 items-center justify-center gap-3 rounded-full border border-[#C8DEE8] bg-white/80 px-5 text-[13px] font-semibold shadow-[0_4px_15px_rgba(7,85,143,0.04)] backdrop-blur-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:bg-[#EAF7FA] hover:shadow-[0_10px_25px_rgba(7,85,143,0.10)] active:translate-y-0 sm:h-[52px] sm:px-8 sm:text-[14px]"
+                  className="group text-primary hover:border-primary inline-flex h-10 items-center justify-center gap-3 rounded-full border border-[#C8DEE8] bg-white/80 px-5 text-[12px] font-semibold shadow-[0_4px_15px_rgba(7,85,143,0.04)] backdrop-blur-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:bg-[#EAF7FA] hover:shadow-[0_10px_25px_rgba(7,85,143,0.10)] active:translate-y-0 sm:h-[52px] sm:px-8 sm:text-[14px]"
                 >
                   <span>Learn More</span>
 
@@ -121,14 +135,21 @@ export default function HomePage() {
                 </Link>
               </div>
 
-              {/* TRUST PILLS - HIDDEN ON MOBILE */}
-              <div
-                data-aos="fade-up"
-                className="mt-8 hidden flex-wrap items-center justify-center gap-3 sm:flex lg:justify-start"
-              >
+              {/* =====================================
+            TRUST PILLS
+            HIDDEN ON MOBILE
+        ===================================== */}
+
+              <div className="mt-6 hidden flex-wrap items-center justify-center gap-3 sm:flex lg:mt-8 lg:justify-start">
                 {[
-                  { value: "99.5%+", label: "Verified Purity" },
-                  { value: "100K+", label: "Researchers Served" },
+                  {
+                    value: "99.5%+",
+                    label: "Verified Purity",
+                  },
+                  {
+                    value: "100K+",
+                    label: "Researchers Served",
+                  },
                 ].map((item) => (
                   <div
                     key={item.label}
@@ -148,10 +169,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      
-      <PromoMarquee />
 
-      <Hero />
+      <PromoMarquee />
 
       <ProductGrid />
       <WhyChooseUs />

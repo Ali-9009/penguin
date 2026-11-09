@@ -222,7 +222,7 @@ export default function ProductCard({ product, onQuickView }) {
               onClick={handleAddToCart}
               disabled={!canAdd || adding}
               aria-label={`Add ${product.name} to cart`}
-              className="bg-primary hover:bg-primary-dark mt-3 flex h-10 w-full items-center justify-center gap-2 rounded-full px-2 text-[11px] font-semibold text-white transition-all duration-300 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 sm:h-11 sm:text-[13px]"
+              className="btn-gradient mt-3 !h-10 w-full !gap-2 !px-2 !text-[11px] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0 sm:!h-11 sm:!text-[13px]"
             >
               {adding ? (
                 <>
@@ -237,10 +237,7 @@ export default function ProductCard({ product, onQuickView }) {
               ) : !hasPrice ? (
                 "Unavailable"
               ) : (
-                <>
-                  <Plus size={16} strokeWidth={2} />
-                  Add to Cart
-                </>
+                <>Add to Cart</>
               )}
             </button>
           </div>

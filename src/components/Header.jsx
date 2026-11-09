@@ -41,32 +41,29 @@ function AnnouncementBar() {
       <div className="pointer-events-none absolute right-1/4 -bottom-16 h-28 w-60 rounded-full bg-[#04C1CA]/30 blur-[50px]" />
 
       {/* ANNOUNCEMENT */}
-      <div className="relative z-10 mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-2.5 gap-y-1.5 text-center sm:gap-x-3">
-        <Gift
-          size={17}
-          strokeWidth={1.8}
-          className="shrink-0 text-[#8AF0F1]"
-          aria-hidden="true"
-        />
-
-        <p className="font-heading text-[11px] leading-relaxed font-medium tracking-[0.01em] text-white sm:text-[13px]">
-          <span className="font-extrabold text-[#A3F7F4]">40% OFF</span>
-
-          <span className="mx-2 text-white/50">+</span>
-
-          <span className="font-semibold text-white">FREE Peptide</span>
-
-          <span className="ml-1 font-medium text-white/85">
-            per $150 Spent After Discount
+      <div className="relative z-10 mx-auto flex max-w-7xl items-center justify-center px-2">
+        <div className="font-heading flex flex-wrap items-center justify-center gap-x-2 gap-y-2 text-center sm:gap-x-3">
+          {/* DISCOUNT BADGE */}
+          <span className="inline-flex shrink-0 items-center rounded-lg bg-gradient-to-r from-[#A3F7F4] to-[#04C1CA] px-3.5 py-1.5 text-[11px] font-extrabold tracking-[0.02em] text-[#073B68] shadow-[0_4px_14px_rgba(4,193,202,0.25)] sm:text-[12px]">
+            40% OFF
           </span>
-        </p>
 
-        <Sparkles
-          size={15}
-          strokeWidth={1.8}
-          className="hidden shrink-0 text-[#8AF0F1] sm:block"
-          aria-hidden="true"
-        />
+          {/* PLUS BADGE */}
+          <span
+            aria-hidden="true"
+            className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-white/25 bg-white/15 text-[15px] font-semibold text-white shadow-sm backdrop-blur-sm"
+          >
+            +
+          </span>
+
+          {/* FREE PEPTIDE OFFER */}
+          <p className="text-[11px] leading-relaxed text-white sm:text-[13px]">
+            <span className="font-bold text-white">FREE Peptide</span>{" "}
+            <span className="font-medium text-white/80">
+              per $150 Spent After Discount
+            </span>
+          </p>
+        </div>
       </div>
     </div>
   );

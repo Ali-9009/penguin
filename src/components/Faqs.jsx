@@ -164,7 +164,7 @@ export default function FAQ() {
             </span>
           </h2>
 
-          <p className="mx-auto mt-4 max-w-[540px] font-sans text-md leading-[1.8] text-[#6B808A]">
+          <p className="text-md mx-auto mt-4 max-w-[540px] font-sans leading-[1.8] text-[#6B808A]">
             Find answers to common questions about our research products,
             ordering, and shipping.
           </p>
@@ -173,7 +173,7 @@ export default function FAQ() {
         {/* FAQ GRID */}
 
         {/* FAQ GRID - 2 COLUMNS WITH ACCORDION */}
-        <div className="grid grid-cols-1 items-start gap-4 sm:grid-cols-2 sm:gap-5 lg:gap-6">
+        <div className="mx-auto flex w-full max-w-4xl flex-col gap-3 sm:gap-4">
           {faqs.map((faq, index) => (
             <FAQItem
               key={faq.question}
@@ -185,31 +185,6 @@ export default function FAQ() {
               }
             />
           ))}
-        </div>
-
-        {/* BOTTOM CONTACT CTA */}
-
-        <div className="mt-10 flex flex-col items-center justify-between gap-5 rounded-[22px] border border-[#DCECF1] bg-[#F4FAFC] px-6 py-7 text-center sm:mt-12 sm:flex-row sm:px-8 sm:text-left lg:px-10">
-          <div>
-            <h3 className="font-heading text-primary text-[19px] font-semibold tracking-[-0.035em] sm:text-[22px]">
-              Still have questions?
-            </h3>
-
-            <p className="mt-1.5 text-[13px] text-[#6B808A]">
-              Our team is here to help with your questions.
-            </p>
-          </div>
-
-          <Link
-            href="/contact"
-            className="group inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#07558F] to-[#009CA9] px-6 text-[12px] font-semibold text-white shadow-[0_8px_22px_rgba(7,85,143,0.15)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_28px_rgba(7,85,143,0.22)] sm:text-[13px]"
-          >
-            Contact Our Team
-            <ArrowUpRight
-              size={17}
-              className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-            />
-          </Link>
         </div>
       </div>
     </section>
