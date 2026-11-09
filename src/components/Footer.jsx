@@ -150,7 +150,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative overflow-hidden px-3 pb-3 sm:px-5 sm:pb-5 pt-6">
+    <footer className="relative w-full overflow-hidden bg-white border border-t-gray-200">
       {/* =====================================
           BACKGROUND GLOW
       ===================================== */}
@@ -169,12 +169,12 @@ export default function Footer() {
           MAIN FLOATING FOOTER
       ===================================== */}
 
-      <div className="relative mx-auto w-full max-w-7xl overflow-hidden border border-[#E5EEF1] bg-white shadow-[0_20px_70px_rgba(7,59,104,0.06)] rounded-2xl">
+      <div className="relative w-full bg-white">
         {/* =====================================
             MAIN FOOTER CONTENT
         ===================================== */}
 
-        <div className="grid grid-cols-2 gap-x-8 gap-y-12 px-6 py-12 sm:px-10 sm:py-14 lg:grid-cols-[1.5fr_0.7fr_0.7fr_0.9fr] lg:gap-12 lg:px-14 lg:py-16">
+        <div className="mx-auto grid w-full max-w-7xl grid-cols-2 gap-x-6 gap-y-10 px-4 py-12 sm:gap-x-8 sm:px-6 sm:py-14 lg:grid-cols-[1.5fr_0.7fr_0.7fr_0.9fr] lg:gap-12 lg:px-8 lg:py-16">
           {/* BRAND COLUMN */}
 
           <div className="col-span-2 lg:col-span-1">
@@ -223,8 +223,8 @@ export default function Footer() {
             RESEARCH DISCLAIMER
         ===================================== */}
 
-        <div className="border-t border-[#E8EFF2] bg-[#F8FBFC] px-6 py-7 sm:px-10 lg:px-14">
-          <div className="flex flex-col items-start gap-4 sm:flex-row sm:gap-5">
+        <div className="border-t border-[#E8EFF2] bg-[#F8FBFC]">
+          <div className="mx-auto flex max-w-7xl flex-col items-start gap-4 px-4 py-7 sm:flex-row sm:gap-5 sm:px-6 lg:px-8">
             <span className="border-primary/15 text-primary shrink-0 rounded-full border bg-[#E8F6F9] px-3.5 py-2 font-sans text-[10px] font-bold tracking-[0.12em] uppercase">
               Research Use Only
             </span>
@@ -242,40 +242,37 @@ export default function Footer() {
             BOTTOM BAR
         ===================================== */}
 
-        <div className="flex flex-col gap-5 bg-[#073B68] px-6 py-5 text-white sm:flex-row sm:items-center sm:justify-between sm:px-10 lg:px-14">
-          {/* COPYRIGHT */}
+        <div className="w-full bg-[#073B68]">
+          <div className="mx-auto flex max-w-7xl flex-col gap-5 px-4 py-5 text-white sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
+            <p className="font-sans text-xs text-white/65">
+              © {new Date().getFullYear()} Penguin Peptides. All rights
+              reserved.
+            </p>
 
-          <p className="font-sans text-xs text-white/65">
-            © {new Date().getFullYear()} Penguin Peptides. All rights reserved.
-          </p>
+            <div className="flex flex-wrap items-center gap-5">
+              <Link
+                href="/privacy-policy"
+                className="font-sans text-xs text-white/65 transition-colors hover:text-white"
+              >
+                Privacy Policy
+              </Link>
 
-          {/* RIGHT LINKS */}
+              <Link
+                href="/terms-and-conditions"
+                className="font-sans text-xs text-white/65 transition-colors hover:text-white"
+              >
+                Terms & Conditions
+              </Link>
 
-          <div className="flex flex-wrap items-center gap-5">
-            <Link
-              href="/privacy-policy"
-              className="font-sans text-xs text-white/65 transition-colors hover:text-white"
-            >
-              Privacy Policy
-            </Link>
-
-            <Link
-              href="/terms-and-conditions"
-              className="font-sans text-xs text-white/65 transition-colors hover:text-white"
-            >
-              Terms & Conditions
-            </Link>
-
-            {/* BACK TO TOP */}
-
-            <button
-              type="button"
-              onClick={scrollToTop}
-              aria-label="Back to top"
-              className="hover:bg-secondary hover:text-primary-dark flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white transition-all duration-300"
-            >
-              <ChevronUp size={18} />
-            </button>
+              <button
+                type="button"
+                onClick={scrollToTop}
+                aria-label="Back to top"
+                className="hover:bg-secondary hover:text-primary-dark flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white transition-all duration-300"
+              >
+                <ChevronUp size={18} />
+              </button>
+            </div>
           </div>
         </div>
       </div>

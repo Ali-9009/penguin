@@ -1,298 +1,452 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
+  Menu,
+  X,
   Search,
   UserRound,
   ShoppingBag,
-  Menu,
-  X,
   ArrowUpRight,
+  ArrowRight,
+  Sparkles,
+  FlaskConical,
+  ChevronRight,
 } from "lucide-react";
 
-// =========================
-// NAVIGATION LINKS
-// =========================
+import { useCart } from "@/context/CartContext";
+import HeaderSearch from "./HeaderSearch";
 
 const navLinks = [
-  { label: "Home", href: "/" },
-  { label: "Shop", href: "/shop" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact-us" },
+  { name: "Shop", href: "/shop" },
+  { name: "COA", href: "/coa" },
+  { name: "About", href: "/about" },
+  { name: "FAQs", href: "/faqs" },
+  { name: "Contact", href: "/contact" },
+  { name: "Partner Program", href: "/partner-program" },
+  { name: "Track Order", href: "/track-order" },
 ];
 
-// =========================
-// HEADER
-// =========================
+import {
+  ShieldCheck,
+  Microscope,
+  PackageCheck,
+  Truck,
+  Headphones,
+} from "lucide-react";
+
+const announcements = [
+  {
+    icon: FlaskConical,
+    text: "Research Peptides",
+  },
+  {
+    icon: ShieldCheck,
+    text: "Quality Focused",
+  },
+  {
+    icon: Microscope,
+    text: "Scientific Research",
+  },
+  {
+    icon: PackageCheck,
+    text: "Secure Packaging",
+  },
+  {
+    icon: Truck,
+    text: "Tracked Shipping",
+  },
+  {
+    icon: Headphones,
+    text: "Dedicated Support",
+  },
+];
+
+function AnnouncementBar() {
+  return (
+    <div className="relative overflow-hidden border-b border-[#DCECF1] bg-[#EAF7FA] py-3">
+      {/* MARQUEE */}
+
+      <div className="overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
+        <div className="announcement-track flex w-max items-center">
+          {[0, 1].map((copy) => (
+            <div
+              key={copy}
+              aria-hidden={copy === 1}
+              className="flex shrink-0 items-center gap-10 pr-10 sm:gap-16 sm:pr-16"
+            >
+              {announcements.map((item) => {
+                const Icon = item.icon;
+
+                return (
+                  <div
+                    key={item.text}
+                    className="flex shrink-0 items-center gap-2.5"
+                  >
+                    <Icon
+                      size={19}
+                      strokeWidth={1.8}
+                      className="text-secondary-dark shrink-0"
+                      aria-hidden="true"
+                    />
+
+                    <span className="font-heading text-primary text-[12px] font-semibold tracking-[0.02em] whitespace-nowrap sm:text-[14px]">
+                      {item.text}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ANIMATION */}
+
+      <style jsx global>{`
+        @keyframes penguin-announcement-scroll {
+          from {
+            transform: translate3d(0, 0, 0);
+          }
+
+          to {
+            transform: translate3d(-50%, 0, 0);
+          }
+        }
+
+        .announcement-track {
+          animation: penguin-announcement-scroll 35s linear infinite;
+          will-change: transform;
+        }
+
+        .announcement-track:hover {
+          animation-play-state: paused;
+        }
+
+        @media (max-width: 640px) {
+          .announcement-track {
+            animation-duration: 25s;
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .announcement-track {
+            animation: none;
+            will-change: auto;
+          }
+        }
+      `}</style>
+    </div>
+  );
+}
+
+function MobileSidebar({ open, onClose, pathname }) {
+  useEffect(() => {
+    if (!open) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const handleEscape = (event) => {
+      if (event.key === "Escape") onClose();
+    };
+
+    window.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleEscape);
+    };
+  }, [open, onClose]);
+
+  return (
+    <div
+      className={`fixed inset-0 z-[100] lg:hidden ${
+        open ? "visible" : "invisible delay-300"
+      }`}
+      aria-hidden={!open}
+    >
+      <div
+        onClick={onClose}
+        className={`absolute inset-0 bg-black/50 transition-opacity duration-300 ${
+          open ? "opacity-100" : "opacity-0"
+        }`}
+      />
+
+      <aside
+        id="mobile-navigation"
+        aria-label="Mobile navigation"
+        inert={!open}
+        className={`absolute inset-y-0 right-0 flex w-[min(340px,90vw)] flex-col bg-white shadow-xl transition-transform duration-300 ease-in-out ${
+          open ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
+        <div className="flex items-center justify-between border-b border-[#EEE6EF] px-5 py-4">
+          <Link href="/" onClick={onClose} aria-label="Spectrum home">
+            <Image
+              src="/assets/penguin-logo.png"
+              alt="Spectrum Biosciences"
+              width={160}
+              height={55}
+              className="h-10 w-auto object-contain"
+            />
+          </Link>
+
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close menu"
+            className="text-primary hover:bg-primary flex size-9 items-center justify-center rounded-full bg-[#F6E5F7] transition-colors hover:text-white"
+          >
+            <X size={20} />
+          </button>
+        </div>
+
+        <nav
+          aria-label="Sidebar navigation"
+          className="flex-1 overflow-y-auto px-4 py-5"
+        >
+          <p className="mb-3 px-3 text-[11px] font-bold tracking-[0.12em] text-[#9B8C9F] uppercase">
+            Navigation
+          </p>
+
+          <div className="space-y-1">
+            {navLinks.map((link) => {
+              const active =
+                pathname === link.href ||
+                (link.href !== "/" && pathname.startsWith(`${link.href}/`));
+
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={onClose}
+                  aria-current={active ? "page" : undefined}
+                  className={`flex items-center justify-between rounded-xl px-4 py-3.5 font-sans text-sm font-semibold transition-colors ${
+                    active
+                      ? "text-primary bg-[#F6E5F7]"
+                      : "hover:text-primary text-[#514653] hover:bg-[#FAF5FB]"
+                  }`}
+                >
+                  {link.name}
+                  <ChevronRight
+                    size={17}
+                    className={active ? "text-primary" : "text-[#B6A7BA]"}
+                  />
+                </Link>
+              );
+            })}
+          </div>
+
+          <div className="mt-6 border-t border-[#EEE6EF] pt-5">
+            <p className="mb-3 px-3 text-[11px] font-bold tracking-[0.12em] text-[#9B8C9F] uppercase">
+              Account
+            </p>
+
+            <Link
+              href="/account"
+              onClick={onClose}
+              className="hover:text-primary flex items-center gap-3 rounded-xl px-4 py-3.5 text-[14px] font-semibold text-[#514653] transition-colors hover:bg-[#FAF5FB]"
+            >
+              <UserRound size={19} />
+              My Account
+              <ChevronRight size={17} className="ml-auto text-[#B6A7BA]" />
+            </Link>
+          </div>
+        </nav>
+
+        <div className="border-t border-[#EEE6EF] px-5 py-4">
+          <p className="flex items-center gap-2 text-[11px] text-[#8B7E8E]">
+            <FlaskConical size={15} className="text-primary" />
+            For laboratory research use only
+          </p>
+        </div>
+      </aside>
+    </div>
+  );
+}
 
 export default function Header() {
   const pathname = usePathname();
+  const router = useRouter();
 
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const { openCart, itemCount, hydrated } = useCart();
 
-  // Scroll animation
+  const cartCount = hydrated ? itemCount : 0;
+
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setScrolled(window.scrollY > 50);
     };
 
     handleScroll();
 
-    window.addEventListener("scroll", handleScroll, {
-      passive: true,
-    });
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mobile menu when route changes
   useEffect(() => {
-    setMobileOpen(false);
+    setMenuOpen(false);
     setSearchOpen(false);
   }, [pathname]);
 
-  // Prevent background scrolling when mobile menu is open
-  useEffect(() => {
-    document.body.style.overflow = mobileOpen ? "hidden" : "";
-
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [mobileOpen]);
-
-  const closeMenu = () => {
-    setMobileOpen(false);
-  };
-
   return (
-    <header className="fixed inset-x-0 top-4 z-50 px-3 sm:px-5">
-      <div
-        style={{
-          maxWidth: isScrolled ? "1300px" : "1400px",
-        }}
-        className="relative mx-auto w-full transition-[max-width] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+    <>
+      <AnnouncementBar />
+
+      <header
+        className={`sticky top-0 z-50 w-full border-b transition-[background-color,backdrop-filter,box-shadow,border-color] duration-500 ease-in-out ${
+          scrolled
+            ? "border-white/40 bg-white/65 shadow-[0_10px_40px_rgba(7,59,104,0.10)] backdrop-blur-[24px] backdrop-saturate-150"
+            : "border-[#E2EDF2] bg-white shadow-none backdrop-blur-none"
+        } `}
       >
-        {/* =========================
-            MAIN HEADER
-        ========================= */}
-
         <div
-          className={`relative grid min-h-[76px] grid-cols-[1fr_auto] items-center rounded-2xl border border-white/70 bg-white/85 shadow-[0_12px_45px_rgba(7,59,104,0.09)] backdrop-blur-2xl transition-all duration-500 lg:grid-cols-[1fr_auto_1fr] ${
-            isScrolled ? "px-4 sm:px-6" : "px-4 sm:px-7 lg:px-9"
-          } `}
+          className={`mx-auto grid max-w-[1360px] grid-cols-[1fr_auto] items-center gap-4 px-4 transition-[padding] duration-300 ease-in-out sm:px-6 lg:grid-cols-[1fr_auto_1fr] lg:px-10 ${scrolled ? "py-1" : "py-2"} `}
         >
-          {/* =========================
-              LOGO - LEFT
-          ========================= */}
-
           <Link
             href="/"
-            onClick={closeMenu}
-            aria-label="Penguin Peptides Home"
-            className="flex w-fit shrink-0 items-center"
+            aria-label="Spectrum Biosciences home"
+            className="flex shrink-0 items-center"
           >
             <Image
               src="/assets/penguin-logo.png"
-              alt="Penguin Peptides"
-              width={155}
-              height={60}
+              alt="Spectrum Biosciences"
+              width={200}
+              height={65}
               priority
-              className="h-auto w-[115px] object-contain sm:w-[145px]"
+              className="h-12 w-auto origin-left object-contain transition-[height] duration-300 ease-in-out"
             />
           </Link>
 
-          {/* =========================
-              DESKTOP NAV - CENTER
-          ========================= */}
-
           <nav
             aria-label="Main navigation"
-            className="hidden items-center justify-center gap-1 lg:flex"
+            className="hidden items-center justify-center gap-7 lg:flex xl:gap-10"
           >
-            {navLinks.map((item) => (
-              <NavLink
-                key={item.label}
-                {...item}
-                active={pathname === item.href}
-              />
-            ))}
+            {navLinks.map((link) => {
+              const active = pathname === link.href;
+
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  aria-current={active ? "page" : undefined}
+                  className={`group text-md relative font-sans font-medium whitespace-nowrap transition-colors duration-300 ${
+                    active
+                      ? "text-primary"
+                      : "hover:text-primary text-[#514654]"
+                  }`}
+                >
+                  {link.name}
+
+                  <span
+                    className={`bg-secondary absolute -bottom-2 left-0 h-[2px] rounded-full transition-all duration-300 ${
+                      active ? "w-full" : "w-0 group-hover:w-full"
+                    }`}
+                  />
+                </Link>
+              );
+            })}
           </nav>
 
-          {/* =========================
-              RIGHT ICONS
-          ========================= */}
-
           <div className="flex items-center justify-end gap-1 sm:gap-2">
-            {/* Search */}
-
             <button
               type="button"
-              aria-label="Search products"
-              aria-expanded={searchOpen}
+              data-header-search-trigger
               onClick={() => {
                 setSearchOpen((current) => !current);
-                setMobileOpen(false);
+                setMenuOpen(false);
               }}
-              className="text-primary hover:bg-accent hover:text-primary-dark flex h-10 w-10 items-center justify-center rounded-full transition-all duration-300 sm:h-11 sm:w-11"
+              aria-label={searchOpen ? "Close search" : "Open search"}
+              aria-expanded={searchOpen}
+              aria-controls="header-search"
+              className="text-primary relative flex h-10 w-10 items-center justify-center rounded-full sm:h-11 sm:w-11"
             >
-              <Search size={21} strokeWidth={1.8} />
+              {searchOpen ? <X size={21} /> : <Search size={21} />}
             </button>
-
-            {/* Account */}
 
             <Link
               href="/account"
               aria-label="My account"
-              className="text-primary hover:bg-accent hover:text-primary-dark flex h-10 w-10 items-center justify-center rounded-full transition-all duration-300 sm:h-11 sm:w-11"
+              className="text-primary relative flex h-10 w-10 items-center justify-center rounded-full sm:h-11 sm:w-11"
             >
-              <UserRound size={21} strokeWidth={1.8} />
+              <UserRound size={21} />
             </Link>
-
-            {/* Cart */}
-
-            <Link
-              href="/cart"
-              aria-label="Shopping cart"
-              className="text-primary hover:bg-accent hover:text-primary-dark relative flex h-10 w-10 items-center justify-center rounded-full transition-all duration-300 sm:h-11 sm:w-11"
-            >
-              <ShoppingBag size={21} strokeWidth={1.8} />
-            </Link>
-
-            {/* Mobile Menu */}
 
             <button
               type="button"
-              aria-label={mobileOpen ? "Close menu" : "Open menu"}
-              aria-expanded={mobileOpen}
-              aria-controls="mobile-navigation"
+              onClick={openCart}
+              aria-label={`Open shopping cart, ${cartCount} items`}
+              className="text-primary relative flex h-10 w-10 items-center justify-center rounded-full sm:h-11 sm:w-11"
+            >
+              <ShoppingBag size={21} strokeWidth={1.8} />
+
+              {cartCount > 0 && (
+                <span className="bg-secondary absolute -top-0.5 -right-0.5 flex h-[18px] min-w-[18px] items-center justify-center rounded-full px-1 font-sans text-[10px] font-bold text-white">
+                  {cartCount > 99 ? "99+" : cartCount}
+                </span>
+              )}
+            </button>
+
+            <button
+              type="button"
               onClick={() => {
-                setMobileOpen((current) => !current);
+                setMenuOpen(true);
                 setSearchOpen(false);
               }}
-              className="border-primary/10 bg-accent-light text-primary hover:bg-accent ml-1 flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-300 sm:h-11 sm:w-11 lg:hidden"
+              aria-label="Open navigation menu"
+              aria-expanded={menuOpen}
+              aria-controls="mobile-navigation"
+              className="text-primary flex h-10 w-10 items-center justify-center rounded-full transition-all duration-300 hover:bg-[#F6E5F7] sm:h-11 sm:w-11 lg:hidden"
             >
-              {mobileOpen ? <X size={21} /> : <Menu size={21} />}
+              <Menu size={24} strokeWidth={1.8} />
             </button>
           </div>
         </div>
 
-        {/* =========================
-            SEARCH DROPDOWN
-        ========================= */}
+        <HeaderSearch open={searchOpen} onClose={() => setSearchOpen(false)} />
+      </header>
 
-        <div
-          className={`border-border absolute top-[calc(100%+10px)] right-0 left-0 origin-top overflow-hidden rounded-2xl border bg-white/95 shadow-[0_20px_60px_rgba(7,59,104,0.12)] backdrop-blur-2xl transition-all duration-300 ${
-            searchOpen
-              ? "visible translate-y-0 opacity-100"
-              : "invisible -translate-y-2 opacity-0"
-          } `}
-        >
-          <form
-            role="search"
-            action="/shop"
-            method="GET"
-            className="flex items-center gap-3 p-4 sm:p-5"
-          >
-            <Search size={21} className="text-primary shrink-0" />
-
-            <input
-              type="search"
-              name="search"
-              placeholder="Search research peptides..."
-              aria-label="Search products"
-              className="text-text placeholder:text-muted min-w-0 flex-1 bg-transparent font-sans text-sm outline-none sm:text-base"
-            />
-
-            <button
-              type="submit"
-              className="bg-primary hover:bg-primary-dark flex shrink-0 items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold text-white transition-all duration-300 sm:px-6"
-            >
-              Search
-              <ArrowUpRight size={16} />
-            </button>
-          </form>
-        </div>
-
-        {/* =========================
-            MOBILE NAVIGATION
-        ========================= */}
-
-        <div
-          id="mobile-navigation"
-          className={`border-border absolute top-[calc(100%+10px)] right-0 left-0 origin-top overflow-hidden rounded-2xl border bg-white/95 shadow-[0_24px_70px_rgba(7,59,104,0.13)] backdrop-blur-2xl transition-all duration-300 lg:hidden ${
-            mobileOpen
-              ? "visible translate-y-0 scale-100 opacity-100"
-              : "invisible -translate-y-3 scale-[0.98] opacity-0"
-          } `}
-        >
-          <nav
-            aria-label="Mobile navigation"
-            className="max-h-[calc(100vh-120px)] overflow-y-auto p-3"
-          >
-            {navLinks.map((item) => (
-              <MobileNavLink
-                key={item.label}
-                {...item}
-                active={pathname === item.href}
-                onClick={closeMenu}
-              />
-            ))}
-          </nav>
-        </div>
-      </div>
-    </header>
-  );
-}
-
-// =========================
-// DESKTOP NAV LINK
-// =========================
-
-function NavLink({ label, href, active }) {
-  return (
-    <Link
-      href={href}
-      aria-current={active ? "page" : undefined}
-      className={`relative rounded-full px-4 py-2.5 font-sans text-[14px] font-semibold transition-all duration-300 ${
-        active
-          ? "bg-accent text-primary"
-          : "text-text/75 hover:bg-accent-light hover:text-primary"
-      } `}
-    >
-      {label}
-    </Link>
-  );
-}
-
-// =========================
-// MOBILE NAV LINK
-// =========================
-
-function MobileNavLink({ label, href, active, onClick }) {
-  return (
-    <Link
-      href={href}
-      onClick={onClick}
-      aria-current={active ? "page" : undefined}
-      className={`mb-1 flex items-center justify-between rounded-xl px-4 py-3.5 font-sans text-sm font-semibold transition-all duration-300 ${
-        active
-          ? "bg-accent text-primary"
-          : "text-text/75 hover:bg-accent-light hover:text-primary"
-      } `}
-    >
-      {label}
-
-      <ArrowUpRight
-        size={16}
-        className={active ? "text-primary" : "text-muted"}
+      <MobileSidebar
+        open={menuOpen}
+        onClose={() => setMenuOpen(false)}
+        pathname={pathname}
       />
-    </Link>
+
+      <style jsx global>{`
+        @keyframes spectrum-announcement-scroll {
+          from {
+            transform: translate3d(0, 0, 0);
+          }
+          to {
+            transform: translate3d(-50%, 0, 0);
+          }
+        }
+
+        .announcement-track {
+          animation: spectrum-announcement-scroll 45s linear infinite;
+          will-change: transform;
+        }
+
+        @media (max-width: 640px) {
+          .announcement-track {
+            animation-duration: 35s;
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .announcement-track {
+            animation: none;
+          }
+        }
+      `}</style>
+    </>
   );
 }

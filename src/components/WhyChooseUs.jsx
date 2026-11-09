@@ -8,6 +8,7 @@ import {
   PackageCheck,
   BadgeCheck,
   Headphones,
+  ArrowUpRight,
 } from "lucide-react";
 
 import AOS from "aos";
@@ -63,46 +64,36 @@ function FeatureCard({ feature, index }) {
     <article
       data-aos="fade-up"
       data-aos-delay={index * 70}
-      className="group relative flex h-full min-w-0 flex-col overflow-hidden rounded-[16px] border border-[#E2EDF2] bg-white p-3 transition-all duration-500 hover:-translate-y-1 hover:border-[#B7DEE8] hover:shadow-[0_20px_50px_rgba(7,85,143,0.09)] sm:rounded-[22px] sm:p-5 lg:rounded-[28px] lg:p-8"
+      className="group relative flex h-full min-w-0 flex-col overflow-hidden rounded-[20px] border border-[#E0EDF1] bg-white p-3.5 transition-all duration-500 hover:-translate-y-1.5 hover:border-[#A9DCE7] hover:bg-[#EBF8FB] hover:shadow-[0_18px_45px_rgba(7,85,143,0.09)] sm:rounded-[28px] sm:p-6 lg:p-8"
     >
-      {/* SUBTLE GRADIENT OVERLAY */}
+      {/* LARGE DECORATIVE ICON */}
 
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#E9FAFC]/80 via-white to-white opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+      <Icon
+        aria-hidden="true"
+        strokeWidth={0.7}
+        className="pointer-events-none absolute -top-5 -right-6 h-28 w-28 rotate-[-18deg] text-[#C8E8F0]/60 transition-all duration-700 group-hover:scale-110 group-hover:rotate-[-5deg] sm:-top-8 sm:-right-8 sm:h-44 sm:w-44"
+      />
 
-      {/* TOP ACCENT LINE */}
+      {/* TOP ROW */}
 
-      <div className="from-primary to-secondary absolute top-0 left-0 h-[3px] w-0 bg-gradient-to-r transition-all duration-700 group-hover:w-full" />
+      <div className="relative z-10 flex items-start justify-between gap-2">
+        {/* ICON BADGE */}
 
-      {/* ICON */}
-
-      <div className="text-primary group-hover:border-primary/20 group-hover:bg-primary relative z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-[13px] border border-[#D7EDF2] bg-gradient-to-br from-[#E6F9FB] to-[#D8F1F6] transition-all duration-500 group-hover:scale-105 sm:h-14 sm:w-14 sm:rounded-[17px] lg:h-16 lg:w-16 lg:rounded-[20px]">
-        <Icon
-          size={22}
-          strokeWidth={1.6}
-          className="transition-transform duration-500 group-hover:rotate-[-8deg] sm:h-[27px] sm:w-[27px] lg:h-[30px] lg:w-[30px]"
-        />
+        <div className="text-primary group-hover:bg-primary flex h-12 w-12 shrink-0 items-center justify-center rounded-[16px] border border-white bg-white shadow-[0_8px_22px_rgba(7,85,143,0.06)] transition-all duration-500 group-hover:rotate-[-8deg] group-hover:text-white sm:h-16 sm:w-16 sm:rounded-[20px]">
+          <Icon size={23} strokeWidth={1.7} className="sm:h-8 sm:w-8" />
+        </div>
       </div>
 
       {/* CONTENT */}
 
-      <div className="relative z-10 mt-4 flex min-w-0 flex-1 flex-col sm:mt-5 lg:mt-7">
-        <h3 className="font-heading group-hover:text-primary text-[14px] leading-[1.3] font-semibold tracking-[-0.025em] text-[#102E38] transition-colors duration-300 sm:text-[19px] lg:text-[22px]">
+      <div className="relative z-10 mt-4 flex flex-1 flex-col">
+        <h3 className="font-heading text-[15px] leading-[1.25] font-semibold tracking-[-0.04em] text-[#103B50] sm:text-[21px] lg:text-[23px]">
           {feature.title}
         </h3>
 
-        <p className="text-muted mt-2 font-sans text-[11px] leading-[1.6] sm:mt-3 sm:text-[13px] sm:leading-[1.75] lg:text-[14px] lg:leading-[1.8]">
+        <p className="mt-3 text-[11px] leading-[1.7] text-[#6D8793] sm:text-[13px] sm:leading-[1.85] lg:text-[14px]">
           {feature.description}
         </p>
-      </div>
-
-      {/* BOTTOM DECORATIVE DETAIL */}
-
-      <div className="relative z-10 mt-5 flex items-center gap-1.5 sm:mt-7 sm:gap-2 lg:mt-8">
-        <span className="bg-secondary h-[4px] w-[4px] rounded-full transition-all duration-500 group-hover:w-6 sm:h-[5px] sm:w-[5px] sm:group-hover:w-8" />
-
-        <span className="h-[4px] w-[4px] rounded-full bg-[#C5E7ED] sm:h-[5px] sm:w-[5px]" />
-
-        <span className="h-[4px] w-[4px] rounded-full bg-[#D9EEF2] sm:h-[5px] sm:w-[5px]" />
       </div>
     </article>
   );

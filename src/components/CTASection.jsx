@@ -1,17 +1,24 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
+import {
+  ArrowUpRight,
+  ArrowRight,
+  Mail,
+  Sparkles,
+  FlaskConical,
+} from "lucide-react";
 
-export default function CTASection() {
+export default function NewsletterCTA() {
   const [email, setEmail] = useState("");
-  const [agreed, setAgreed] = useState(false);
   const [status, setStatus] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (!email.trim() || !agreed) return;
+    if (!email.trim()) return;
 
     // Connect your newsletter API here.
     setStatus("Newsletter subscriptions are not available yet.");
@@ -19,127 +26,205 @@ export default function CTASection() {
 
   return (
     <section
-      id="newsletter"
-      aria-labelledby="newsletter-title"
-      className="relative px-3 py-12 sm:px-5 md:py-16"
+      aria-labelledby="newsletter-cta-heading"
+      className="relative overflow-hidden bg-white px-4 pt-12 pb-16 sm:px-6 sm:pt-16 sm:pb-20 lg:px-8 lg:pt-20 lg:pb-24"
     >
-      {/* MAIN CTA CONTAINER */}
+      <div className="relative mx-auto max-w-7xl">
+        {/* =====================================
+            MAIN CTA BACKGROUND
+        ===================================== */}
 
-      <div className="relative mx-auto w-full max-w-7xl overflow-hidden rounded-2xl border border-[#E5EEF1] bg-white">
-        {/* BACKGROUND DECORATION */}
+        <div className="relative min-h-[420px] overflow-hidden rounded-[26px] bg-gradient-to-br from-[#E9F5FD] via-[#E6F6FC] to-[#C8E9F6] sm:min-h-[450px] sm:rounded-[32px] lg:min-h-[480px]">
+          {/* BACKGROUND DECORATIONS */}
 
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_85%_10%,rgba(4,193,202,0.08),transparent_55%),radial-gradient(ellipse_at_10%_95%,rgba(7,85,143,0.04),transparent_55%)]"
-        />
+          <div className="pointer-events-none absolute -top-32 -left-32 h-[350px] w-[350px] rounded-full bg-white/50 blur-[80px]" />
 
-        {/* CONTENT */}
+          <div className="pointer-events-none absolute -right-32 -bottom-32 h-[400px] w-[400px] rounded-full bg-[#75D7E8]/30 blur-[100px]" />
 
-        <div className="relative mx-auto flex max-w-[900px] flex-col items-center px-5 py-14 text-center sm:px-10 sm:py-20 lg:py-24">
-          {/* EYEBROW */}
+          {/* DECORATIVE CIRCLES */}
 
-          <p className="text-secondary-dark mb-4 font-sans text-[11px] font-bold tracking-[0.18em] uppercase">
-            Stay Connected
-          </p>
+          <div className="pointer-events-none absolute top-1/2 left-1/2 h-[350px] w-[350px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/35 sm:h-[550px] sm:w-[550px]" />
 
-          {/* HEADING */}
+          <div className="pointer-events-none absolute top-1/2 left-1/2 h-[250px] w-[250px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-white/40 sm:h-[420px] sm:w-[420px]" />
 
-          <h2
-            id="newsletter-title"
-            className="font-heading text-primary text-[clamp(2.3rem,5.5vw,5rem)] leading-[1.08] font-semibold tracking-[-0.055em]"
-          >
-            Stay Ahead of
-            <span className="text-secondary-dark block">Every Discovery.</span>
-          </h2>
+          {/* =====================================
+              LEFT PRODUCT
+          ===================================== */}
 
-          {/* DESCRIPTION */}
-
-          <p className="text-muted mx-auto mt-5 max-w-[520px] font-sans text-sm leading-7 sm:mt-6 sm:text-base">
-            Discover new research products, collection updates, and
-            announcements from Penguin Peptides.
-          </p>
-
-          {/* NEWSLETTER FORM */}
-
-          <form
-            onSubmit={handleSubmit}
-            className="mt-8 w-full max-w-[560px] sm:mt-10"
-          >
-            {/* EMAIL FIELD */}
-
-            <div className="focus-within:border-primary flex w-full min-w-0 items-center gap-1.5 rounded-full border border-[#E3EDF1] bg-[#F7FAFC] p-1.5 shadow-[0_8px_25px_rgba(7,85,143,0.05)] transition-colors sm:gap-2 sm:p-2">
-              <label htmlFor="newsletter-email" className="sr-only">
-                Email address
-              </label>
-
-              <input
-                id="newsletter-email"
-                type="email"
-                value={email}
-                onChange={(event) => {
-                  setEmail(event.target.value);
-                  setStatus("");
-                }}
-                placeholder="Your email address"
-                autoComplete="email"
-                required
-                className="text-text placeholder:text-muted/70 h-11 min-w-0 flex-1 bg-transparent px-3 font-sans text-[12px] outline-none sm:h-12 sm:px-5 sm:text-sm"
+          <div className="pointer-events-none absolute bottom-[14%] -left-8 z-10 h-[190px] w-[120px] -rotate-15 sm:bottom-[20%] sm:left-[2%] sm:h-[270px] sm:w-[170px] lg:bottom-[18%] lg:left-[4%] lg:h-[340px] lg:w-[210px]">
+            <div className="cta-float-left relative h-full w-full">
+              <Image
+                src="/assets/pp-1sm.png"
+                alt="Penguin Peptides PP-1SM research vial"
+                fill
+                sizes="(max-width: 640px) 120px, (max-width: 1024px) 170px, 210px"
+                className="object-contain drop-shadow-[0_20px_25px_rgba(7,59,104,0.18)]"
               />
-
-              {/* SUBSCRIBE BUTTON */}
-
-              <button
-                type="submit"
-                className="bg-primary hover:bg-primary-dark flex h-11 shrink-0 items-center justify-center rounded-full px-4 font-sans text-[12px] font-semibold text-white transition-colors duration-300 sm:h-12 sm:px-8 sm:text-sm"
-              >
-                Subscribe
-              </button>
             </div>
+          </div>
 
-            {/* PRIVACY CONSENT */}
+          {/* =====================================
+              RIGHT PRODUCT
+          ===================================== */}
 
-            <div className="mx-auto mt-5 flex max-w-[530px] items-start gap-3 px-1 text-left sm:px-2">
-              <input
-                id="newsletter-consent"
-                type="checkbox"
-                checked={agreed}
-                onChange={(event) => {
-                  setAgreed(event.target.checked);
-                  setStatus("");
-                }}
-                required
-                className="mt-1 h-4 w-4 shrink-0 cursor-pointer accent-[#07558F]"
+          <div className="pointer-events-none absolute -right-8 bottom-[14%] z-10 h-[190px] w-[120px] rotate-15 sm:right-[2%] sm:bottom-[20%] sm:h-[270px] sm:w-[170px] lg:right-[4%] lg:bottom-[18%] lg:h-[340px] lg:w-[210px]">
+            <div className="cta-float-right relative h-full w-full">
+              <Image
+                src="/assets/pp-1cag.png"
+                alt="Penguin Peptides PP-1 Cag research vial"
+                fill
+                sizes="(max-width: 640px) 120px, (max-width: 1024px) 170px, 210px"
+                className="object-contain drop-shadow-[0_20px_25px_rgba(7,59,104,0.18)]"
               />
-
-              <label
-                htmlFor="newsletter-consent"
-                className="text-muted font-sans text-[11px] leading-[1.7] sm:text-xs"
-              >
-                I agree to receive marketing emails from Penguin Peptides and
-                accept the{" "}
-                <Link
-                  href="/privacy-policy"
-                  className="text-primary hover:text-secondary-dark font-medium underline underline-offset-2 transition-colors"
-                >
-                  Privacy Policy
-                </Link>
-                . Unsubscribe at any time.
-              </label>
             </div>
+          </div>
 
-            {/* STATUS MESSAGE */}
+          {/* =====================================
+              CENTER CONTENT
+          ===================================== */}
 
-            {status && (
-              <p
-                role="status"
-                className="text-primary mt-5 font-sans text-sm font-medium"
-              >
-                {status}
-              </p>
-            )}
-          </form>
+          <div className="relative z-20 mx-auto flex max-w-[850px] flex-col items-center px-5 pt-14 pb-36 text-center sm:px-10 sm:pt-20 sm:pb-32 lg:pt-24">
+            {/* HEADING */}
+
+            <h2
+              id="newsletter-cta-heading"
+              className="font-heading text-primary max-w-[720px] text-[clamp(1.75rem,4.5vw,4rem)] leading-[1.12] font-bold tracking-[-0.055em]"
+            >
+              Explore Research Compounds
+              <br className="hidden sm:block" />
+              <span className="text-secondary-dark"> With Confidence.</span>
+            </h2>
+
+            {/* DESCRIPTION */}
+
+            <p className="mt-5 max-w-[500px] text-[12px] leading-[1.8] text-[#5F7C8A] sm:text-[14px]">
+              Discover our carefully selected collection of research peptides
+              and formulations for scientific and laboratory applications.
+            </p>
+
+            {/* BUTTON */}
+
+            <Link href="/shop" className="btn-primary mt-4">
+              See All Products
+            </Link>
+          </div>
+        </div>
+
+        {/* =====================================
+            NEWSLETTER SUBSCRIPTION BAR
+        ===================================== */}
+
+        <div className="relative z-30 mx-auto -mt-20 w-[calc(100%-24px)] max-w-[1050px] sm:-mt-16 sm:w-[calc(100%-60px)]">
+          <div className="rounded-[22px] border border-[#E2EDF2] bg-white px-5 py-6 shadow-[0_20px_60px_rgba(7,59,104,0.12)] sm:rounded-[26px] sm:px-7 sm:py-7 lg:px-10">
+            <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
+              {/* NEWSLETTER TEXT */}
+
+              <div className="min-w-0">
+                <div className="mb-2 flex items-center gap-2">
+                  <Mail size={17} className="text-secondary-dark" />
+
+                  <span className="text-secondary-dark text-[10px] font-bold tracking-[0.15em] uppercase">
+                    Stay Connected
+                  </span>
+                </div>
+
+                <h3 className="font-heading text-primary text-[19px] font-bold tracking-[-0.04em] sm:text-[23px]">
+                  Subscribe to Our Newsletter
+                </h3>
+
+                <p className="mt-1.5 max-w-[420px] text-[11px] leading-[1.7] text-[#708692] sm:text-[12px]">
+                  Receive product updates and news from Penguin Peptides.
+                </p>
+              </div>
+
+              {/* NEWSLETTER FORM */}
+
+              <form onSubmit={handleSubmit} className="w-full lg:max-w-[450px]">
+                <div className="focus-within:border-primary/40 flex w-full items-center gap-2 rounded-full border border-[#DCEAF0] bg-[#F7FBFC] p-1.5 transition-colors">
+                  <label htmlFor="newsletter-email" className="sr-only">
+                    Email address
+                  </label>
+
+                  <input
+                    id="newsletter-email"
+                    type="email"
+                    required
+                    autoComplete="email"
+                    value={email}
+                    onChange={(event) => {
+                      setEmail(event.target.value);
+                      setStatus("");
+                    }}
+                    placeholder="Enter your email"
+                    className="text-primary min-w-0 flex-1 bg-transparent px-3 py-2 text-[12px] outline-none placeholder:text-[#9AAEB8] sm:px-4 sm:text-[13px]"
+                  />
+
+                  <button
+                    type="submit"
+                    className="bg-primary hover:bg-primary-dark inline-flex h-10 shrink-0 items-center justify-center gap-2 rounded-full px-4 text-[11px] font-semibold text-white transition-colors sm:px-6 sm:text-[12px]"
+                  >
+                    Subscribe
+                    <ArrowRight size={15} />
+                  </button>
+                </div>
+
+                {status && (
+                  <p
+                    role="status"
+                    className="mt-3 px-2 text-[11px] text-[#708692]"
+                  >
+                    {status}
+                  </p>
+                )}
+              </form>
+            </div>
+          </div>
         </div>
       </div>
+
+      {/* =====================================
+          FLOATING ANIMATIONS
+      ===================================== */}
+
+      <style jsx global>{`
+        @keyframes ctaFloatLeft {
+          0%,
+          100% {
+            transform: translateY(0) rotate(-8deg);
+          }
+
+          50% {
+            transform: translateY(-14px) rotate(-5deg);
+          }
+        }
+
+        @keyframes ctaFloatRight {
+          0%,
+          100% {
+            transform: translateY(-8px) rotate(8deg);
+          }
+
+          50% {
+            transform: translateY(10px) rotate(5deg);
+          }
+        }
+
+        .cta-float-left {
+          animation: ctaFloatLeft 5.5s ease-in-out infinite;
+        }
+
+        .cta-float-right {
+          animation: ctaFloatRight 6s ease-in-out infinite;
+          animation-delay: -1.5s;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .cta-float-left,
+          .cta-float-right {
+            animation: none;
+          }
+        }
+      `}</style>
     </section>
   );
 }

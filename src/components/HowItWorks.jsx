@@ -1,13 +1,15 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+
 import {
   ShoppingBag,
   ClipboardCheck,
-  Package,
+  PackageCheck,
   Truck,
   MapPin,
-  ArrowUpRight,
+  ArrowRight,
+  Check,
 } from "lucide-react";
 
 import { gsap } from "gsap";
@@ -18,44 +20,42 @@ gsap.registerPlugin(ScrollTrigger);
 const steps = [
   {
     number: "01",
-    title: "Order Received",
-    description: "Order and address captured.",
+    title: "Order Placed",
+    description:
+      "Choose your research products and complete your order securely.",
     icon: ShoppingBag,
   },
   {
     number: "02",
-    title: "Details Reviewed",
-    description: "Usually 1–3 business days.",
+    title: "Order Review",
+    description: "Your order details are reviewed before preparation begins.",
     icon: ClipboardCheck,
   },
   {
     number: "03",
-    title: "Parcel Prepared",
-    description: "Packed and batch-labelled.",
-    icon: Package,
+    title: "Carefully Packed",
+    description: "Your products are prepared and packaged for shipment.",
+    icon: PackageCheck,
   },
   {
     number: "04",
-    title: "Carrier Handoff",
-    description: "Handed to UPS.",
+    title: "Order Dispatched",
+    description: "Your package is handed over to the shipping carrier.",
     icon: Truck,
   },
   {
     number: "05",
-    title: "Tracking Active",
-    description: "Tracking sent by email.",
+    title: "Track Your Order",
+    description: "Tracking information is provided when it becomes available.",
     icon: MapPin,
   },
 ];
 
 export default function HowItWorks() {
   const sectionRef = useRef(null);
-  const desktopLineRef = useRef(null);
-  const mobileLineRef = useRef(null);
 
   useEffect(() => {
     const section = sectionRef.current;
-
     if (!section) return;
 
     const reducedMotion = window.matchMedia(
@@ -65,76 +65,135 @@ export default function HowItWorks() {
     if (reducedMotion) return;
 
     const ctx = gsap.context(() => {
-      // Heading animation
+      const heading = section.querySelector(".timeline-heading");
 
-      gsap.from(".process-heading", {
-        y: 35,
-        opacity: 0,
-        duration: 0.9,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: ".process-heading",
-          start: "top 88%",
-          once: true,
+      const desktopSteps = gsap.utils.toArray(".timeline-desktop-step");
+
+      const mobileSteps = gsap.utils.toArray(".timeline-mobile-step");
+
+      const desktopProgress = section.querySelector(
+        ".timeline-desktop-progress",
+      );
+
+      const mobileProgress = section.querySelector(".timeline-mobile-progress");
+
+      // HEADING
+      gsap.fromTo(
+        heading,
+        {
+          opacity: 0,
+          y: 35,
         },
-      });
-
-      // Step animation
-
-      gsap.from(".process-step", {
-        y: 45,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: ".process-steps",
-          start: "top 85%",
-          once: true,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.9,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: heading,
+            start: "top 88%",
+            once: true,
+          },
         },
-      });
+      );
 
-      // Desktop line animation
+      // DESKTOP STEP ENTRANCE
+      gsap.fromTo(
+        desktopSteps,
+        {
+          opacity: 0,
+          y: 35,
+          scale: 0.95,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          stagger: 0.13,
+          duration: 0.75,
+          ease: "back.out(1.4)",
+          scrollTrigger: {
+            trigger: ".timeline-desktop",
+            start: "top 80%",
+            once: true,
+          },
+        },
+      );
 
-      if (desktopLineRef.current) {
+      // DESKTOP PROGRESS LINE
+      gsap.fromTo(
+        desktopProgress,
+        {
+          scaleX: 0,
+        },
+        {
+          scaleX: 1,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".timeline-desktop",
+            start: "top 75%",
+            end: "bottom 45%",
+            scrub: 1,
+            onUpdate: (self) => {
+              const activeCount = Math.max(
+                1,
+                Math.floor(self.progress * (desktopSteps.length - 1)) + 1,
+              );
+
+              desktopSteps.forEach((step, index) => {
+                step.classList.toggle("is-active", index < activeCount);
+              });
+            },
+          },
+        },
+      );
+
+      // MOBILE STEP ENTRANCE
+      mobileSteps.forEach((step) => {
         gsap.fromTo(
-          desktopLineRef.current,
+          step,
           {
-            scaleX: 0,
+            opacity: 0,
+            y: 35,
           },
           {
-            scaleX: 1,
-            ease: "none",
+            opacity: 1,
+            y: 0,
+            duration: 0.75,
+            ease: "power3.out",
             scrollTrigger: {
-              trigger: ".process-steps",
-              start: "top 80%",
-              end: "bottom 55%",
-              scrub: 1.2,
+              trigger: step,
+              start: "top 88%",
+              once: true,
             },
           },
         );
-      }
 
-      // Mobile line animation
+        ScrollTrigger.create({
+          trigger: step,
+          start: "top 75%",
+          onEnter: () => step.classList.add("is-active"),
+          onLeaveBack: () => step.classList.remove("is-active"),
+        });
+      });
 
-      if (mobileLineRef.current) {
-        gsap.fromTo(
-          mobileLineRef.current,
-          {
-            scaleY: 0,
+      // MOBILE PROGRESS LINE
+      gsap.fromTo(
+        mobileProgress,
+        {
+          scaleY: 0,
+        },
+        {
+          scaleY: 1,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".timeline-mobile",
+            start: "top 72%",
+            end: "bottom 55%",
+            scrub: 1,
           },
-          {
-            scaleY: 1,
-            ease: "none",
-            scrollTrigger: {
-              trigger: ".process-mobile",
-              start: "top 75%",
-              end: "bottom 65%",
-              scrub: 1,
-            },
-          },
-        );
-      }
+        },
+      );
     }, section);
 
     return () => ctx.revert();
@@ -144,144 +203,142 @@ export default function HowItWorks() {
     <section
       ref={sectionRef}
       id="how-it-works"
-      aria-labelledby="process-title"
+      aria-labelledby="timeline-heading"
       className="relative overflow-hidden px-4 py-12 sm:px-6 md:py-16 lg:px-8"
     >
-      {/* Background decoration */}
+      {/* BACKGROUND DECORATION */}
 
-      <div className="bg-secondary/5 pointer-events-none absolute top-0 -left-40 h-[450px] w-[450px] rounded-full blur-[100px]" />
+      <div
+        aria-hidden="true"
+        className="bg-secondary/10 pointer-events-none absolute -top-40 -left-40 h-[400px] w-[400px] rounded-full blur-[110px]"
+      />
 
-      <div className="bg-primary/5 pointer-events-none absolute -right-40 -bottom-40 h-[450px] w-[450px] rounded-full blur-[100px]" />
+      <div
+        aria-hidden="true"
+        className="bg-primary/5 pointer-events-none absolute -right-40 -bottom-40 h-[400px] w-[400px] rounded-full blur-[110px]"
+      />
 
       <div className="relative mx-auto max-w-7xl">
-        {/* =========================
+        {/* ==============================
             SECTION HEADING
-        ========================= */}
+        ============================== */}
 
-        <div className="process-heading mx-auto mb-14 max-w-[750px] text-center lg:mb-20">
-          <h2 id="process-title" className="section-heading">
-            How It <span className="text-secondary-dark">Works.</span>
+        <header className="timeline-heading mx-auto mb-12 max-w-[700px] text-center sm:mb-16 lg:mb-20">
+          <h2 id="timeline-heading" className="section-heading">
+            From Order to <span className="text-secondary-dark">Delivery.</span>
           </h2>
 
-          <p className="text-muted mx-auto mt-5 max-w-[560px] font-sans text-sm leading-7 sm:text-base">
-            From order confirmation to shipment tracking, explore the process
-            behind every Penguin Peptides order.
+          <p className="mx-auto mt-5 max-w-[550px] text-[13px] leading-[1.8] text-[#718792] sm:text-[15px]">
+            A simple, transparent process designed to keep you informed from
+            checkout to shipment tracking.
           </p>
-        </div>
+        </header>
 
-        {/* =========================
+        {/* ==============================
             DESKTOP TIMELINE
-        ========================= */}
+        ============================== */}
 
-        <div className="process-steps relative hidden lg:block">
-          {/* Connecting line */}
+        <div className="timeline-desktop relative hidden lg:block">
+          {/* TRACK */}
 
           <div
             aria-hidden="true"
-            className="absolute top-[50px] right-[10%] left-[10%] h-[2px] bg-[#DCE9EF]"
+            className="absolute top-[44px] right-[10%] left-[10%] z-0 h-[3px] rounded-full bg-[#D8E8ED]"
           >
-            <div
-              ref={desktopLineRef}
-              className="from-primary via-secondary-dark to-secondary h-full w-full origin-left bg-gradient-to-r"
-            />
+            <div className="timeline-desktop-progress from-primary to-secondary h-full w-full origin-left rounded-full bg-gradient-to-r via-[#087BA5]" />
           </div>
 
-          {/* Steps */}
+          {/* STEPS */}
 
-          <div className="relative grid grid-cols-5 gap-5">
+          <div className="relative z-10 grid grid-cols-5 gap-5">
             {steps.map((step, index) => {
               const Icon = step.icon;
 
               return (
                 <article
                   key={step.number}
-                  className="process-step group relative flex flex-col items-center text-center"
+                  className="timeline-desktop-step group relative flex flex-col items-center text-center"
                 >
-                  {/* Icon circle */}
+                  {/* CIRCLE */}
 
-                  <div className="group-hover:border-secondary/40 relative z-10 flex h-[100px] w-[100px] items-center justify-center rounded-full border border-[#DCE9EF] bg-white shadow-[0_8px_30px_rgba(7,85,143,0.05)] transition-all duration-500 group-hover:-translate-y-2 group-hover:shadow-[0_20px_45px_rgba(7,85,143,0.12)]">
-                    {/* Inner circle */}
-
-                    <div className="text-primary group-hover:bg-primary flex h-[74px] w-[74px] items-center justify-center rounded-full bg-[#EAF7FA] transition-all duration-500 group-hover:text-white">
-                      <Icon size={29} strokeWidth={1.5} />
+                  <div className="timeline-step-circle relative flex h-[88px] w-[88px] items-center justify-center rounded-full border-[3px] border-[#D8E8ED] bg-white shadow-[0_8px_25px_rgba(7,85,143,0.05)] transition-all duration-500">
+                    <div className="timeline-step-inner text-primary flex h-[66px] w-[66px] items-center justify-center rounded-full bg-[#EAF7FA] transition-all duration-500">
+                      <Icon size={27} strokeWidth={1.65} />
                     </div>
+
+                    {/* ACTIVE INDICATOR */}
+
+                    <span className="timeline-step-check bg-secondary absolute -right-1 -bottom-1 flex h-6 w-6 scale-0 items-center justify-center rounded-full border-[3px] border-[#F5FAFC] text-white opacity-0 transition-all duration-300">
+                      <Check size={12} strokeWidth={2.5} />
+                    </span>
                   </div>
 
-                  {/* Content */}
+                  {/* CONTENT */}
 
-                  <div className="mt-8 flex w-full flex-col items-center">
-                    <span className="font-heading text-secondary-dark text-[13px] font-bold tracking-[0.2em]">
-                      STEP {step.number}
-                    </span>
-
-                    <h3 className="font-heading mt-3 text-[19px] leading-[1.25] font-semibold tracking-[-0.035em] text-[#102E38] xl:text-[21px]">
+                  <div className="mt-4">
+                    <h3 className="font-heading mt-3 text-[18px] leading-[1.3] font-bold tracking-[-0.035em] text-[#102E38] xl:text-[20px]">
                       {step.title}
                     </h3>
 
-                    <p className="text-muted mt-3 max-w-[190px] font-sans text-[13px] leading-[1.7]">
+                    <p className="mx-auto mt-3 max-w-[190px] text-[12px] leading-[1.8] text-[#718792] xl:text-[13px]">
                       {step.description}
                     </p>
                   </div>
-
-                  {/* Decorative bottom dot */}
-
-                  <div className="bg-secondary/60 mt-7 h-[5px] w-[5px] rounded-full transition-all duration-500 group-hover:w-8" />
                 </article>
               );
             })}
           </div>
         </div>
 
-        {/* =========================
+        {/* ==============================
             MOBILE / TABLET TIMELINE
-        ========================= */}
+        ============================== */}
 
-        <div className="process-mobile relative mx-auto max-w-[650px] lg:hidden">
-          {/* Vertical line */}
+        <div className="timeline-mobile relative mx-auto max-w-[650px] lg:hidden">
+          {/* VERTICAL TRACK */}
 
           <div
             aria-hidden="true"
-            className="absolute top-8 bottom-12 left-[34px] w-[2px] bg-[#DCE9EF] sm:left-[41px]"
+            className="absolute top-[32px] bottom-[calc(100px+32px)] left-[31px] w-[3px] rounded-full bg-[#D8E8ED] sm:top-[38px] sm:left-[37px]"
           >
-            <div
-              ref={mobileLineRef}
-              className="from-primary to-secondary h-full w-full origin-top bg-gradient-to-b"
-            />
+            <div className="timeline-mobile-progress from-primary to-secondary h-full w-full origin-top rounded-full bg-gradient-to-b via-[#087BA5]" />
           </div>
 
-          <div className="process-steps relative space-y-6 sm:space-y-8">
+          {/* STEPS */}
+
+          <div className="relative space-y-5 sm:space-y-7">
             {steps.map((step) => {
               const Icon = step.icon;
 
               return (
                 <article
                   key={step.number}
-                  className="process-step group relative flex items-start gap-5 sm:gap-7"
+                  className="timeline-mobile-step group relative flex min-w-0 items-start gap-4 sm:gap-6"
                 >
-                  {/* Icon */}
+                  {/* ICON CIRCLE */}
 
-                  <div className="relative z-10 flex h-[70px] w-[70px] shrink-0 items-center justify-center rounded-full border border-[#DCE9EF] bg-white shadow-[0_8px_25px_rgba(7,85,143,0.05)] sm:h-[84px] sm:w-[84px]">
-                    <div className="text-primary group-hover:bg-primary flex h-[52px] w-[52px] items-center justify-center rounded-full bg-[#EAF7FA] transition-colors duration-300 group-hover:text-white sm:h-[64px] sm:w-[64px]">
-                      <Icon
-                        size={24}
-                        strokeWidth={1.6}
-                        className="sm:h-7 sm:w-7"
-                      />
+                  <div className="timeline-step-circle relative z-10 flex h-[66px] w-[66px] shrink-0 items-center justify-center rounded-full border-[3px] border-[#D8E8ED] bg-white transition-all duration-500 sm:h-[78px] sm:w-[78px]">
+                    <div className="timeline-step-inner text-primary flex h-[48px] w-[48px] items-center justify-center rounded-full bg-[#EAF7FA] transition-all duration-500 sm:h-[58px] sm:w-[58px]">
+                      <Icon size={22} strokeWidth={1.7} />
                     </div>
+
+                    <span className="timeline-step-check bg-secondary absolute -right-1 -bottom-1 flex h-5 w-5 scale-0 items-center justify-center rounded-full border-2 border-[#F5FAFC] text-white opacity-0 transition-all duration-300">
+                      <Check size={11} strokeWidth={2.5} />
+                    </span>
                   </div>
 
-                  {/* Text */}
+                  {/* STEP CARD */}
 
-                  <div className="group-hover:border-primary/20 flex min-h-[90px] flex-1 flex-col justify-center rounded-[20px] border border-[#E3EDF1] bg-white px-5 py-5 transition-all duration-300 group-hover:shadow-[0_10px_30px_rgba(7,85,143,0.06)] sm:px-7 sm:py-6">
-                    <span className="text-secondary-dark text-[10px] font-bold tracking-[0.2em] uppercase">
-                      STEP {step.number}
+                  <div className="timeline-step-card min-w-0 flex-1 rounded-[18px] border border-[#E2EDF2] bg-white px-4 py-5 transition-all duration-300 sm:rounded-[22px] sm:px-6 sm:py-6">
+                    <span className="text-secondary-dark text-[10px] font-bold tracking-[0.16em] uppercase">
+                      Step {step.number}
                     </span>
 
-                    <h3 className="font-heading mt-2 text-[18px] font-semibold tracking-[-0.035em] text-[#102E38] sm:text-[21px]">
+                    <h3 className="font-heading mt-2 text-[16px] font-bold tracking-[-0.035em] text-[#102E38] sm:text-[20px]">
                       {step.title}
                     </h3>
 
-                    <p className="text-muted mt-2 font-sans text-[12px] leading-[1.7] sm:text-sm">
+                    <p className="mt-2 text-[12px] leading-[1.75] text-[#718792] sm:text-[14px]">
                       {step.description}
                     </p>
                   </div>
@@ -291,6 +348,44 @@ export default function HowItWorks() {
           </div>
         </div>
       </div>
+
+      {/* ==============================
+          ACTIVE STEP STYLING
+      ============================== */}
+
+      <style jsx global>{`
+        .timeline-desktop-step.is-active .timeline-step-circle,
+        .timeline-mobile-step.is-active .timeline-step-circle {
+          border-color: #04c1ca;
+          box-shadow: 0 10px 30px rgba(7, 85, 143, 0.12);
+        }
+
+        .timeline-desktop-step.is-active .timeline-step-inner,
+        .timeline-mobile-step.is-active .timeline-step-inner {
+          background-color: #07558f;
+          color: white;
+        }
+
+        .timeline-desktop-step.is-active .timeline-step-check,
+        .timeline-mobile-step.is-active .timeline-step-check {
+          transform: scale(1);
+          opacity: 1;
+        }
+
+        .timeline-mobile-step.is-active .timeline-step-card {
+          border-color: #b8dfe9;
+          box-shadow: 0 10px 30px rgba(7, 85, 143, 0.05);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .timeline-step-circle,
+          .timeline-step-inner,
+          .timeline-step-check,
+          .timeline-step-card {
+            transition: none;
+          }
+        }
+      `}</style>
     </section>
   );
 }
