@@ -4,14 +4,13 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-import { ArrowRight, ArrowUpRight, ChevronUp } from "lucide-react";
-
 import {
   RiInstagramLine,
   RiFacebookCircleLine,
   RiTwitterXLine,
   RiYoutubeLine,
 } from "@remixicon/react";
+import { ShieldAlert } from "lucide-react";
 
 // =====================================
 // FOOTER NAVIGATION
@@ -46,89 +45,6 @@ const footerLinks = [
   },
 ];
 
-// =====================================
-// SOCIAL LINKS
-// =====================================
-
-// Replace empty URLs with your real social media links.
-// Social icons without URLs will not appear.
-
-const socialLinks = [
-  {
-    label: "Instagram",
-    href: "",
-    icon: RiInstagramLine,
-  },
-  {
-    label: "Facebook",
-    href: "",
-    icon: RiFacebookCircleLine,
-  },
-  {
-    label: "X",
-    href: "",
-    icon: RiTwitterXLine,
-  },
-  {
-    label: "YouTube",
-    href: "",
-    icon: RiYoutubeLine,
-  },
-];
-
-// =====================================
-// FOOTER COLUMN
-// =====================================
-
-function FooterColumn({ title, links }) {
-  return (
-    <nav aria-label={`${title} navigation`}>
-      <h3 className="font-heading mb-6 text-[15px] font-semibold text-[#102E38]">
-        {title}
-      </h3>
-
-      <ul className="space-y-4">
-        {links.map((link) => (
-          <li key={link.label}>
-            <Link
-              href={link.href}
-              className="group hover:text-primary inline-flex items-center gap-1 font-sans text-[13px] font-medium text-[#71838C] transition-colors duration-300 sm:text-sm"
-            >
-              <span className="transition-transform duration-300 group-hover:translate-x-1">
-                {link.label}
-              </span>
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </nav>
-  );
-}
-
-// =====================================
-// SOCIAL ICON
-// =====================================
-
-function SocialIcon({ social }) {
-  const Icon = social.icon;
-
-  return (
-    <a
-      href={social.href}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={social.label}
-      className="text-primary hover:border-primary hover:bg-primary flex h-11 w-11 items-center justify-center rounded-full border border-[#DFEAEE] bg-[#F5FAFC] transition-all duration-300 hover:-translate-y-1 hover:text-white"
-    >
-      <Icon size={20} />
-    </a>
-  );
-}
-
-// =====================================
-// FOOTER
-// =====================================
-
 export default function Footer() {
   const [email, setEmail] = useState("");
   const [newsletterStatus, setNewsletterStatus] = useState("");
@@ -142,41 +58,26 @@ export default function Footer() {
     setNewsletterStatus("Newsletter subscriptions are not available yet.");
   };
 
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
-
   return (
-    <footer className="relative w-full overflow-hidden bg-white border border-t-gray-200">
-      {/* =====================================
-          BACKGROUND GLOW
-      ===================================== */}
+    <footer className="relative isolate w-full overflow-hidden bg-[#041B2D] text-white">
+      {/* TOP GRADIENT LINE */}
+      <div className="absolute inset-x-0 top-0 z-20 h-[2px] bg-gradient-to-r from-[#07558F] via-[#04C1CA] to-[#07558F]" />
 
-      <div
-        aria-hidden="true"
-        className="bg-secondary/10 pointer-events-none absolute top-10 -left-40 h-[400px] w-[400px] rounded-full blur-[100px]"
-      />
+      {/* BACKGROUND GRADIENT */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#092F4B] via-[#051F35] to-[#031523]" />
 
-      <div
-        aria-hidden="true"
-        className="bg-primary/5 pointer-events-none absolute -right-40 bottom-10 h-[400px] w-[400px] rounded-full blur-[100px]"
-      />
+      {/* SOFT GLOW */}
+      <div className="pointer-events-none absolute -top-40 -right-40 h-[550px] w-[550px] rounded-full bg-[#04C1CA]/10 blur-[140px]" />
 
-      {/* =====================================
-          MAIN FLOATING FOOTER
-      ===================================== */}
+      <div className="pointer-events-none absolute -bottom-60 -left-40 h-[500px] w-[500px] rounded-full bg-[#07558F]/20 blur-[130px]" />
 
-      <div className="relative w-full bg-white">
+      <div className="relative z-10">
         {/* =====================================
-            MAIN FOOTER CONTENT
-        ===================================== */}
+          TOP BRAND + NAVIGATION
+      ===================================== */}
 
-        <div className="mx-auto grid w-full max-w-7xl grid-cols-2 gap-x-6 gap-y-10 px-4 py-12 sm:gap-x-8 sm:px-6 sm:py-14 lg:grid-cols-[1.5fr_0.7fr_0.7fr_0.9fr] lg:gap-12 lg:px-8 lg:py-16">
-          {/* BRAND COLUMN */}
-
+        <div className="mx-auto grid w-full max-w-7xl grid-cols-2 gap-x-8 gap-y-12 px-4 pt-16 pb-14 sm:px-6 sm:pt-20 sm:pb-16 lg:grid-cols-[1.6fr_0.7fr_0.7fr_0.8fr] lg:gap-14 lg:px-8">
+          {/* BRAND */}
           <div className="col-span-2 lg:col-span-1">
             <Link
               href="/"
@@ -186,93 +87,144 @@ export default function Footer() {
               <Image
                 src="/assets/penguin-logo.png"
                 alt="Penguin Peptides"
-                width={200}
-                height={80}
-                className="h-auto w-[170px] object-contain sm:w-[200px]"
+                width={230}
+                height={90}
+                className="h-auto w-[180px] brightness-0 invert sm:w-[210px]"
               />
             </Link>
 
-            <p className="text-muted mt-6 max-w-[340px] font-sans text-[13px] leading-[1.9] sm:text-sm">
-              Penguin Peptides offers a carefully selected range of research
-              peptides and blends for scientific and laboratory applications.
+            <p className="mt-6 max-w-[350px] font-sans text-[13px] leading-[1.9] text-[#A9C5D5]">
+              A focused collection of research peptides and blends for
+              scientific exploration and laboratory applications.
             </p>
 
-            {/* REMIX SOCIAL ICONS */}
+            {/* BRAND LABEL */}
+            <div className="mt-6 inline-flex items-center gap-2.5">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#04C1CA] shadow-[0_0_12px_rgba(4,193,202,0.8)]" />
 
-            <div className="mt-7 flex flex-wrap items-center gap-2.5">
-              {socialLinks
-                .filter((social) => social.href)
-                .map((social) => (
-                  <SocialIcon key={social.label} social={social} />
-                ))}
+              <span className="text-[10px] font-semibold tracking-[0.14em] text-[#82DDE5] uppercase">
+                For Laboratory Research Only
+              </span>
             </div>
           </div>
 
-          {/* NAVIGATION COLUMNS */}
-
+          {/* NAVIGATION */}
           {footerLinks.map((column) => (
-            <FooterColumn
+            <nav
               key={column.title}
-              title={column.title}
-              links={column.links}
-            />
+              aria-label={`${column.title} footer links`}
+              className="min-w-0"
+            >
+              <h3 className="font-heading mb-6 text-sm font-semibold tracking-[-0.01em] text-white">
+                {column.title}
+              </h3>
+
+              <ul className="space-y-4">
+                {column.links.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className="group inline-flex items-center gap-2 font-sans text-[13px] text-[#A9C5D5] transition-colors duration-300 hover:text-[#65E4E9]"
+                    >
+                      <span className="h-[3px] w-0 rounded-full bg-[#04C1CA] transition-all duration-300 group-hover:w-2" />
+
+                      {link.label ?? link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
           ))}
         </div>
 
         {/* =====================================
-            RESEARCH DISCLAIMER
-        ===================================== */}
+          FDA DISCLAIMER
+      ===================================== */}
+        {/* FDA DISCLAIMER */}
+        <section
+          aria-labelledby="footer-fda-title"
+          className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8"
+        >
+          <div className="border-y border-white/10 py-4">
+            {/* TITLE */}
+            <div className="flex items-center gap-2.5">
+              <ShieldAlert
+                size={19}
+                strokeWidth={1.7}
+                className="shrink-0 text-[#04C1CA]"
+                aria-hidden="true"
+              />
 
-        <div className="border-t border-[#E8EFF2] bg-[#F8FBFC]">
-          <div className="mx-auto flex max-w-7xl flex-col items-start gap-4 px-4 py-7 sm:flex-row sm:gap-5 sm:px-6 lg:px-8">
-            <span className="border-primary/15 text-primary shrink-0 rounded-full border bg-[#E8F6F9] px-3.5 py-2 font-sans text-[10px] font-bold tracking-[0.12em] uppercase">
-              Research Use Only
-            </span>
+              <h3
+                id="footer-fda-title"
+                className="font-heading text-[16px] font-semibold text-white sm:text-[18px]"
+              >
+                FDA Disclaimer
+              </h3>
+            </div>
 
-            <p className="text-muted max-w-[1000px] font-sans text-[11px] leading-[1.9] sm:text-xs">
-              Products offered by Penguin Peptides are intended exclusively for
-              laboratory research and analytical applications. They are not
-              intended for human consumption, medical treatment, diagnostic use,
-              or veterinary applications.
+            {/* DESCRIPTION */}
+            <p className="mt-4 font-sans text-[12px] leading-[1.9] text-[#AEC4D2] sm:text-[13px]">
+              These products have not been evaluated or approved by the United
+              States Food and Drug Administration, and no statement published on
+              this site has been evaluated by it. They are not drugs, foods,
+              dietary supplements, cosmetics, or medical devices, and nothing
+              offered or described here is intended to diagnose, treat, cure,
+              mitigate, or prevent any disease or health condition. For in-vitro
+              laboratory research use only.
             </p>
           </div>
-        </div>
+        </section>
 
         {/* =====================================
-            BOTTOM BAR
-        ===================================== */}
+          PAYMENT METHODS + COPYRIGHT
+      ===================================== */}
 
-        <div className="w-full bg-[#073B68]">
-          <div className="mx-auto flex max-w-7xl flex-col gap-5 px-4 py-5 text-white sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
-            <p className="font-sans text-xs text-white/65">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          {/* PAYMENT ROW */}
+          <div className="flex flex-col gap-5 border-b border-white/10 py-4 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <h4 className="font-heading text-[13px] font-semibold text-white">
+                Payment Methods
+              </h4>
+
+              <p className="mt-1 text-[11px] text-[#8EADBE]">
+                Payment options available at checkout.
+              </p>
+            </div>
+
+            {/* REAL PAYMENT LOGO IMAGES */}
+            <div className="flex flex-wrap items-center gap-5 sm:gap-7">
+              {[
+                { name: "Visa", image: "/assets/visa.png" },
+
+                {
+                  name: "American Express",
+                  image: "/assets/american.png",
+                },
+              ].map((payment) => (
+                <div
+                  key={payment.name}
+                  className="group flex h-9 items-center justify-center"
+                >
+                  <Image
+                    src={payment.image}
+                    alt={payment.name}
+                    width={65}
+                    height={36}
+                    className="h-[24px] w-auto max-w-[65px] object-contain opacity-65 brightness-0 invert transition-all duration-300 group-hover:scale-105 group-hover:opacity-100"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* COPYRIGHT ROW */}
+          <div className="flex flex-col items-center justify-center gap-5 py-6 text-center">
+            <p className="text-[12px] text-[#8EADBE]">
               © {new Date().getFullYear()} Penguin Peptides. All rights
               reserved.
             </p>
-
-            <div className="flex flex-wrap items-center gap-5">
-              <Link
-                href="/privacy-policy"
-                className="font-sans text-xs text-white/65 transition-colors hover:text-white"
-              >
-                Privacy Policy
-              </Link>
-
-              <Link
-                href="/terms-and-conditions"
-                className="font-sans text-xs text-white/65 transition-colors hover:text-white"
-              >
-                Terms & Conditions
-              </Link>
-
-              <button
-                type="button"
-                onClick={scrollToTop}
-                aria-label="Back to top"
-                className="hover:bg-secondary hover:text-primary-dark flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white transition-all duration-300"
-              >
-                <ChevronUp size={18} />
-              </button>
-            </div>
           </div>
         </div>
       </div>

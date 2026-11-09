@@ -13,27 +13,25 @@ gsap.registerPlugin(ScrollTrigger);
 const researchFeatures = [
   {
     title: "Identification",
-    description:
-      "Analytical evaluation supporting accurate compound identification.",
+    description: "Accurate compound identification.",
     image: "/assets/identification.jpg",
     position: "top-left",
   },
   {
     title: "Purity",
-    description: "Quality-focused analysis for research-grade materials.",
+    description: "Reliable purity assessment.",
     image: "/assets/purity.jpg",
     position: "top-right",
   },
   {
     title: "Endotoxins",
-    description:
-      "Laboratory testing information supporting research evaluation.",
+    description: "Precise endotoxin testing.",
     image: "/assets/endotoxins.jpg",
     position: "bottom-left",
   },
   {
     title: "Net Content",
-    description: "Precision-focused measurement and product information.",
+    description: "Accurate content measurement.",
     image: "/assets/measurement.jpg",
     position: "bottom-right",
   },
@@ -271,47 +269,24 @@ export default function ResearchShowcase() {
               TWO CENTER PRODUCTS
           ========================= */}
 
-          {/* =========================
-    TWO CENTER PRODUCTS
-========================= */}
+          {/* CENTER LOGO */}
+          <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center">
+            <div
+              data-showcase-product
+              className="relative flex h-40 w-[180px] items-center justify-center rounded-3xl border border-[#C8E6EF] bg-white/80 p-5 shadow-[0_15px_50px_rgba(7,85,143,0.12),0_0_35px_rgba(4,193,202,0.08)] backdrop-blur-xl sm:w-[280px] sm:p-8 lg:w-[360px] lg:p-10"
+            >
+              {/* INNER BORDER */}
+              <div className="pointer-events-none absolute inset-[6px] rounded-[22px] border border-white/80 sm:rounded-[30px] lg:rounded-[38px]" />
 
-          <div
-            ref={productRef}
-            className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center"
-          >
-            <div className="relative flex h-[220px] w-[150px] items-center justify-center sm:h-[360px] sm:w-[290px] lg:h-[460px] lg:w-[350px]">
-              {/* LEFT PRODUCT */}
-
-              <div
-                data-showcase-product
-                className="absolute bottom-[10%] left-[-2%] h-[165px] w-[90px] sm:bottom-[10%] sm:left-[2%] sm:h-[280px] sm:w-[155px] lg:bottom-[10%] lg:left-[3%] lg:h-[360px] lg:w-[195px]"
-              >
-                <div className="showcase-float-left relative h-full w-full">
-                  <Image
-                    src="/assets/pp-1sm.png"
-                    alt="Penguin Peptides PP-1SM research vial"
-                    fill
-                    sizes="(max-width: 640px) 90px, (max-width: 1024px) 155px, 195px"
-                    className="object-contain drop-shadow-[0_20px_20px_rgba(7,59,104,0.18)]"
-                  />
-                </div>
-              </div>
-
-              {/* RIGHT PRODUCT */}
-
-              <div
-                data-showcase-product
-                className="absolute right-[-2%] bottom-[15%] h-[165px] w-[90px] sm:right-[2%] sm:bottom-[15%] sm:h-[280px] sm:w-[155px] lg:right-[3%] lg:bottom-[15%] lg:h-[360px] lg:w-[195px]"
-              >
-                <div className="showcase-float-right relative h-full w-full">
-                  <Image
-                    src="/assets/pp-1cag.png"
-                    alt="Penguin Peptides PP-1 Cag research vial"
-                    fill
-                    sizes="(max-width: 640px) 90px, (max-width: 1024px) 155px, 195px"
-                    className="object-contain drop-shadow-[0_20px_20px_rgba(7,59,104,0.18)]"
-                  />
-                </div>
+              {/* LOGO */}
+              <div className="showcase-float-center relative h-full w-full">
+                <Image
+                  src="/assets/penguin-logo.png"
+                  alt="Penguin Peptides"
+                  fill
+                  sizes="(max-width: 640px) 140px, (max-width: 1024px) 216px, 280px"
+                  className="object-contain drop-shadow-[0_12px_25px_rgba(7,59,104,0.10)]"
+                />
               </div>
             </div>
           </div>

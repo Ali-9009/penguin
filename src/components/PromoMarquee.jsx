@@ -9,28 +9,20 @@ import { ArrowUpRight, Sparkles, Zap, FlaskConical } from "lucide-react";
 
 const promotions = [
   {
-    badge: "PENGUIN EXCLUSIVE",
-    title: "DISCOVER THE COLLECTION",
-    subtitle: "explore our research essentials",
-    button: "Shop Now",
-    href: "/shop",
-    icon: Sparkles,
-  },
-  {
-    badge: "RESEARCH ESSENTIALS",
-    title: "PRECISION STARTS HERE",
-    subtitle: "find your next research product",
-    button: "Explore",
-    href: "/shop",
+    title: "Premium Research Peptides",
     icon: FlaskConical,
   },
   {
-    badge: "EXPLORE MORE",
-    title: "FIND YOUR FORMULA",
-    subtitle: "multiple strengths to discover",
-    button: "View Products",
-    href: "/shop",
+    title: "Explore Our Collection",
+    icon: Sparkles,
+  },
+  {
+    title: "Multiple Strengths Available",
     icon: Zap,
+  },
+  {
+    title: "Research-Focused Products",
+    icon: FlaskConical,
   },
 ];
 
@@ -59,50 +51,26 @@ function PromoItem({ promotion }) {
   const Icon = promotion.icon;
 
   return (
-    <div className="flex shrink-0 items-center gap-5 pr-5 sm:gap-7 sm:pr-7 lg:gap-9 lg:pr-9">
-      {/* BADGE */}
+    <div className="flex shrink-0 items-center gap-6 pr-6 sm:gap-10 sm:pr-10 lg:gap-14 lg:pr-14">
+      {/* ICON + TEXT */}
+      <div className="flex shrink-0 items-center gap-3 sm:gap-4">
+        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/20 bg-white/10 text-[#8AF0F1] backdrop-blur-sm sm:h-10 sm:w-10">
+          <Icon size={18} strokeWidth={1.7} />
+        </span>
 
-      <span className="inline-flex shrink-0 items-center gap-2 rounded-full border border-white/20 bg-white/95 px-3 py-2 font-sans text-[9px] font-bold tracking-[0.12em] whitespace-nowrap text-[#073B68] uppercase shadow-sm sm:px-4 sm:text-[10px]">
-        <span className="h-1.5 w-1.5 rounded-full bg-[#04C1CA]" />
+        <span className="font-heading text-[13px] font-semibold tracking-[-0.02em] whitespace-nowrap text-white sm:text-[16px] lg:text-[18px]">
+          {promotion.title}
+        </span>
+      </div>
 
-        {promotion.badge}
-      </span>
-
-      {/* TITLE */}
-
-      <span className="font-heading shrink-0 text-[15px] font-bold tracking-[-0.035em] whitespace-nowrap text-white uppercase sm:text-[18px] lg:text-[20px]">
-        {promotion.title}
-      </span>
-
-      {/* SUBTITLE */}
-
-      <span className="font-heading hidden shrink-0 text-[15px] font-semibold whitespace-nowrap text-white/80 italic sm:inline sm:text-[18px] lg:text-[20px]">
-        {promotion.subtitle}
-      </span>
-
-      {/* BUTTON */}
-
-      {/* <Link
-        href={promotion.href}
-        className="inline-flex shrink-0 items-center gap-2 rounded-full bg-white px-5 py-2.5 font-sans text-[11px] font-semibold whitespace-nowrap text-[#073B68] transition-all duration-300 hover:bg-[#E6F9FB] sm:px-6 sm:text-xs"
-      >
-        {promotion.button}
-
-        <ArrowUpRight size={15} strokeWidth={1.8} />
-      </Link> */}
-
-      {/* DECORATIVE ICON */}
-
-      <Icon
-        size={21}
-        strokeWidth={1.7}
+      {/* SEPARATOR */}
+      <span
         aria-hidden="true"
-        className="shrink-0 text-[#79E6EB]"
+        className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#7CE5E8]"
       />
     </div>
   );
 }
-
 // =====================================
 // PROMO MARQUEE
 // =====================================
@@ -110,84 +78,37 @@ function PromoItem({ promotion }) {
 export default function PromoMarquee() {
   return (
     <section
-      aria-label="Penguin Peptides promotional offers"
-      className="relative z-30 -mt-12 h-20 w-full overflow-hidden sm:-mt-18 sm:h-30 lg:-mt-10 lg:h-40"
+      aria-label="Penguin Peptides highlights"
+      className="relative z-30 w-full overflow-hidden bg-gradient-to-r from-[#073B68] via-[#07558F] to-[#009CA9] py-4 sm:py-5"
     >
-      {/* =========================
-          SVG BACKGROUND
-      ========================= */}
-
-      <svg
-        viewBox="0 0 1440 260"
-        preserveAspectRatio="none"
-        className="pointer-events-none absolute inset-0 h-full w-full"
-        aria-hidden="true"
-      >
-        <defs>
-          {/* GRADIENT */}
-
-          <linearGradient
-            id="promoCurveGradient"
-            x1="0%"
-            y1="0%"
-            x2="100%"
-            y2="0%"
-          >
-            <stop offset="0%" stopColor="#073B68" />
-            <stop offset="50%" stopColor="#07558F" />
-            <stop offset="100%" stopColor="#009CA9" />
-          </linearGradient>
-
-          {/* RESPONSIVE CLIP PATH */}
-
-          <clipPath id="promoCurveClip" clipPathUnits="objectBoundingBox">
-            <path
-              d={curvePath}
-              transform="scale(0.000694444444 0.003846153846)"
-            />
-          </clipPath>
-        </defs>
-
-        {/* MAIN CURVED RIBBON */}
-
-        <path d={curvePath} fill="url(#promoCurveGradient)" />
-      </svg>
-
-      {/* =========================
-          CURVED MARQUEE CONTENT
-      ========================= */}
-
+      {/* SUBTLE BACKGROUND GLOW */}
       <div
-        className="absolute inset-0"
-        style={{
-          clipPath: "url(#promoCurveClip)",
-        }}
-      >
-        <div className="promo-marquee flex h-full w-full items-center overflow-hidden">
-          <div className="promo-marquee-track flex w-max items-center">
-            {[0, 1].map((copy) => (
-              <div
-                key={copy}
-                aria-hidden={copy === 1}
-                inert={copy === 1}
-                className="flex shrink-0 items-center"
-              >
-                {promotions.map((promotion) => (
-                  <PromoItem
-                    key={`${copy}-${promotion.title}`}
-                    promotion={promotion}
-                  />
-                ))}
-              </div>
-            ))}
-          </div>
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-20 left-1/3 h-40 w-80 rounded-full bg-white/10 blur-[70px]"
+      />
+
+      {/* SCROLLING CONTENT */}
+      <div className="promo-marquee relative flex w-full items-center overflow-hidden">
+        <div className="promo-marquee-track flex w-max items-center">
+          {[0, 1].map((copy) => (
+            <div
+              key={copy}
+              aria-hidden={copy === 1}
+              inert={copy === 1}
+              className="flex shrink-0 items-center"
+            >
+              {promotions.map((promotion) => (
+                <PromoItem
+                  key={`${copy}-${promotion.title}`}
+                  promotion={promotion}
+                />
+              ))}
+            </div>
+          ))}
         </div>
       </div>
 
-      {/* =========================
-          MARQUEE ANIMATION
-      ========================= */}
-
+      {/* MARQUEE ANIMATION */}
       <style jsx global>{`
         @keyframes penguin-promo-marquee {
           from {
@@ -204,8 +125,7 @@ export default function PromoMarquee() {
           will-change: transform;
         }
 
-        .promo-marquee:hover .promo-marquee-track,
-        .promo-marquee:focus-within .promo-marquee-track {
+        .promo-marquee:hover .promo-marquee-track {
           animation-play-state: paused;
         }
 

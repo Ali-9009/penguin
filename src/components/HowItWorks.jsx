@@ -228,7 +228,7 @@ export default function HowItWorks() {
             From Order to <span className="text-secondary-dark">Delivery.</span>
           </h2>
 
-          <p className="mx-auto mt-5 max-w-[550px] text-[13px] leading-[1.8] text-[#718792] sm:text-[15px]">
+          <p className="text-muted text-md mx-auto mt-5 max-w-2xl font-sans leading-7">
             A simple, transparent process designed to keep you informed from
             checkout to shipment tracking.
           </p>

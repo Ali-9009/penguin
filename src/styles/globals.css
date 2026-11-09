@@ -175,3 +175,47 @@
     @apply border-primary/20 text-primary hover:border-primary hover:bg-accent-light inline-flex items-center justify-center rounded-full border bg-white px-5 py-3.5 font-sans text-sm font-semibold transition-all duration-300;
   }
 }
+
+/* cards */
+
+/* =====================================
+   ALWAYS ANIMATED GRADIENT BORDER
+===================================== */
+
+@property --product-border-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.product-glow-card {
+  background: #dce8ed;
+}
+
+.product-glow-border {
+  background: conic-gradient(
+    from var(--product-border-angle),
+    #07558f 0%,
+    #04c1ca 20%,
+    #92f5ff 35%,
+    #e6edf0 50%,
+    #07558f 70%,
+    #04c1ca 85%,
+    #07558f 100%
+  );
+
+  opacity: 1;
+  animation: product-border-rotate 8s linear infinite;
+}
+
+@keyframes product-border-rotate {
+  to {
+    --product-border-angle: 360deg;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-glow-border {
+    animation: none;
+  }
+}

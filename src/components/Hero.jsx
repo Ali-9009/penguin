@@ -353,7 +353,7 @@ export default function Hero() {
     <section
       ref={heroRef}
       aria-labelledby="hero-heading"
-      className="relative isolate w-full overflow-hidden bg-linear-to-b from-[#F5FAFC] via-white to-white px-4 py-12 sm:px-6 lg:flex lg:items-center lg:px-8 lg:py-0"
+      className="relative isolate w-full overflow-hidden bg-linear-to-b from-[#F5FAFC] via-white to-white px-4 py-8 sm:px-6 md:py-12 lg:flex lg:items-center lg:px-8"
     >
       {/* ==========================================
           BACKGROUND
@@ -373,14 +373,14 @@ export default function Hero() {
           MAIN CONTAINER
       ========================================== */}
 
-      <div className="relative mx-auto grid w-full max-w-7xl items-center gap-10 sm:gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-5 xl:gap-10">
+      <div className="relative mx-auto grid w-full max-w-7xl items-center gap-4 sm:gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-5 xl:gap-10">
         {/* LEFT CONTENT */}
         <div className="relative z-30 min-w-0">
           {/* EYEBROW */}
 
           <div
             data-hero-eyebrow
-            className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-[#D6EAF0] bg-white/90 px-4 py-2.5 shadow-[0_5px_20px_rgba(7,85,143,0.04)]"
+            className="mb-3 inline-flex items-center gap-2.5 rounded-full border border-[#D6EAF0] bg-white/90 px-4 py-2.5 shadow-[0_5px_20px_rgba(7,85,143,0.04)]"
           >
             <span className="relative flex h-2 w-2">
               <span className="bg-secondary/40 absolute inset-0 animate-ping rounded-full" />
@@ -397,85 +397,83 @@ export default function Hero() {
           <h1
             id="hero-heading"
             data-hero-heading
-            className="font-heading text-primary max-w-[760px] text-[clamp(2.8rem,10vw,4rem)] leading-[1.02] font-extrabold tracking-[-0.06em] sm:text-[clamp(3.5rem,7vw,5rem)] lg:text-[clamp(3.8rem,5vw,6rem)]"
+            className="font-heading text-primary max-w-[650px] text-[clamp(2.3rem,8vw,3.5rem)] leading-[1.08] font-extrabold tracking-[-0.055em] sm:text-[clamp(3rem,5vw,4rem)] lg:text-[clamp(3.2rem,4vw,4.8rem)]"
           >
-            Premium Research
+            Precision in
             <br />
-            <span className="text-secondary-dark">Peptides Discovery.</span>
+            <span className="text-secondary-dark">Every Discovery.</span>
           </h1>
 
           {/* DESCRIPTION */}
 
           <p
             data-hero-description
-            className="mt-6 max-w-[530px] font-sans text-md leading-[1.7] text-[#657F8B] sm:mt-7"
+            className="text-md mt-6 max-w-[530px] font-sans leading-[1.7] text-[#657F8B] sm:mt-7"
           >
-            Discover a carefully selected collection of research peptides,
-            available in multiple strengths and formulations for scientific and
-            laboratory applications.
+            Discover premium research peptides in a variety of strengths and
+            formulations for laboratory research.
           </p>
-
-          <div
-            data-aos="fade-up"
-            className="inline-flex items-center gap-4 pt-4"
-          >
-            {/* OVERLAPPING AVATARS */}
-            <div className="flex shrink-0 items-center -space-x-3">
-              {[
-                "/assets/profile-1.jpeg",
-                "/assets/profile-2.jpeg",
-                "/assets/profile-3.avif",
-              ].map((src, index) => (
-                <div
-                  key={index}
-                  className="relative h-10 w-10 overflow-hidden rounded-full border-[3px] border-white bg-[#EAF7FA] sm:h-11 sm:w-11"
-                >
-                  <Image
-                    src={src}
-                    alt=""
-                    fill
-                    sizes="44px"
-                    className="object-cover"
-                  />
-                </div>
-              ))}
-            </div>
-
-            {/* TEXT */}
-            <div className="min-w-0">
-              <p className="font-heading text-primary text-[15px] leading-tight font-bold sm:text-[19px]">
-                Research Focused
-              </p>
-
-              <p className="mt-1 text-[11px] text-[#718596] sm:text-[12px]">
-                Focused Collection
-              </p>
-            </div>
-          </div>
-
-          {/* BUTTONS */}
 
           <div
             data-hero-buttons
             className="mt-8 flex flex-wrap items-center gap-3 sm:mt-9"
           >
-            <Link href="/shop" className="btn-primary">
-              Explore Collection
+            {/* PRIMARY BUTTON */}
+            <Link
+              href="/shop"
+              className="group relative inline-flex h-10 items-center justify-center gap-3 overflow-hidden rounded-full bg-gradient-to-r from-[#07558F] via-[#0878A5] to-[#04AEBB] px-4 text-[13px] font-semibold text-white shadow-[0_8px_24px_rgba(7,85,143,0.20)] transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_14px_32px_rgba(7,85,143,0.28)] active:translate-y-0 sm:h-[52px] sm:px-8 sm:text-[14px]"
+            >
+              {/* HOVER SHINE */}
+              <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+
+              <span className="relative z-10">Explore Collection</span>
+
               <ArrowUpRight
-                size={17}
-                className="transition-transform group-hover:rotate-45"
+                size={18}
+                className="relative z-10 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
               />
             </Link>
 
-            <Link href="/about-us" className="btn-secondary">
-              Learn More
-              <ArrowUpRight size={16} />
+            {/* SECONDARY BUTTON */}
+            <Link
+              href="/about-us"
+              className="group text-primary inline-flex h-10 items-center justify-center gap-3 rounded-full border border-[#C8DEE8] bg-white/80 px-4 text-[13px] font-semibold shadow-[0_4px_15px_rgba(7,85,143,0.04)] backdrop-blur-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:border-[#07558F] hover:bg-[#EAF7FA] hover:shadow-[0_10px_25px_rgba(7,85,143,0.10)] active:translate-y-0 sm:h-[52px] sm:px-8 sm:text-[14px]"
+            >
+              <span>Learn More</span>
+
+              <ArrowUpRight
+                size={17}
+                className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              />
             </Link>
+          </div>
+
+          <div
+            data-aos="fade-up"
+            className="mt-8 hidden flex-wrap items-center gap-3 sm:flex"
+          >
+            {[
+              { value: "99.5%+", label: "Verified Purity" },
+              { value: "100K+", label: "Researchers Served" },
+            ].map((item) => (
+              <div
+                key={item.label}
+                className="group inline-flex items-center gap-2.5 rounded-full border border-[#D6E9EF] bg-gradient-to-r from-white to-[#EDF9FC] px-4 py-2.5 shadow-[0_4px_16px_rgba(7,85,143,0.05)] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#8DD8E3] hover:shadow-[0_8px_24px_rgba(7,85,143,0.10)]"
+              >
+                <span className="font-heading text-primary text-[13px] font-bold">
+                  {item.value}
+                </span>
+
+                <span className="text-xs font-medium text-[#698593]">
+                  {item.label}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
 
         {/* RIGHT PRODUCT COMPOSITION */}
-        <div className="relative min-w-0 pt-3 sm:pt-0">
+        <div className="relative min-w-0">
           <div className="relative mx-auto h-[370px] w-full max-w-[520px] sm:h-[500px] lg:h-[580px] lg:max-w-none xl:h-[650px]">
             {/* MAIN GRADIENT VISUAL */}
 

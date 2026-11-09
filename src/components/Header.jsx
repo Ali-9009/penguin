@@ -30,115 +30,44 @@ const navLinks = [
   { name: "Track Order", href: "/track-order" },
 ];
 
-import {
-  ShieldCheck,
-  Microscope,
-  PackageCheck,
-  Truck,
-  Headphones,
-} from "lucide-react";
-
-const announcements = [
-  {
-    icon: FlaskConical,
-    text: "Research Peptides",
-  },
-  {
-    icon: ShieldCheck,
-    text: "Quality Focused",
-  },
-  {
-    icon: Microscope,
-    text: "Scientific Research",
-  },
-  {
-    icon: PackageCheck,
-    text: "Secure Packaging",
-  },
-  {
-    icon: Truck,
-    text: "Tracked Shipping",
-  },
-  {
-    icon: Headphones,
-    text: "Dedicated Support",
-  },
-];
+import { Gift } from "lucide-react";
 
 function AnnouncementBar() {
   return (
-    <div className="relative overflow-hidden border-b border-[#DCECF1] bg-[#EAF7FA] py-3">
-      {/* MARQUEE */}
+    <div className="relative w-full overflow-hidden bg-linear-to-r from-[#073B68] via-[#07558F] to-[#009CA9] px-4 py-3 sm:py-3.5">
+      {/* SOFT GRADIENT GLOW */}
+      <div className="pointer-events-none absolute -top-16 left-1/4 h-28 w-60 rounded-full bg-white/10 blur-[50px]" />
 
-      <div className="overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
-        <div className="announcement-track flex w-max items-center">
-          {[0, 1].map((copy) => (
-            <div
-              key={copy}
-              aria-hidden={copy === 1}
-              className="flex shrink-0 items-center gap-10 pr-10 sm:gap-16 sm:pr-16"
-            >
-              {announcements.map((item) => {
-                const Icon = item.icon;
+      <div className="pointer-events-none absolute right-1/4 -bottom-16 h-28 w-60 rounded-full bg-[#04C1CA]/30 blur-[50px]" />
 
-                return (
-                  <div
-                    key={item.text}
-                    className="flex shrink-0 items-center gap-2.5"
-                  >
-                    <Icon
-                      size={19}
-                      strokeWidth={1.8}
-                      className="text-secondary-dark shrink-0"
-                      aria-hidden="true"
-                    />
+      {/* ANNOUNCEMENT */}
+      <div className="relative z-10 mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-2.5 gap-y-1.5 text-center sm:gap-x-3">
+        <Gift
+          size={17}
+          strokeWidth={1.8}
+          className="shrink-0 text-[#8AF0F1]"
+          aria-hidden="true"
+        />
 
-                    <span className="font-heading text-primary text-[12px] font-semibold tracking-[0.02em] whitespace-nowrap sm:text-[14px]">
-                      {item.text}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
-          ))}
-        </div>
+        <p className="font-heading text-[11px] leading-relaxed font-medium tracking-[0.01em] text-white sm:text-[13px]">
+          <span className="font-extrabold text-[#A3F7F4]">40% OFF</span>
+
+          <span className="mx-2 text-white/50">+</span>
+
+          <span className="font-semibold text-white">FREE Peptide</span>
+
+          <span className="ml-1 font-medium text-white/85">
+            per $150 Spent After Discount
+          </span>
+        </p>
+
+        <Sparkles
+          size={15}
+          strokeWidth={1.8}
+          className="hidden shrink-0 text-[#8AF0F1] sm:block"
+          aria-hidden="true"
+        />
       </div>
-
-      {/* ANIMATION */}
-
-      <style jsx global>{`
-        @keyframes penguin-announcement-scroll {
-          from {
-            transform: translate3d(0, 0, 0);
-          }
-
-          to {
-            transform: translate3d(-50%, 0, 0);
-          }
-        }
-
-        .announcement-track {
-          animation: penguin-announcement-scroll 35s linear infinite;
-          will-change: transform;
-        }
-
-        .announcement-track:hover {
-          animation-play-state: paused;
-        }
-
-        @media (max-width: 640px) {
-          .announcement-track {
-            animation-duration: 25s;
-          }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          .announcement-track {
-            animation: none;
-            will-change: auto;
-          }
-        }
-      `}</style>
     </div>
   );
 }

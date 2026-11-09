@@ -203,12 +203,6 @@ export default function Bestsellers({ currentProduct = null }) {
                 </>
               )}
             </h2>
-
-            <p className="text-muted text-md mt-4 max-w-[530px] font-sans leading-7">
-              {isProductPage
-                ? "Discover more research peptides and formulations from our collection."
-                : "Explore selected research peptides and blends from the Penguin Peptides collection."}
-            </p>
           </div>
         </div>
       </div>
@@ -217,7 +211,7 @@ export default function Bestsellers({ currentProduct = null }) {
           PRODUCT MARQUEE
       ========================= */}
 
-      <div className="relative mx-auto mt-12 max-w-7xl sm:mt-14">
+      <div className="relative mx-auto mt-12 max-w-7xl">
         {/* LEFT FADE */}
 
         <div className="pointer-events-none absolute inset-y-0 left-0 z-20 hidden w-20 bg-gradient-to-r from-white to-transparent lg:block" />

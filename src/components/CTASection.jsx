@@ -1,227 +1,243 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  ArrowUpRight,
-  ArrowRight,
-  Mail,
-  Sparkles,
-  FlaskConical,
-} from "lucide-react";
+import { ArrowUpRight, FlaskConical, ShieldCheck } from "lucide-react";
+import { useRef, useState } from "react";
 
-export default function NewsletterCTA() {
-  const [email, setEmail] = useState("");
-  const [status, setStatus] = useState("");
+const floatingProducts = [
+  {
+    image: "/assets/pp-1sm.png",
+    left: "5%",
+    delay: "-2s",
+    duration: "19s",
+    size: "w-[62px] sm:w-[85px]",
+    rotation: "-22deg",
+  },
+  {
+    image: "/assets/pp-1cag.png",
+    left: "18%",
+    delay: "-11s",
+    duration: "24s",
+    size: "w-[48px] sm:w-[75px]",
+    rotation: "18deg",
+  },
+  {
+    image: "/assets/pp-1sm.png",
+    left: "33%",
+    delay: "-16s",
+    duration: "21s",
+    size: "w-[54px] sm:w-[82px]",
+    rotation: "-15deg",
+  },
+  {
+    image: "/assets/pp-1cag.png",
+    left: "49%",
+    delay: "-7s",
+    duration: "26s",
+    size: "w-[55px] sm:w-[78px]",
+    rotation: "25deg",
+  },
+  {
+    image: "/assets/pp-1sm.png",
+    left: "65%",
+    delay: "-13s",
+    duration: "22s",
+    size: "w-[50px] sm:w-[70px]",
+    rotation: "-28deg",
+  },
+  {
+    image: "/assets/pp-1cag.png",
+    left: "79%",
+    delay: "-4s",
+    duration: "20s",
+    size: "w-[60px] sm:w-[85px]",
+    rotation: "16deg",
+  },
+  {
+    image: "/assets/pp-1sm.png",
+    left: "92%",
+    delay: "-17s",
+    duration: "25s",
+    size: "w-[54px] sm:w-[80px]",
+    rotation: "-18deg",
+  },
+];
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+export default function ResearchCTA() {
+  const glowRef = useRef(null);
+  const [isHovering, setIsHovering] = useState(false);
 
-    if (!email.trim()) return;
+  const handleMouseMove = (e) => {
+    const section = e.currentTarget;
+    const rect = section.getBoundingClientRect();
 
-    // Connect your newsletter API here.
-    setStatus("Newsletter subscriptions are not available yet.");
+    if (glowRef.current) {
+      glowRef.current.style.left = `${e.clientX - rect.left}px`;
+      glowRef.current.style.top = `${e.clientY - rect.top}px`;
+    }
   };
-
   return (
     <section
-      aria-labelledby="newsletter-cta-heading"
-      className="relative overflow-hidden bg-white px-4 pt-12 pb-16 sm:px-6 sm:pt-16 sm:pb-20 lg:px-8 lg:pt-20 lg:pb-24"
+      aria-labelledby="research-cta-heading"
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
+      className="relative isolate mt-10 flex min-h-110 w-full items-center justify-center overflow-hidden bg-[#041625] px-4 py-12 sm:min-h-120 sm:px-6 lg:min-h-140 lg:px-8"
     >
-      <div className="relative mx-auto max-w-7xl">
-        {/* =====================================
-            MAIN CTA BACKGROUND
-        ===================================== */}
+      {/* =====================================
+          BACKGROUND GRADIENT
+      ===================================== */}
 
-        <div className="relative min-h-[420px] overflow-hidden rounded-[26px] bg-gradient-to-br from-[#E9F5FD] via-[#E6F6FC] to-[#C8E9F6] sm:min-h-[450px] sm:rounded-[32px] lg:min-h-[480px]">
-          {/* BACKGROUND DECORATIONS */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#092D49] via-[#041625] to-[#020C16]" />
 
-          <div className="pointer-events-none absolute -top-32 -left-32 h-[350px] w-[350px] rounded-full bg-white/50 blur-[80px]" />
+      {/* LEFT GLOW */}
 
-          <div className="pointer-events-none absolute -right-32 -bottom-32 h-[400px] w-[400px] rounded-full bg-[#75D7E8]/30 blur-[100px]" />
+      <div className="pointer-events-none absolute top-1/4 -left-40 h-[500px] w-[500px] rounded-full bg-[#07558F]/20 blur-[130px]" />
 
-          {/* DECORATIVE CIRCLES */}
+      {/* RIGHT GLOW */}
 
-          <div className="pointer-events-none absolute top-1/2 left-1/2 h-[350px] w-[350px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/35 sm:h-[550px] sm:w-[550px]" />
+      <div className="pointer-events-none absolute -right-40 bottom-0 h-[500px] w-[500px] rounded-full bg-[#04C1CA]/10 blur-[130px]" />
 
-          <div className="pointer-events-none absolute top-1/2 left-1/2 h-[250px] w-[250px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-white/40 sm:h-[420px] sm:w-[420px]" />
+      {/* MOUSE FOLLOWING GLOW */}
+      <div
+        ref={glowRef}
+        aria-hidden="true"
+        className={`pointer-events-none absolute z-[2] hidden h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(4,193,202,0.24)_0%,rgba(7,85,143,0.12)_38%,transparent_72%)] blur-[35px] transition-opacity duration-500 md:block ${
+          isHovering ? "opacity-100" : "opacity-0"
+        }`}
+      />
 
-          {/* =====================================
-              LEFT PRODUCT
-          ===================================== */}
+      {/* =====================================
+          FLOATING / RAINING PRODUCTS
+      ===================================== */}
 
-          <div className="pointer-events-none absolute bottom-[14%] -left-8 z-10 h-[190px] w-[120px] -rotate-15 sm:bottom-[20%] sm:left-[2%] sm:h-[270px] sm:w-[170px] lg:bottom-[18%] lg:left-[4%] lg:h-[340px] lg:w-[210px]">
-            <div className="cta-float-left relative h-full w-full">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
+      >
+        {floatingProducts.map((product, index) => (
+          <div
+            key={index}
+            className={`cta-product-rain absolute top-0 ${product.size}`}
+            style={{
+              left: product.left,
+              animationDelay: product.delay,
+              animationDuration: product.duration,
+              "--product-rotation": product.rotation,
+            }}
+          >
+            <div className="relative aspect-[2/3] w-full">
               <Image
-                src="/assets/pp-1sm.png"
-                alt="Penguin Peptides PP-1SM research vial"
+                src={product.image}
+                alt=""
                 fill
-                sizes="(max-width: 640px) 120px, (max-width: 1024px) 170px, 210px"
-                className="object-contain drop-shadow-[0_20px_25px_rgba(7,59,104,0.18)]"
+                sizes="(max-width: 640px) 62px, 85px"
+                className="object-contain opacity-35 drop-shadow-[0_15px_25px_rgba(0,0,0,0.3)] sm:opacity-45"
               />
             </div>
           </div>
+        ))}
+      </div>
 
-          {/* =====================================
-              RIGHT PRODUCT
-          ===================================== */}
+      {/* CENTER DARK GRADIENT FOR TEXT READABILITY */}
 
-          <div className="pointer-events-none absolute -right-8 bottom-[14%] z-10 h-[190px] w-[120px] rotate-15 sm:right-[2%] sm:bottom-[20%] sm:h-[270px] sm:w-[170px] lg:right-[4%] lg:bottom-[18%] lg:h-[340px] lg:w-[210px]">
-            <div className="cta-float-right relative h-full w-full">
-              <Image
-                src="/assets/pp-1cag.png"
-                alt="Penguin Peptides PP-1 Cag research vial"
-                fill
-                sizes="(max-width: 640px) 120px, (max-width: 1024px) 170px, 210px"
-                className="object-contain drop-shadow-[0_20px_25px_rgba(7,59,104,0.18)]"
-              />
-            </div>
-          </div>
+      <div className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_center,rgba(4,22,37,0.85)_0%,rgba(4,22,37,0.4)_45%,transparent_85%)]" />
 
-          {/* =====================================
-              CENTER CONTENT
-          ===================================== */}
+      {/* =====================================
+          CENTER CONTENT
+      ===================================== */}
 
-          <div className="relative z-20 mx-auto flex max-w-[850px] flex-col items-center px-5 pt-14 pb-36 text-center sm:px-10 sm:pt-20 sm:pb-32 lg:pt-24">
-            {/* HEADING */}
+      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center text-center">
+        {/* HEADING */}
 
-            <h2
-              id="newsletter-cta-heading"
-              className="font-heading text-primary max-w-[720px] text-[clamp(1.75rem,4.5vw,4rem)] leading-[1.12] font-bold tracking-[-0.055em]"
-            >
-              Explore Research Compounds
-              <br className="hidden sm:block" />
-              <span className="text-secondary-dark"> With Confidence.</span>
-            </h2>
+        <h2
+          id="research-cta-heading"
+          className="font-heading max-w-[850px] text-[clamp(2.3rem,6vw,4.8rem)] leading-[1.08] font-extrabold tracking-[-0.06em] text-white"
+        >
+          Research Peptides.
+          <br />
+          <span className="bg-gradient-to-r from-[#54D9E7] via-[#8DF0F2] to-[#04C1CA] bg-clip-text text-transparent">
+            Precision in Every Batch.
+          </span>
+        </h2>
 
-            {/* DESCRIPTION */}
+        {/* DESCRIPTION */}
 
-            <p className="mt-5 max-w-[500px] text-[12px] leading-[1.8] text-[#5F7C8A] sm:text-[14px]">
-              Discover our carefully selected collection of research peptides
-              and formulations for scientific and laboratory applications.
-            </p>
+        <p className="text-md mt-4 max-w-[490px] text-[#A7BCCB]">
+          Explore our collection of research peptides and blends in a variety of
+          strengths for laboratory applications.
+        </p>
 
-            {/* BUTTON */}
+        {/* CTA BUTTONS */}
 
-            <Link href="/shop" className="btn-primary mt-4">
-              See All Products
-            </Link>
-          </div>
-        </div>
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-3 sm:mt-10">
+          {/* PRIMARY */}
 
-        {/* =====================================
-            NEWSLETTER SUBSCRIPTION BAR
-        ===================================== */}
+          <Link
+            href="/shop"
+            className="group relative inline-flex h-10 items-center justify-center gap-2.5 overflow-hidden rounded-full bg-gradient-to-r from-[#07558F] via-[#0878A5] to-[#04AEBB] px-4 text-[12px] font-semibold text-white shadow-[0_10px_30px_rgba(4,193,202,0.17)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_15px_35px_rgba(4,193,202,0.25)] sm:h-12 sm:px-8 sm:text-[13px]"
+          >
+            <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
 
-        <div className="relative z-30 mx-auto -mt-20 w-[calc(100%-24px)] max-w-[1050px] sm:-mt-16 sm:w-[calc(100%-60px)]">
-          <div className="rounded-[22px] border border-[#E2EDF2] bg-white px-5 py-6 shadow-[0_20px_60px_rgba(7,59,104,0.12)] sm:rounded-[26px] sm:px-7 sm:py-7 lg:px-10">
-            <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
-              {/* NEWSLETTER TEXT */}
+            <span className="relative z-10">Shop Research Peptides</span>
 
-              <div className="min-w-0">
-                <div className="mb-2 flex items-center gap-2">
-                  <Mail size={17} className="text-secondary-dark" />
+            <ArrowUpRight
+              size={17}
+              className="relative z-10 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+            />
+          </Link>
 
-                  <span className="text-secondary-dark text-[10px] font-bold tracking-[0.15em] uppercase">
-                    Stay Connected
-                  </span>
-                </div>
+          {/* SECONDARY */}
 
-                <h3 className="font-heading text-primary text-[19px] font-bold tracking-[-0.04em] sm:text-[23px]">
-                  Subscribe to Our Newsletter
-                </h3>
-
-                <p className="mt-1.5 max-w-[420px] text-[11px] leading-[1.7] text-[#708692] sm:text-[12px]">
-                  Receive product updates and news from Penguin Peptides.
-                </p>
-              </div>
-
-              {/* NEWSLETTER FORM */}
-
-              <form onSubmit={handleSubmit} className="w-full lg:max-w-[450px]">
-                <div className="focus-within:border-primary/40 flex w-full items-center gap-2 rounded-full border border-[#DCEAF0] bg-[#F7FBFC] p-1.5 transition-colors">
-                  <label htmlFor="newsletter-email" className="sr-only">
-                    Email address
-                  </label>
-
-                  <input
-                    id="newsletter-email"
-                    type="email"
-                    required
-                    autoComplete="email"
-                    value={email}
-                    onChange={(event) => {
-                      setEmail(event.target.value);
-                      setStatus("");
-                    }}
-                    placeholder="Enter your email"
-                    className="text-primary min-w-0 flex-1 bg-transparent px-3 py-2 text-[12px] outline-none placeholder:text-[#9AAEB8] sm:px-4 sm:text-[13px]"
-                  />
-
-                  <button
-                    type="submit"
-                    className="bg-primary hover:bg-primary-dark inline-flex h-10 shrink-0 items-center justify-center gap-2 rounded-full px-4 text-[11px] font-semibold text-white transition-colors sm:px-6 sm:text-[12px]"
-                  >
-                    Subscribe
-                    <ArrowRight size={15} />
-                  </button>
-                </div>
-
-                {status && (
-                  <p
-                    role="status"
-                    className="mt-3 px-2 text-[11px] text-[#708692]"
-                  >
-                    {status}
-                  </p>
-                )}
-              </form>
-            </div>
-          </div>
+          <Link
+            href="/about-us"
+            className="group inline-flex h-10 items-center justify-center gap-2.5 rounded-full border border-white/20 bg-white/10 px-4 text-[12px] font-semibold text-white backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-white/50 hover:bg-white/15 sm:h-12 sm:px-8 sm:text-[13px]"
+          >
+            <FlaskConical size={17} />
+            Learn More
+          </Link>
         </div>
       </div>
 
       {/* =====================================
-          FLOATING ANIMATIONS
+          ANIMATIONS
       ===================================== */}
 
       <style jsx global>{`
-        @keyframes ctaFloatLeft {
-          0%,
-          100% {
-            transform: translateY(0) rotate(-8deg);
+        @keyframes ctaProductRain {
+          0% {
+            transform: translate3d(0, -180px, 0) rotate(var(--product-rotation));
           }
 
           50% {
-            transform: translateY(-14px) rotate(-5deg);
+            transform: translate3d(25px, 45vh, 0)
+              rotate(calc(var(--product-rotation) + 12deg));
           }
-        }
 
-        @keyframes ctaFloatRight {
-          0%,
           100% {
-            transform: translateY(-8px) rotate(8deg);
-          }
-
-          50% {
-            transform: translateY(10px) rotate(5deg);
+            transform: translate3d(-15px, 900px, 0)
+              rotate(calc(var(--product-rotation) - 8deg));
           }
         }
 
-        .cta-float-left {
-          animation: ctaFloatLeft 5.5s ease-in-out infinite;
+        .cta-product-rain {
+          animation-name: ctaProductRain;
+          animation-timing-function: linear;
+          animation-iteration-count: infinite;
+          will-change: transform;
         }
 
-        .cta-float-right {
-          animation: ctaFloatRight 6s ease-in-out infinite;
-          animation-delay: -1.5s;
+        @media (max-width: 640px) {
+          .cta-product-rain {
+            opacity: 0.5;
+          }
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .cta-float-left,
-          .cta-float-right {
+          .cta-product-rain {
             animation: none;
+            opacity: 0.15;
           }
         }
       `}</style>

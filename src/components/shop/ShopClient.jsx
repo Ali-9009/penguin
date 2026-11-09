@@ -72,7 +72,7 @@ export default function ShopClient({ initialSearch = "" }) {
     <main className="min-h-screen">
       <section
         data-aos="fade-up"
-        className="px-3 pt-30 sm:px-5 sm:pt-32 lg:px-8 lg:pt-36"
+        className="px-3 pt-10 sm:px-5 lg:px-8"
       >
         <div className="relative mx-auto w-full max-w-7xl overflow-hidden rounded-3xl bg-[#EAF7FA]">
           {/* RESPONSIVE BACKGROUND IMAGES */}

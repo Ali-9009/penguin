@@ -12,10 +12,7 @@ export default function ProductGrid() {
   const activeProducts = products.filter((product) => product.active !== false);
 
   return (
-    <section
-      id="shop"
-      className="bg-white px-4 py-12 sm:px-6 md:py-16 lg:px-8"
-    >
+    <section id="shop" className="bg-white px-4 py-12 sm:px-6 md:py-16 lg:px-8">
       <div className="mx-auto max-w-7xl">
         {/* =========================
             SECTION HEADER
@@ -24,14 +21,13 @@ export default function ProductGrid() {
         <div className="mb-10 text-center sm:mb-14">
           {/* Heading */}
 
-          <h2 className="section-heading">Explore Our Research Collection</h2>
+          <h2 className="section-heading">Explore Collection</h2>
 
           {/* Description */}
 
           <p className="text-muted text-md mx-auto mt-5 max-w-2xl font-sans leading-7">
-            Explore the Penguin Peptides collection of research peptides and
-            blends, available in a range of strengths for laboratory research
-            and scientific applications.
+            Discover research peptides and blends in multiple strengths for
+            laboratory applications.
           </p>
         </div>
 
