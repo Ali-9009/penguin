@@ -209,7 +209,7 @@ function Packs({ product, price, selectedPack, setSelectedPack, stock }) {
                   : "hover:border-primary/40 border-[#EAE3EB] bg-white"
               }`}
             >
-              <div className="relative h-[75px] w-[85px] shrink-0 sm:h-[90px] sm:w-[100px]">
+              <div className="relative h-15 w-[85px] shrink-0 sm:h-16 sm:w-[100px]">
                 {Array.from({ length: bottleCount }).map((_, index) => {
                   const bottleWidth = 38;
                   const bottleHeight = 75;
@@ -539,8 +539,8 @@ export default function ProductDetails({ product }) {
   };
 
   return (
-    <main className="min-h-screen pt-24">
-      <section className="px-4 pt-8 pb-12 sm:px-6 lg:px-10 lg:pt-12 lg:pb-16">
+    <main className="min-h-screen">
+      <section className="px-3 pt-30 sm:px-5 sm:pt-32 lg:px-8 lg:pt-36">
         <div className="mx-auto grid max-w-7xl items-start gap-8 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] lg:gap-10">
           {/* LEFT - STICKY PRODUCT GALLERY */}
           <div className="min-w-0 lg:sticky lg:top-[110px] lg:self-start">

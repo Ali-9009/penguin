@@ -8,18 +8,9 @@ import "./src/env.js";
 const config = {
   async redirects() {
     return [
-      {
-        source: "/about",
-        destination: "/",
-        permanent: false,
-      },
+      
       {
         source: "/contact",
-        destination: "/",
-        permanent: false,
-      },
-      {
-        source: "/shop",
         destination: "/",
         permanent: false,
       },

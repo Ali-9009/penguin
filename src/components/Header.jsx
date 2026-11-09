@@ -20,7 +20,7 @@ import {
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "Shop", href: "/shop" },
-  { label: "About Us", href: "/about-us" },
+  { label: "About", href: "/about" },
   { label: "Contact", href: "/contact-us" },
 ];
 
