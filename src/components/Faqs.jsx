@@ -1,134 +1,136 @@
 "use client";
 
-import { useId, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
-import { ArrowUpRight, Plus, HelpCircle } from "lucide-react";
-
-// =====================================
-// FAQ DATA
-// =====================================
+import {
+  Plus,
+  ArrowUpRight,
+  Headphones,
+  Sparkles,
+  MessageCircle,
+  FlaskConical,
+} from "lucide-react";
 
 const faqs = [
   {
-    question: "What are Penguin Peptides products intended for?",
+    question: "What are research peptides?",
     answer:
-      "Our products are offered for laboratory research and analytical applications. They are not intended for human consumption, medical treatment, or veterinary use.",
+      "Research peptides are short chains of amino acids used in scientific and laboratory studies. At Penguin Peptides, our products are supplied exclusively for appropriate research applications and are not intended for human or animal consumption.",
   },
   {
-    question: "How can I choose the correct product strength?",
+    question: "Are your products intended for human use?",
     answer:
-      "Each product page displays the available strengths and specifications. Review the product information carefully to select the option appropriate for your research requirements.",
+      "No. All Penguin Peptides products are intended strictly for laboratory and in-vitro research purposes. They are not approved or intended for human consumption, medical treatment, clinical administration, veterinary use, or diagnostic applications.",
+  },
+  {
+    question: "How do I choose the correct peptide strength?",
+    answer:
+      "Our products are available in multiple strengths and formulations to support different laboratory research requirements. You can review the available variants on each product page, along with the product description and relevant specifications.",
   },
   {
     question: "How long does order processing take?",
     answer:
-      "Orders typically go through a review process that may take 1–3 business days before preparation and shipping. Processing times can vary depending on order details and availability.",
+      "Orders generally require approximately 1–3 business days for processing before shipment. Processing times may vary depending on product availability, order volume, and other operational factors.",
   },
   {
-    question: "How will I receive my tracking information?",
+    question: "Will I receive tracking information?",
     answer:
-      "Once your parcel has been prepared and handed to the shipping carrier, tracking information will be sent to the email address provided during checkout.",
+      "Once your order has been dispatched and tracking becomes available, the tracking details will be provided through the email address associated with your order. Carrier updates and delivery times may vary.",
   },
   {
     question: "How are research peptides packaged?",
     answer:
-      "Products are packaged with attention to protection and handling during transit. Refer to the product labeling and any accompanying documentation for product-specific information.",
+      "Products are packaged with attention to protection, labeling, and secure handling during transit. Packaging may vary depending on the selected product, quantity, and applicable shipping requirements.",
   },
   {
-    question: "Can I change or cancel my order?",
+    question: "Can I cancel or modify my order?",
     answer:
-      "If you need to modify your order, contact our support team as soon as possible. Changes or cancellations may not be possible once processing or shipping has started.",
+      "If you need to request a change or cancellation, please contact our support team as soon as possible. Whether an order can be changed depends on its processing and shipping status.",
   },
   {
-    question: "How should I store my research products?",
+    question: "How should research peptides be stored?",
     answer:
-      "Storage requirements vary by product. Always follow the storage instructions provided on the product label or in the accompanying documentation.",
+      "Storage requirements may differ between products and formulations. Always refer to the specific product documentation and applicable laboratory handling guidelines for appropriate storage conditions.",
   },
 ];
 
-// =====================================
-// FAQ ITEM
-// =====================================
-
-function FAQItem({ faq, isOpen, onToggle }) {
-  const contentId = useId();
+function FAQItem({ faq, index, isOpen, onToggle }) {
+  const contentId = `faq-content-${index}`;
+  const buttonId = `faq-button-${index}`;
 
   return (
     <article
-      className={`group relative w-full min-w-0 overflow-hidden rounded-[18px] border transition-[background-color,border-color,box-shadow] duration-300 sm:rounded-[20px] ${
+      className={`group relative overflow-hidden rounded-[18px] border transition-all duration-300 sm:rounded-[22px] ${
         isOpen
-          ? "border-primary/20 bg-[#F0FAFC] shadow-[0_8px_30px_rgba(7,85,143,0.05)]"
-          : "hover:border-primary/20 border-[#E3EDF1] bg-white"
-      }`}
+          ? "border-[#B8DFE9] bg-gradient-to-br from-[#F1FAFC] via-white to-white shadow-[0_12px_35px_rgba(7,85,143,0.05)]"
+          : "border-[#E2EDF2] bg-white hover:border-[#BDDDE6] hover:bg-[#FAFDFE]"
+      } `}
     >
-      {/* =========================
-          QUESTION
-      ========================= */}
+      {/* ACCENT BAR */}
+
+      <div
+        className={`from-primary to-secondary absolute top-0 left-0 h-full w-[3px] bg-gradient-to-b transition-opacity duration-300 ${isOpen ? "opacity-100" : "opacity-0"} `}
+      />
+
+      {/* QUESTION */}
 
       <h3>
         <button
+          id={buttonId}
           type="button"
-          id={`${contentId}-trigger`}
           aria-expanded={isOpen}
           aria-controls={contentId}
           onClick={onToggle}
-          className="flex w-full min-w-0 items-center justify-between gap-4 px-5 py-5 text-left sm:px-6 sm:py-6"
+          className="flex w-full items-center justify-between gap-4 px-4 py-5 text-left sm:gap-6 sm:px-6 sm:py-6 lg:px-7"
         >
-          {/* Question Text */}
+          {/* NUMBER + QUESTION */}
 
-          <span
-            className={`font-heading min-w-0 flex-1 text-[15px] leading-[1.45] font-semibold tracking-[-0.025em] transition-colors duration-300 sm:text-[17px] ${
-              isOpen
-                ? "text-primary"
-                : "group-hover:text-primary text-[#173743]"
-            }`}
-          >
-            {faq.question}
+          <span className="flex min-w-0 items-start gap-3 sm:gap-5">
+            <span
+              className={`font-heading text-[14px] leading-[1.5] font-semibold tracking-[-0.025em] transition-colors duration-300 sm:text-[17px] lg:text-[18px] ${
+                isOpen
+                  ? "text-primary"
+                  : "group-hover:text-primary text-[#163443]"
+              } `}
+            >
+              {faq.question}
+            </span>
           </span>
 
-          {/* Animated Plus Icon */}
+          {/* PLUS ICON */}
 
           <span
-            className={`relative flex h-9 w-9 shrink-0 items-center justify-center rounded-full transition-[background-color,color,transform] duration-300 ease-out motion-reduce:transition-none ${
+            className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border transition-all duration-300 sm:h-10 sm:w-10 ${
               isOpen
-                ? "bg-primary rotate-45 text-white"
-                : "text-primary rotate-0 bg-[#EDF5F7] group-hover:bg-[#E0F0F4]"
-            }`}
+                ? "border-primary bg-primary rotate-45 text-white"
+                : "text-primary group-hover:border-primary/20 border-[#DCEAF0] bg-[#F4F9FB] group-hover:bg-[#E8F5F9]"
+            } `}
           >
-            <Plus size={18} strokeWidth={1.8} />
+            <Plus size={17} strokeWidth={1.8} />
           </span>
         </button>
       </h3>
 
-      {/* =========================
-          ANIMATED ANSWER
-      ========================= */}
+      {/* ANSWER */}
 
       <div
         id={contentId}
         role="region"
-        aria-labelledby={`${contentId}-trigger`}
-        aria-hidden={!isOpen}
+        aria-labelledby={buttonId}
         inert={!isOpen}
-        className={`grid w-full min-w-0 transition-[grid-template-rows,opacity] duration-300 ease-in-out motion-reduce:transition-none ${
+        className={`grid transition-[grid-template-rows,opacity] duration-300 ease-in-out ${
           isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-        }`}
+        } `}
       >
-        <div className="min-h-0 min-w-0 overflow-hidden">
-          <div
-            className={`w-full min-w-0 px-5 pb-6 transition-[transform,opacity] duration-300 ease-out motion-reduce:transition-none sm:px-6 sm:pb-7 ${
-              isOpen ? "translate-y-0 opacity-100" : "-translate-y-2 opacity-0"
-            }`}
-          >
-            {/* Divider */}
+        <div className="min-h-0 overflow-hidden">
+          <div className="px-4 pb-6 sm:px-6 sm:pb-7 lg:px-7">
+            <div className="">
+              <div className="mb-4 h-px w-full bg-[#E4EFF2]" />
 
-            <div className="bg-primary/10 mb-4 h-px w-full" />
-
-            {/* Answer */}
-
-            <p className="text-muted w-full font-sans text-[13px] leading-[1.85] sm:text-sm">
-              {faq.answer}
-            </p>
+              <p className="max-w-[600px] font-sans text-sm leading-[1.85] text-[#637985]">
+                {faq.answer}
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -136,95 +138,120 @@ function FAQItem({ faq, isOpen, onToggle }) {
   );
 }
 
-// =====================================
-// FAQ SECTION
-// =====================================
-
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState(0);
 
   return (
     <section
-      id="faq"
-      aria-labelledby="faq-title"
-      className="relative isolate bg-white px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-28"
+      id="faqs"
+      aria-labelledby="faq-heading"
+      className="relative overflow-x-clip bg-white px-4 py-12 sm:px-6 md:py-16 lg:px-10"
     >
-      {/* =========================
-          BACKGROUND DECORATION
-      ========================= */}
+      {/* BACKGROUND DECORATION */}
 
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute top-20 -left-48 h-[450px] w-[450px] rounded-full bg-[#E8F8FB]/50 blur-[110px]"
+        className="pointer-events-none absolute top-0 right-0 h-[500px] w-[500px] rounded-full bg-[#E9FAFC]/60 blur-[120px]"
       />
 
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -right-48 bottom-0 h-[450px] w-[450px] rounded-full bg-[#EDF6FB]/60 blur-[110px]"
+        className="pointer-events-none absolute bottom-0 left-0 h-[400px] w-[450px] rounded-full bg-[#EAF4FB]/50 blur-[120px]"
       />
 
-      {/* =========================
-          MAIN CONTAINER
-      ========================= */}
+      {/* MAIN CONTAINER */}
 
-      <div className="relative mx-auto w-full max-w-[1400px]">
-        <div className="grid w-full grid-cols-1 items-start gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16">
+      <div className="relative mx-auto w-full max-w-7xl">
+        {/* TOP SECTION LABEL */}
+
+        {/* TWO COLUMN LAYOUT */}
+
+        <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16 xl:gap-24">
           {/* =========================
               LEFT CONTENT
           ========================= */}
 
-          <div className="w-full min-w-0 self-start lg:sticky lg:top-24">
-            {/* Heading */}
+          <div className="min-w-0 lg:sticky lg:top-28">
+            {/* HEADING */}
 
-            <h2 id="faq-title" className="section-heading">
+            <h2 id="faq-heading" className="section-heading">
               Frequently Asked
               <br />
-              <span className="text-secondary-dark">Questions.</span>
+              <span className="text-secondary-dark">
+                Questions<span className="text-primary">.</span>
+              </span>
             </h2>
 
-            {/* Description */}
+            {/* DESCRIPTION */}
 
-            <p className="text-muted mt-6 max-w-[420px] font-sans text-base leading-7">
-              Everything you need to know about our research collection,
-              ordering process, shipping, and product information.
+            <p className="text-md mt-6 max-w-[430px] font-sans leading-[1.9] text-[#6B808A]">
+              Everything you need to know about our research products, ordering
+              process, and shipping experience.
             </p>
 
-            {/* =========================
-                SUPPORT BOX
-            ========================= */}
+            {/* DECORATIVE DIVIDER */}
 
-            <div className="mt-9 w-full max-w-[420px] rounded-[24px] border border-[#DDECF0] bg-[#F5FAFC] p-5 sm:p-6">
-              <div className="flex items-start gap-4">
-                {/* Icon */}
+            <div className="my-8 flex items-center gap-3">
+              <span className="bg-secondary h-[2px] w-12 rounded-full" />
 
-                <div className="bg-primary flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl text-white">
-                  <HelpCircle size={23} strokeWidth={1.6} />
-                </div>
+              <span className="h-[2px] w-5 rounded-full bg-[#B9E5EB]" />
 
-                {/* Support Content */}
+              <span className="h-[2px] w-2 rounded-full bg-[#D4EEF2]" />
+            </div>
 
-                <div className="min-w-0 flex-1">
-                  <h3 className="font-heading text-[18px] font-semibold text-[#173743]">
-                    Still have questions?
-                  </h3>
+            {/* SUPPORT CARD */}
 
-                  <p className="text-muted mt-2 font-sans text-[13px] leading-6">
-                    Our support team is here to help with your questions and
-                    product inquiries.
-                  </p>
+            <div className="relative max-w-[460px] overflow-hidden rounded-[22px] border border-[#DBEDF1] bg-gradient-to-br from-[#F0FAFC] via-[#F8FDFE] to-white p-5 sm:rounded-[26px] sm:p-7">
+              {/* DECORATIVE CIRCLE */}
 
-                  <Link
-                    href="/contact-us"
-                    className="group text-primary hover:text-secondary-dark mt-5 inline-flex items-center gap-2 font-sans text-sm font-semibold transition-colors"
-                  >
-                    Contact Support
-                    <ArrowUpRight
-                      size={17}
-                      className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                    />
-                  </Link>
-                </div>
+              <div
+                aria-hidden="true"
+                className="border-secondary/15 pointer-events-none absolute -top-16 -right-16 h-44 w-44 rounded-full border"
+              />
+
+              <div
+                aria-hidden="true"
+                className="border-secondary/15 pointer-events-none absolute -top-9 -right-9 h-32 w-32 rounded-full border"
+              />
+
+              {/* ICON */}
+
+              <div className="bg-primary relative mb-5 flex h-12 w-12 items-center justify-center rounded-[15px] text-white shadow-[0_8px_20px_rgba(7,85,143,0.15)]">
+                <Headphones size={23} strokeWidth={1.7} />
               </div>
+
+              {/* TEXT */}
+
+              <h3 className="font-heading text-primary relative text-[20px] font-semibold tracking-[-0.035em] sm:text-[23px]">
+                Still have questions?
+              </h3>
+
+              <p className="relative mt-2 max-w-[300px] text-[12px] leading-[1.8] text-[#6B808A] sm:text-[13px]">
+                Need help finding information about a product or an order? Our
+                team is here to assist.
+              </p>
+
+              {/* BUTTON */}
+
+              <Link
+                href="/contact"
+                className="bg-primary hover:bg-primary-dark relative mt-6 inline-flex h-11 items-center justify-center gap-3 rounded-full px-6 text-[12px] font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_20px_rgba(7,85,143,0.15)]"
+              >
+                Contact Our Team
+                <ArrowUpRight size={16} strokeWidth={1.8} />
+              </Link>
+            </div>
+
+            {/* BOTTOM NOTE */}
+
+            <div className="mt-6 flex items-center gap-2 text-[11px] text-[#91A8B2]">
+              <FlaskConical
+                size={15}
+                strokeWidth={1.7}
+                className="text-secondary-dark"
+              />
+
+              <span>Dedicated to responsible scientific research.</span>
             </div>
           </div>
 
@@ -232,17 +259,60 @@ export default function FAQ() {
               RIGHT FAQ ACCORDION
           ========================= */}
 
-          <div className="flex w-full min-w-0 flex-col gap-3 sm:gap-4">
-            {faqs.map((faq, index) => (
-              <FAQItem
-                key={faq.question}
-                faq={faq}
-                isOpen={openIndex === index}
-                onToggle={() =>
-                  setOpenIndex((current) => (current === index ? null : index))
-                }
-              />
-            ))}
+          <div className="min-w-0">
+            {/* FAQ TOP INFO */}
+
+            <div className="mb-5 flex items-center justify-between gap-4 border-b border-[#E4EDF1] pb-5 sm:mb-7">
+              <div className="flex items-center gap-2">
+                <MessageCircle
+                  size={17}
+                  strokeWidth={1.7}
+                  className="text-secondary-dark"
+                />
+
+                <span className="font-heading text-[13px] font-semibold text-[#183E4E] sm:text-[14px]">
+                  Common Questions
+                </span>
+              </div>
+
+              <span className="text-primary rounded-full border border-[#DDECF0] bg-[#F5FAFC] px-3 py-1.5 text-[10px] font-semibold">
+                {String(faqs.length).padStart(2, "0")} FAQs
+              </span>
+            </div>
+
+            {/* ACCORDION ITEMS */}
+
+            <div className="space-y-3">
+              {faqs.map((faq, index) => (
+                <FAQItem
+                  key={faq.question}
+                  faq={faq}
+                  index={index}
+                  isOpen={openIndex === index}
+                  onToggle={() =>
+                    setOpenIndex((current) =>
+                      current === index ? null : index,
+                    )
+                  }
+                />
+              ))}
+            </div>
+
+            {/* BOTTOM MESSAGE */}
+
+            <div className="mt-7 flex flex-wrap items-center justify-between gap-3 rounded-[17px] border border-[#E1EDF1] bg-[#F8FBFC] px-5 py-4 sm:px-6">
+              <p className="text-[12px] text-[#708892]">
+                Didn't find what you're looking for?
+              </p>
+
+              <Link
+                href="/contact"
+                className="text-primary hover:text-secondary-dark inline-flex items-center gap-1.5 text-[12px] font-semibold transition-colors"
+              >
+                Get in touch
+                <ArrowUpRight size={15} />
+              </Link>
+            </div>
           </div>
         </div>
       </div>

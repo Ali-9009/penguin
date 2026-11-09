@@ -116,7 +116,7 @@ export default function QuickView({ product, onClose }) {
           type="button"
           onClick={onClose}
           aria-label="Close quick view"
-          className="text-primary hover:bg-primary absolute top-3 right-3 z-30 flex size-10 items-center justify-center rounded-full bg-[#F7F3F8] shadow-sm transition-all duration-300 hover:text-white sm:top-4 sm:right-4"
+          className="text-primary hover:bg-primary absolute top-5 right-5 z-30 flex size-10 items-center justify-center rounded-full bg-[#F7F3F8] shadow-sm transition-all duration-300 hover:text-white sm:top-4 sm:right-4"
         >
           <X size={20} />
         </button>
@@ -178,7 +178,7 @@ export default function QuickView({ product, onClose }) {
                       disabled={item.inStock === false}
                       onClick={() => setSelectedVariant(index)}
                       aria-pressed={selected}
-                      className={`inline-flex min-h-9 items-center justify-center rounded-full border px-4 py-1.5 font-sans text-[12px] font-semibold whitespace-nowrap transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-40 sm:text-[13px] ${
+                      className={`inline-flex items-center justify-center rounded-full border px-2 py-1 font-sans text-[12px] font-semibold whitespace-nowrap transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-40 ${
                         selected
                           ? "border-primary bg-primary text-white"
                           : "text-primary hover:border-primary border-[#E8DFEA] bg-white hover:bg-[#F8EFF9]"
@@ -235,7 +235,7 @@ export default function QuickView({ product, onClose }) {
                     }`}
                   >
                     {/* BOTTLE IMAGES */}
-                    <div className="relative h-[75px] w-[85px] shrink-0 sm:h-[90px] sm:w-[100px]">
+                    <div className="relative h-15 w-18 shrink-0 sm:h-17 sm:w-20">
                       {Array.from({ length: bottleCount }).map((_, index) => {
                         const bottleWidth = 38;
                         const bottleHeight = 75;
@@ -249,8 +249,8 @@ export default function QuickView({ product, onClose }) {
                             key={index}
                             className="absolute bottom-0"
                             style={{
-                              width: `${bottleWidth}px`,
-                              height: `${bottleHeight}px`,
+                              width: `${bottleWidth * 0.8}px`,
+                              height: `${bottleHeight * 0.8}px`,
                               left: `calc(50% - ${groupWidth / 2}px + ${index * stepX}px)`,
                               zIndex: bottleCount - index,
                             }}

@@ -126,12 +126,6 @@ function BestsellerCard({ product }) {
       ========================= */}
 
       <div className="px-2 pt-5 sm:px-3">
-        {/* CATEGORY */}
-
-        <p className="font-sans text-[10px] font-semibold tracking-[0.16em] text-[#78909A] uppercase sm:text-[11px]">
-          {product.category || "Research Peptides"}
-        </p>
-
         {/* PRODUCT NAME */}
 
         <Link href={`/products/${product.slug}`} className="mt-2 block">
@@ -161,19 +155,6 @@ function BestsellerCard({ product }) {
             </span>
           )}
         </div>
-
-        {/* BOTTOM LINK */}
-
-        <Link
-          href={`/products/${product.slug}`}
-          className="text-primary hover:text-secondary-dark mt-2 flex items-center justify-between border-t border-[#E3EDF1] pt-4 font-sans text-[12px] font-semibold transition-colors sm:text-[13px]"
-        >
-          Explore Product
-          <ArrowRight
-            size={17}
-            className="transition-transform duration-300 group-hover:translate-x-1"
-          />
-        </Link>
       </div>
     </article>
   );
@@ -200,7 +181,7 @@ export default function Bestsellers({ currentProduct = null }) {
     <section
       id="bestsellers"
       aria-labelledby="bestsellers-title"
-      className="relative overflow-hidden pb-12 md:pb-16"
+      className="relative overflow-hidden py-12 md:py-16"
     >
       {/* =========================
           SECTION HEADING

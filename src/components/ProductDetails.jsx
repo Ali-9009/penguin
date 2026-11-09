@@ -145,7 +145,7 @@ function Strengths({ variants, index, setIndex }) {
               disabled={soldOut}
               aria-pressed={selected}
               onClick={() => setIndex(i)}
-              className={`inline-flex min-h-10 items-center justify-center rounded-full border px-5 py-2 text-[13px] font-semibold transition-all duration-300 ${
+              className={`inline-flex items-center justify-center rounded-full border px-3 py-1 text-[12px] font-semibold transition-all duration-300 ${
                 selected
                   ? "border-primary bg-primary text-white"
                   : "hover:border-primary hover:text-primary border-[#E8DCEA] bg-white text-[#514653]"
@@ -221,8 +221,8 @@ function Packs({ product, price, selectedPack, setSelectedPack, stock }) {
                       key={index}
                       className="absolute bottom-0"
                       style={{
-                        width: `${bottleWidth}px`,
-                        height: `${bottleHeight}px`,
+                        width: `${bottleWidth * 0.8}px`,
+                        height: `${bottleHeight * 0.8}px`,
                         left: `calc(50% - ${groupWidth / 2}px + ${index * stepX}px)`,
                         zIndex: bottleCount - index,
                       }}
@@ -539,7 +539,7 @@ export default function ProductDetails({ product }) {
   };
 
   return (
-    <main className="min-h-screen pt-24 ">
+    <main className="min-h-screen pt-24">
       <section className="px-4 pt-8 pb-12 sm:px-6 lg:px-10 lg:pt-12 lg:pb-16">
         <div className="mx-auto grid max-w-7xl items-start gap-8 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] lg:gap-10">
           {/* LEFT - STICKY PRODUCT GALLERY */}

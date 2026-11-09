@@ -1,6 +1,6 @@
 import Bestsellers from "@/components/Bestsellers";
 import CTASection from "@/components/CTASection";
-// import Faqs from "@/components/Faqs";
+import Faqs from "@/components/Faqs";
 import Hero from "@/components/Hero";
 import HowItWorks from "@/components/HowItWorks";
 // import LabVerification from "@/components/LabVerification";
@@ -18,7 +18,7 @@ export default function HomePage() {
       <HowItWorks />
       <Bestsellers />
 
-      {/* <Faqs /> */}
+      <Faqs />
       <USShippingCoverage />
       <CTASection />
     </main>

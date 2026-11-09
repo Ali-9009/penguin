@@ -122,14 +122,10 @@ export default function ProductCard({ product, onQuickView }) {
         {/* TITLE */}
 
         <Link href={`/products/${product.slug}`} className="block">
-          <h3 className="font-heading group-hover:text-primary min-h-[42px] text-[14px] leading-[1.3] font-semibold tracking-[-0.03em] text-[#102E38] transition-colors sm:text-[17px]">
+          <h3 className="font-heading group-hover:text-primary min-h-[42px] text-md leading-[1.3] font-semibold tracking-[-0.03em] text-[#102E38] transition-colors">
             {product.name}
           </h3>
         </Link>
-
-        {/* =========================
-        VARIANT PILLS
-    ========================= */}
 
         {/* VARIANT SELECTOR */}
 
