@@ -101,7 +101,7 @@ export default function CartPageClient() {
   }, 0);
 
   return (
-    <main className="min-h-screen pt-20 lg:pt-24">
+    <main className="min-h-screen pt-25">
       {/* ==========================================
           PAGE HEADER
       ========================================== */}

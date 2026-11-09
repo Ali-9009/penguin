@@ -134,7 +134,7 @@ export default function CheckoutClient() {
   };
 
   return (
-    <main className="min-h-screen bg-white px-4 pt-30 pb-10 sm:px-6 lg:px-10 lg:pt-36">
+    <main className="min-h-screen bg-white px-4 pt-30 pb-6 sm:px-6 lg:px-10 lg:pt-36">
       <div className="mx-auto max-w-7xl">
         {/* BREADCRUMB */}
 

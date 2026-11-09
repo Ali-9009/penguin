@@ -23,7 +23,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden bg-linear-to-b from-[#F7FAFC] to-transparent pt-20 lg:pt-24">
+    <section className="relative overflow-hidden bg-linear-to-b from-[#F7FAFC] to-transparent pt-30 lg:pt-24">
       {/* BACKGROUND DECORATION */}
 
       <div className="pointer-events-none absolute top-[30%] left-1/2 h-[500px] w-[800px] -translate-x-1/2 rounded-full bg-cyan-100/40 blur-[120px]" />

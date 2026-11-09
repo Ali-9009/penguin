@@ -539,7 +539,7 @@ export default function ProductDetails({ product }) {
   };
 
   return (
-    <main className="min-h-screen pt-20 lg:pt-24">
+    <main className="min-h-screen pt-24 ">
       <section className="px-4 pt-8 pb-12 sm:px-6 lg:px-10 lg:pt-12 lg:pb-16">
         <div className="mx-auto grid max-w-7xl items-start gap-8 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] lg:gap-10">
           {/* LEFT - STICKY PRODUCT GALLERY */}
