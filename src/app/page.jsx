@@ -4,11 +4,12 @@ import Faqs from "@/components/Faqs";
 import Hero from "@/components/Hero";
 import HowItWorks from "@/components/HowItWorks";
 import ProductGrid from "@/components/ProductGrid";
+import ProductVerification from "@/components/ProductVerification";
 import PromoMarquee from "@/components/PromoMarquee";
 import ResearchShowcase from "@/components/ResearchShowcase";
 import USShippingCoverage from "@/components/shipping/USShippingCoverage";
 import WhyChooseUs from "@/components/WhyChooseUs";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, FlaskConical, ShieldCheck } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -17,7 +18,7 @@ export default function HomePage() {
     <main>
       <section
         aria-labelledby="hero-heading"
-        className="relative h-[calc(100dvh-110px)] w-full overflow-hidden bg-[#EAF7FA] sm:h-[calc(100dvh-115px)] lg:h-[calc(100dvh-110px)]"
+        className="relative h-[calc(100svh-110px)] w-full overflow-hidden bg-[#EAF7FA] sm:h-[calc(100svh-115px)] lg:h-[calc(100svh-110px)]"
       >
         {/* =====================================
       BACKGROUND IMAGES
@@ -177,7 +178,74 @@ export default function HomePage() {
 
       <HowItWorks />
       <Bestsellers />
+
+      <ProductVerification />
+
       <ResearchShowcase />
+
+      <section className="relative overflow-hidden bg-white px-4 py-12 sm:px-6 md:py-16 lg:px-8">
+        <div className="mx-auto grid w-full max-w-7xl items-center gap-14 lg:grid-cols-2 lg:gap-20">
+          <div className="relative mx-auto w-full max-w-[540px] px-5 pt-7 pb-10 sm:px-10 sm:pt-10 sm:pb-14">
+            <div className="relative aspect-[1.12/1] overflow-hidden rounded-[26px] bg-[#E8F7FA] shadow-[0_20px_55px_rgba(7,85,143,0.12)] sm:rounded-[34px]">
+              <Image
+                src="/assets/home-info.png"
+                alt="Penguin Peptides research product"
+                fill
+                sizes="(max-width: 1023px) 90vw, 540px"
+                className="object-cover"
+              />
+            </div>
+
+            <div className="absolute top-0 left-0 z-10 flex h-[100px] w-[100px] flex-col items-center justify-center rounded-full border-[5px] border-white bg-gradient-to-br from-[#073B68] to-[#04C1CA] text-center text-white shadow-[0_12px_30px_rgba(7,85,143,0.2)] sm:h-[130px] sm:w-[130px]">
+              <ShieldCheck size={24} strokeWidth={1.7} />
+              <span className="mt-1.5 text-[10px] font-bold tracking-[0.08em] uppercase sm:text-[12px]">
+                Research
+                <br />
+                Focused
+              </span>
+            </div>
+
+            <div className="absolute right-0 bottom-0 z-10 w-[175px] rounded-[20px] border border-[#D5EBEF] bg-white p-4 shadow-[0_15px_45px_rgba(7,85,143,0.13)] sm:w-[220px] sm:rounded-[24px] sm:p-5">
+              <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-[#E4F8FA] text-[#07558F]">
+                <FlaskConical size={21} />
+              </div>
+
+              <p className="font-heading text-[15px] font-bold text-[#073B68] sm:text-[19px]">
+                Made for Research
+              </p>
+
+              <p className="mt-1.5 text-[11px] leading-[1.6] text-[#718792] sm:text-[13px]">
+                Explore our collection of research-focused peptides.
+              </p>
+            </div>
+          </div>
+
+          <div className="max-w-[570px]">
+            <span className="mb-5 inline-flex rounded-full border border-[#D7EAF0] bg-[#F2FAFC] px-4 py-2 text-[10px] font-bold tracking-[0.14em] text-[#07558F] uppercase">
+              Discover Penguin Peptides
+            </span>
+
+            <h2 className="section-heading">
+              Built for
+              <br />
+              <span className="text-[#009CA9]">Scientific Discovery.</span>
+            </h2>
+
+            <p className="text-md mt-6 max-w-[510px] font-sans leading-[1.9] text-[#607F8B]">
+              At Penguin Peptides, we focus on providing a diverse selection of
+              research peptides for scientific and laboratory applications.
+              Explore our collection of compounds, available in different
+              strengths and formulations to support your research needs.
+            </p>
+
+            <Link href="/shop" className="btn-gradient mt-7">
+              Explore Collection
+              <ArrowUpRight size={18} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
       <Faqs />
       <USShippingCoverage />
       <CTASection />

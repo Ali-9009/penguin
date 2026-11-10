@@ -2,7 +2,12 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, FlaskConical, ShieldCheck } from "lucide-react";
+import {
+  ArrowUpRight,
+  FlaskConical,
+  ShieldCheck,
+  Snowflake,
+} from "lucide-react";
 import { useRef, useState } from "react";
 
 const floatingProducts = [
@@ -63,6 +68,20 @@ const floatingProducts = [
     rotation: "-18deg",
   },
 ];
+
+const floatingSnowflakes = Array.from({ length: 35 }, (_, index) => {
+  const sizes = [10, 14, 18, 12, 20, 15, 24];
+
+  return {
+    id: index,
+    left: `${(index * 37.7 + 11) % 100}%`,
+    size: sizes[index % sizes.length],
+    duration: `${7 + ((index * 3.7) % 9)}s`,
+    delay: `${-((index * 2.3) % 15)}s`,
+    opacity: 0.2 + ((index * 7) % 5) / 10,
+    drift: `${(index % 2 === 0 ? 1 : -1) * (15 + (index % 5) * 9)}px`,
+  };
+});
 
 export default function ResearchCTA() {
   const glowRef = useRef(null);
@@ -140,6 +159,27 @@ export default function ResearchCTA() {
         ))}
       </div>
 
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-[1] overflow-hidden"
+      >
+        {floatingSnowflakes.map((snow) => (
+          <Snowflake
+            key={snow.id}
+            size={snow.size}
+            strokeWidth={1.4}
+            className="cta-snowflake absolute top-0 text-white drop-shadow-[0_0_6px_rgba(255,255,255,0.5)]"
+            style={{
+              left: snow.left,
+              opacity: snow.opacity,
+              animationDuration: snow.duration,
+              animationDelay: snow.delay,
+              "--snow-drift": snow.drift,
+            }}
+          />
+        ))}
+      </div>
+
       {/* CENTER DARK GRADIENT FOR TEXT READABILITY */}
 
       <div className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_center,rgba(4,22,37,0.85)_0%,rgba(4,22,37,0.4)_45%,transparent_85%)]" />
@@ -201,32 +241,90 @@ export default function ResearchCTA() {
           }
 
           50% {
-            transform: translate3d(25px, 45vh, 0)
+            transform: translate3d(25px, 350px, 0)
               rotate(calc(var(--product-rotation) + 12deg));
           }
 
           100% {
-            transform: translate3d(-15px, 900px, 0)
+            transform: translate3d(-15px, var(--product-fall-distance), 0)
               rotate(calc(var(--product-rotation) - 8deg));
           }
         }
 
         .cta-product-rain {
+          --product-fall-distance: 700px;
           animation-name: ctaProductRain;
           animation-timing-function: linear;
           animation-iteration-count: infinite;
           will-change: transform;
         }
 
-        @media (max-width: 640px) {
+        @keyframes ctaSnowfall {
+          0% {
+            transform: translate3d(0, -60px, 0) rotate(0deg);
+          }
+
+          50% {
+            transform: translate3d(
+                calc(var(--snow-drift, 30px) * 0.5),
+                calc(var(--snow-fall-distance) * 0.5),
+                0
+              )
+              rotate(180deg);
+          }
+
+          100% {
+            transform: translate3d(
+                var(--snow-drift, 30px),
+                var(--snow-fall-distance),
+                0
+              )
+              rotate(360deg);
+          }
+        }
+
+        .cta-snowflake {
+          --snow-fall-distance: 650px;
+          animation-name: ctaSnowfall;
+          animation-timing-function: linear;
+          animation-iteration-count: infinite;
+          will-change: transform;
+        }
+
+        @media (min-width: 640px) {
+          .cta-product-rain {
+            --product-fall-distance: 800px;
+          }
+
+          .cta-snowflake {
+            --snow-fall-distance: 750px;
+          }
+        }
+
+        @media (min-width: 1024px) {
+          .cta-product-rain {
+            --product-fall-distance: 950px;
+          }
+
+          .cta-snowflake {
+            --snow-fall-distance: 850px;
+          }
+        }
+
+        @media (max-width: 639px) {
           .cta-product-rain {
             opacity: 0.5;
           }
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .cta-product-rain {
+          .cta-product-rain,
+          .cta-snowflake {
             animation: none;
+            will-change: auto;
+          }
+
+          .cta-product-rain {
             opacity: 0.15;
           }
         }

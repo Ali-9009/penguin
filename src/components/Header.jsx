@@ -30,25 +30,52 @@ const navLinks = [
   { name: "Track Order", href: "/track-order" },
 ];
 
-import { Gift } from "lucide-react";
+import { Snowflake } from "lucide-react";
+
+const announcementSnowflakes = Array.from({ length: 22 }, (_, index) => ({
+  id: index,
+  left: `${(index * 37.7 + 7) % 100}%`,
+  size: [9, 12, 15, 10, 13, 17][index % 6],
+  duration: `${3 + ((index * 1.7) % 4)}s`,
+  delay: `${-((index * 1.3) % 7)}s`,
+  opacity: 0.2 + ((index % 4) * 0.1),
+  drift: `${index % 2 === 0 ? 12 : -12}px`,
+}));
 
 function AnnouncementBar() {
   return (
     <div className="relative w-full overflow-hidden bg-linear-to-r from-[#073B68] via-[#07558F] to-[#009CA9] px-4 py-3 sm:py-3.5">
-      {/* SOFT GRADIENT GLOW */}
       <div className="pointer-events-none absolute -top-16 left-1/4 h-28 w-60 rounded-full bg-white/10 blur-[50px]" />
 
       <div className="pointer-events-none absolute right-1/4 -bottom-16 h-28 w-60 rounded-full bg-[#04C1CA]/30 blur-[50px]" />
 
-      {/* ANNOUNCEMENT */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
+      >
+        {announcementSnowflakes.map((snow) => (
+          <Snowflake
+            key={snow.id}
+            size={snow.size}
+            strokeWidth={1.4}
+            className="announcement-snowflake absolute top-0 text-white"
+            style={{
+              left: snow.left,
+              opacity: snow.opacity,
+              animationDuration: snow.duration,
+              animationDelay: snow.delay,
+              "--snow-drift": snow.drift,
+            }}
+          />
+        ))}
+      </div>
+
       <div className="relative z-10 mx-auto flex max-w-7xl items-center justify-center px-2">
         <div className="font-heading flex flex-wrap items-center justify-center gap-x-2 gap-y-2 text-center sm:gap-x-3">
-          {/* DISCOUNT BADGE */}
           <span className="inline-flex shrink-0 items-center rounded-lg bg-gradient-to-r from-[#A3F7F4] to-[#04C1CA] px-3.5 py-1.5 text-[11px] font-extrabold tracking-[0.02em] text-[#073B68] shadow-[0_4px_14px_rgba(4,193,202,0.25)] sm:text-[12px]">
             40% OFF
           </span>
 
-          {/* PLUS BADGE */}
           <span
             aria-hidden="true"
             className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-white/25 bg-white/15 text-[15px] font-semibold text-white shadow-sm backdrop-blur-sm"
@@ -56,7 +83,6 @@ function AnnouncementBar() {
             +
           </span>
 
-          {/* FREE PEPTIDE OFFER */}
           <p className="text-[11px] leading-relaxed text-white sm:text-[13px]">
             <span className="font-bold text-white">FREE Peptide</span>{" "}
             <span className="font-medium text-white/80">
@@ -65,9 +91,41 @@ function AnnouncementBar() {
           </p>
         </div>
       </div>
+
+      <style jsx global>{`
+        @keyframes announcementSnowfall {
+          0% {
+            transform: translate3d(0, -25px, 0) rotate(0deg);
+          }
+
+          100% {
+            transform: translate3d(
+                var(--snow-drift, 12px),
+                110px,
+                0
+              )
+              rotate(180deg);
+          }
+        }
+
+        .announcement-snowflake {
+          animation-name: announcementSnowfall;
+          animation-timing-function: linear;
+          animation-iteration-count: infinite;
+          will-change: transform;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .announcement-snowflake {
+            animation: none;
+            will-change: auto;
+          }
+        }
+      `}</style>
     </div>
   );
 }
+
 
 function MobileSidebar({ open, onClose, pathname }) {
   useEffect(() => {
