@@ -197,7 +197,7 @@ export default function HeaderSearch({ open, onClose }) {
       <Link
         href={`/products/${product.slug}`}
         onClick={closeSearch}
-        className="group flex items-center gap-3 rounded-[15px] px-3 py-3 transition-all duration-300 hover:bg-[#F9F3FA] sm:gap-4"
+        className="group flex items-center gap-3 rounded-[15px] px-3 py-3 transition-all duration-300 hover:bg-[#E3F2FF] sm:gap-4"
       >
         {/* IMAGE */}
 
@@ -224,13 +224,13 @@ export default function HeaderSearch({ open, onClose }) {
             {product.category || "Research Compound"}
           </span>
 
-          <h3 className="font-heading text-primary group-hover:text-secondary mt-1 truncate text-[14px] font-bold tracking-[-0.03em] transition-colors sm:text-[16px]">
+          <h3 className="font-heading text-primary mt-1 truncate text-[14px] font-bold tracking-[-0.03em] transition-colors sm:text-[16px]">
             {product.name}
           </h3>
 
           <div className="mt-1.5 flex flex-wrap items-center gap-2">
             {variant?.label && (
-              <span className="text-primary rounded-full bg-[#F3E5F5] px-2 py-1 font-sans text-[10px] font-semibold">
+              <span className="text-primary rounded-full bg-[#E3F2FF] px-2 py-1 font-sans text-[10px] font-semibold">
                 {variant.label}
               </span>
             )}
@@ -260,7 +260,7 @@ export default function HeaderSearch({ open, onClose }) {
             </span>
           )}
 
-          <span className="text-primary group-hover:bg-primary hidden h-9 w-9 items-center justify-center rounded-full bg-[#F6E5F7] transition-all duration-300 group-hover:rotate-45 group-hover:text-white sm:flex">
+          <span className="text-primary group-hover:bg-primary hidden h-9 w-9 items-center justify-center rounded-full bg-[#E3F2FF] transition-all duration-300 group-hover:rotate-45 group-hover:text-white sm:flex">
             <ArrowUpRight size={17} />
           </span>
         </div>

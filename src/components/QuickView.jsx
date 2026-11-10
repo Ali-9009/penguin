@@ -181,7 +181,7 @@ export default function QuickView({ product, onClose }) {
                       className={`inline-flex items-center justify-center rounded-full border px-2 py-1 font-sans text-[12px] font-semibold whitespace-nowrap transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-40 ${
                         selected
                           ? "border-primary bg-primary text-white"
-                          : "text-primary hover:border-primary border-[#E8DFEA] bg-white hover:bg-[#F8EFF9]"
+                          : "text-primary hover:border-primary border-[#E8DFEA] bg-white hover:bg-[#E3F2FF]"
                       }`}
                     >
                       {item.label}
@@ -230,7 +230,7 @@ export default function QuickView({ product, onClose }) {
                     }
                     className={`group flex min-w-0 flex-col items-center justify-center gap-2 rounded-xl border px-2 py-3 text-center transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-40 sm:px-3 ${
                       selected
-                        ? "border-primary bg-[#F8EFF9]"
+                        ? "border-primary bg-[#E3F2FF]"
                         : "hover:border-primary/40 border-[#EAE3EB] bg-white"
                     }`}
                   >

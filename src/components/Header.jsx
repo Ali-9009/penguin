@@ -38,7 +38,7 @@ const announcementSnowflakes = Array.from({ length: 22 }, (_, index) => ({
   size: [9, 12, 15, 10, 13, 17][index % 6],
   duration: `${3 + ((index * 1.7) % 4)}s`,
   delay: `${-((index * 1.3) % 7)}s`,
-  opacity: 0.2 + ((index % 4) * 0.1),
+  opacity: 0.2 + (index % 4) * 0.1,
   drift: `${index % 2 === 0 ? 12 : -12}px`,
 }));
 
@@ -99,11 +99,7 @@ function AnnouncementBar() {
           }
 
           100% {
-            transform: translate3d(
-                var(--snow-drift, 12px),
-                110px,
-                0
-              )
+            transform: translate3d(var(--snow-drift, 12px), 110px, 0)
               rotate(180deg);
           }
         }
@@ -125,7 +121,6 @@ function AnnouncementBar() {
     </div>
   );
 }
-
 
 function MobileSidebar({ open, onClose, pathname }) {
   useEffect(() => {

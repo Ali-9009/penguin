@@ -9,61 +9,103 @@ const sections = [
   {
     title: "1. Introduction",
     paragraphs: [
-      "Spectrum Biosciences respects the privacy of visitors and customers. This policy explains the personal information that may be collected through our website and how it may be used.",
+      "We value your privacy and are committed to protecting the personal information you share with us. This Privacy Policy explains how information is collected, used, stored, and protected when you visit our website, browse research products, or place an order.",
     ],
   },
   {
     title: "2. Information We Collect",
     paragraphs: [
-      "Depending on how you interact with our website, we may collect the following information:",
+      "We may collect certain information when you interact with our website, create an account, make a purchase, or contact our support team.",
     ],
     items: [
-      "Contact information such as your name, email address, and phone number.",
-      "Billing, shipping, and order information.",
-      "Messages and inquiries submitted through contact forms.",
-      "Technical information such as browser type, device information, and website usage data.",
+      "Personal information such as your name, email address, and phone number.",
+      "Billing addresses, shipping addresses, and order details.",
+      "Payment-related information processed through secure third-party payment providers.",
+      "Account information, preferences, and purchase history.",
+      "Messages, inquiries, and communications submitted through our website.",
+      "Technical information, including IP address, browser type, device information, and website usage data.",
     ],
   },
   {
-    title: "3. How Information Is Used",
+    title: "3. How We Use Your Information",
     paragraphs: [
-      "Personal information may be used to process orders, communicate with customers, provide support, maintain website functionality, prevent fraudulent activity, and meet applicable legal obligations.",
+      "The information collected may be used to process and fulfill orders, provide customer support, respond to inquiries, manage customer accounts, improve website functionality, prevent unauthorized transactions, and comply with applicable legal requirements.",
+      "Where permitted by law and based on your preferences, we may also use contact information to share updates about research products, new arrivals, and promotional offers.",
     ],
   },
   {
     title: "4. Information Sharing",
     paragraphs: [
-      "Information may be shared with service providers where necessary to operate the website, process transactions, arrange deliveries, or provide customer support. The specific providers and disclosures should reflect the services actually used by Spectrum Biosciences.",
+      "We do not sell personal information to third parties. Information may be shared with trusted service providers when necessary to operate our website and deliver services.",
+    ],
+    items: [
+      "Payment processing providers for secure transactions.",
+      "Shipping and logistics providers for order fulfillment.",
+      "Website hosting and technical service providers.",
+      "Customer support and communication platforms.",
+      "Government or regulatory authorities when required by applicable law.",
     ],
   },
   {
     title: "5. Cookies and Website Analytics",
     paragraphs: [
-      "Our website may use cookies or similar technologies to support essential functionality and, where enabled, understand website performance. Cookie practices depend on the technologies installed on the website.",
+      "Our website may use cookies and similar technologies to maintain essential website functionality, remember preferences, support shopping cart features, and understand how visitors interact with our website.",
+      "You can manage or disable cookies through your browser settings. Certain website features may not function correctly when essential cookies are disabled.",
     ],
   },
   {
     title: "6. Data Security",
     paragraphs: [
-      "We aim to use appropriate safeguards to protect personal information. However, no internet transmission or electronic storage system can be guaranteed to be completely secure.",
+      "We take reasonable technical and organizational measures to help protect personal information against unauthorized access, loss, misuse, or disclosure.",
+      "Although we work to maintain a secure online environment, no method of electronic transmission or storage can be guaranteed to be completely secure.",
     ],
   },
   {
     title: "7. Data Retention",
     paragraphs: [
-      "Personal information should be retained only for as long as necessary for legitimate business purposes, applicable legal obligations, or other permitted purposes.",
+      "Personal information is retained only for as long as reasonably necessary to fulfill the purposes described in this policy, maintain business records, resolve disputes, and comply with applicable legal obligations.",
+      "When information is no longer required, reasonable steps may be taken to securely delete or anonymize it.",
     ],
   },
   {
-    title: "8. Privacy Requests",
+    title: "8. Third-Party Services",
     paragraphs: [
-      "Depending on applicable law, individuals may have rights to request access to, correction of, or deletion of their personal information. Please contact us through our contact page to submit a privacy inquiry.",
+      "Our website may contain links to external websites or integrate third-party services, including payment processors, shipping providers, and analytics platforms.",
+      "These third parties may operate under their own privacy policies. We encourage visitors to review those policies before sharing personal information.",
     ],
   },
   {
-    title: "9. Policy Updates",
+    title: "9. Your Privacy Rights",
     paragraphs: [
-      "This policy may be updated to reflect changes in website operations, business practices, or applicable requirements. The current version will be published on this page.",
+      "Depending on your location and applicable privacy laws, you may have certain rights regarding your personal information, including requesting access, correction, deletion, or restrictions on its processing.",
+      "To submit a privacy-related request or ask questions about your information, please contact us through the contact page on our website.",
+    ],
+  },
+  {
+    title: "10. Research Product Information",
+    paragraphs: [
+      "Our website provides information about products intended for laboratory research and scientific applications. Information submitted in connection with product inquiries, purchases, or research-related communications may be processed for customer service, order management, and compliance purposes.",
+      "Research-related inquiries are handled in accordance with this Privacy Policy and applicable legal requirements.",
+    ],
+  },
+  {
+    title: "11. Children's Privacy",
+    paragraphs: [
+      "Our website and research products are not intended for children. We do not knowingly collect personal information from individuals under the age of 18.",
+      "If we become aware that personal information has been collected from a child, we will take appropriate steps to address the situation in accordance with applicable law.",
+    ],
+  },
+  {
+    title: "12. Changes to This Privacy Policy",
+    paragraphs: [
+      "We may update this Privacy Policy periodically to reflect changes in our services, website operations, legal requirements, or privacy practices.",
+      "Any updates will be published on this page. We encourage visitors to review this policy occasionally to stay informed about how their information is handled.",
+    ],
+  },
+  {
+    title: "13. Contact Us",
+    paragraphs: [
+      "If you have questions, concerns, or requests regarding this Privacy Policy or the handling of your personal information, please contact our support team through the contact page available on our website.",
     ],
   },
 ];

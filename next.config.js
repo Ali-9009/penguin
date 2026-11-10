@@ -8,37 +8,11 @@ import "./src/env.js";
 const config = {
   async redirects() {
     return [
-      
-      {
-        source: "/contact",
-        destination: "/",
-        permanent: false,
-      },
-      {
-        source: "/coa",
-        destination: "/",
-        permanent: false,
-      },
-      {
-        source: "/account",
-        destination: "/",
-        permanent: false,
-      },
-      {
-        source: "/faqs",
-        destination: "/",
-        permanent: false,
-      },
-      {
-        source: "/partner-program",
-        destination: "/",
-        permanent: false,
-      },
-      {
-        source: "/track-order",
-        destination: "/",
-        permanent: false,
-      },
+      // {
+      //   source: "/account",
+      //   destination: "/",
+      //   permanent: false,
+      // },
     ];
   },
 };

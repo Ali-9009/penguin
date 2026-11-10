@@ -10,6 +10,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { ScanLine, ArrowDownRight, Sparkles } from "lucide-react";
+import PageHero from "@/components/PageHero";
 
 export const metadata = {
   title: "About Us | Spectrum Biosciences",
@@ -48,104 +49,14 @@ const values = [
   },
 ];
 
-const images = {
-  bpc: "/products/BPC-157.webp",
-  ghk: "/products/ghk-cu.webp",
-  tesamorelin: "/products/tesamorelin.webp",
-  blend: "/products/glow-blend.webp",
-  tb: "/products/tb-500.webp",
-};
-
-const principles = [
-  {
-    number: "01",
-    icon: Microscope,
-    title: "Research-Focused",
-    description:
-      "Our collection is organized around compounds intended for scientific investigation and analytical laboratory applications.",
-  },
-  {
-    number: "02",
-    icon: FileCheck2,
-    title: "Information Matters",
-    description:
-      "We believe researchers should be able to review clear product specifications and available batch-specific documentation.",
-  },
-  {
-    number: "03",
-    icon: ShieldCheck,
-    title: "Responsible Research",
-    description:
-      "Our products are presented for laboratory research purposes, with clear distinctions between research materials and medical products.",
-  },
-];
-
 export default function AboutUsPage() {
   return (
     <main className="min-h-screen">
-      <section
-        data-aos="fade-up"
-        className="px-3 pt-30 sm:px-5 sm:pt-32 lg:px-8 lg:pt-36"
-      >
-        <div className="relative mx-auto w-full max-w-7xl overflow-hidden rounded-3xl bg-[#EAF7FA]">
-          {/* RESPONSIVE BACKGROUND IMAGES */}
-
-          <div className="absolute inset-0">
-            {/* MOBILE + TABLET */}
-            <Image
-              src="/assets/banner-mob.png"
-              alt=""
-              fill
-              priority
-              sizes="(max-width: 1023px) 100vw, 1px"
-              className="object-cover object-bottom lg:hidden"
-            />
-
-            {/* DESKTOP */}
-            <Image
-              src="/assets/banner.png"
-              alt=""
-              fill
-              priority
-              sizes="(min-width: 1024px) 1280px, 1px"
-              className="hidden object-cover object-center lg:block"
-            />
-          </div>
-
-          {/* SUBTLE MOBILE OVERLAY */}
-          <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-[#F2FAFC]/65 via-transparent to-transparent lg:hidden" />
-
-          {/* DESKTOP OVERLAY */}
-          <div className="pointer-events-none absolute inset-0 hidden bg-linear-to-r from-[#F2FAFC]/70 via-[#F2FAFC]/20 to-transparent lg:block" />
-
-          {/* CONTENT */}
-
-          <div className="relative z-10 flex w-full flex-col items-center px-5 pt-9 pb-[320px] text-center sm:px-10 sm:pt-12 sm:pb-[440px] md:px-12 md:pt-14 md:pb-150 lg:min-h-90 lg:items-start lg:justify-center lg:px-16 lg:py-12 lg:text-left">
-            <div className="w-full max-w-[440px] lg:max-w-[480px]">
-              {/* EYEBROW */}
-
-              <span className="text-secondary-dark mb-3 inline-block font-sans text-[10px] font-bold tracking-[0.18em] uppercase sm:text-[11px]">
-                PENGUIN PEPTIDES
-              </span>
-
-              {/* HEADING */}
-
-              <h2 className="font-heading text-primary text-[clamp(2.2rem,5vw,3.8rem)] leading-[1.05] font-extrabold tracking-[-0.055em]">
-                About{" "}
-                <span className="text-secondary-dark">Penguin Peptides.</span>
-              </h2>
-
-              {/* DESCRIPTION */}
-
-              <p className="text-md mx-auto mt-4 max-w-100 font-sans text-[#587583] lg:mx-0">
-                At Penguin Peptides, we believe meaningful scientific progress
-                begins with curiosity, precision, and access to reliable
-                research materials.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        title="About Penguin"
+        highlight="Peptides."
+        description="At Penguin Peptides, we believe meaningful scientific progress begins with curiosity, precision, and access to reliable research materials."
+      />
 
       <section className="px-4 py-12 sm:px-6 md:py-16 lg:px-10">
         <div className="mx-auto max-w-7xl text-center">
@@ -153,8 +64,6 @@ export default function AboutUsPage() {
 
           <h2 className="section-heading mx-auto max-w-[850px]">
             Inspired by <span className="text-secondary-dark">Discovery.</span>
-            <br className="hidden sm:block" />
-            Driven by Precision.
           </h2>
 
           {/* CENTER DIVIDER */}
@@ -170,7 +79,7 @@ export default function AboutUsPage() {
 
           {/* DESCRIPTION */}
 
-          <div className="mx-auto mt-6 max-w-220 space-y-5 font-sans text-md leading-[1.7] text-[#667F8B]">
+          <div className="text-md mx-auto mt-6 max-w-220 space-y-5 font-sans leading-[1.7] text-[#667F8B]">
             <p>
               At Penguin Peptides, we are dedicated to supporting scientific
               exploration through a thoughtfully selected collection of research
@@ -283,10 +192,16 @@ export default function AboutUsPage() {
 
             <Link
               href="/shop"
-              className="btn-primary mt-8 inline-flex items-center gap-3"
+              className="group relative mt-8 inline-flex h-12 items-center justify-center gap-3 overflow-hidden rounded-full bg-[linear-gradient(110deg,var(--color-primary),var(--color-secondary))] px-7 text-sm font-semibold text-white shadow-md transition-all duration-500 ease-out hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.98]"
             >
-              Discover Our Products
-              <ArrowUpRight size={17} />
+              <span className="pointer-events-none absolute inset-0 bg-[linear-gradient(110deg,var(--color-primary-dark),var(--color-primary))] opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100" />
+
+              <span className="relative z-10">Discover Our Products</span>
+
+              <ArrowUpRight
+                size={17}
+                className="relative z-10 transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              />
             </Link>
           </div>
 

@@ -157,9 +157,11 @@ export default function CartDrawer() {
                 <Link
                   href="/checkout"
                   onClick={closeCart}
-                  className="bg-primary flex min-h-11 w-full items-center justify-center rounded-full px-6 text-sm font-semibold text-white transition-colors duration-300 hover:bg-[#28558f]"
+                  className="group relative flex min-h-11 w-full items-center justify-center overflow-hidden rounded-full bg-[linear-gradient(110deg,var(--color-primary),var(--color-secondary))] px-6 text-sm font-semibold text-white shadow-md transition-all duration-500 ease-out hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.98]"
                 >
-                  Proceed to Checkout
+                  <span className="absolute inset-0 bg-[linear-gradient(110deg,var(--color-primary-dark),var(--color-primary))] opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100" />
+
+                  <span className="relative z-10">Proceed to Checkout</span>
                 </Link>
               </div>
             </footer>

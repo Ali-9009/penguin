@@ -1,5 +1,11 @@
 import Link from "next/link";
-import { ArrowUpRight, ChevronRight } from "lucide-react";
+import {
+  ArrowUpRight,
+  ChevronDown,
+  ChevronRight,
+  HelpCircle,
+  MessageCircle,
+} from "lucide-react";
 
 export const metadata = {
   title: "Frequently Asked Questions | Spectrum Biosciences",
@@ -82,118 +88,167 @@ const groups = [
 
 export default function FAQsPage() {
   return (
-    <main className="min-h-screen bg-white">
-      <header className="border-b border-[#EEE6EF] px-4 py-6 sm:px-6 md:py-12 lg:px-8">
+    <main className="min-h-screen bg-[#F8FBFC]">
+      <header className="border-b border-[#E2EBEF] bg-white px-4 py-8 sm:px-6 md:py-10 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <nav
-            aria-label="Breadcrumb"
-            className="mb-6 flex items-center gap-2 text-xs text-[#95879A]"
-          >
-            <Link href="/" className="hover:text-primary">
-              Home
-            </Link>
-            <ChevronRight size={13} />
-            <span className="text-primary font-semibold">FAQs</span>
-          </nav>
-          <p className="text-secondary mb-4 flex items-center gap-2 font-sans text-xs font-bold tracking-[0.15em] uppercase">
-            Helpful information
-          </p>
-          <h1 className="section-heading">
-            Frequently Asked <span className="text-secondary">Questions.</span>
-          </h1>
-          <p className="text-md mt-3 max-w-xl text-[#817586]">
-            Everything you need to know about our research collection, ordering,
-            and product documentation.
-          </p>
+          <div className="max-w-2xl">
+            <h1 className="font-heading text-primary text-[34px] leading-[1.15] font-bold tracking-[-0.04em] sm:text-[44px] lg:text-[52px]">
+              Frequently Asked{" "}
+              <span className="text-secondary">Questions.</span>
+            </h1>
+
+            <p className="mt-5 max-w-xl text-sm leading-7 text-[#617987] sm:text-[15px]">
+              Find answers to common questions about our research products,
+              ordering process, shipping, and product documentation.
+            </p>
+          </div>
         </div>
       </header>
 
-      <div className="px-4 py-12 sm:px-6 sm:py-16 lg:px-10">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
-          <aside className="lg:sticky lg:top-28 lg:self-start">
-            <p className="mb-4 text-xs font-bold tracking-[0.14em] text-[#8C7C90] uppercase">
-              On this page
-            </p>
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-4 py-10 sm:px-6 sm:py-14 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-12 lg:px-8 lg:py-16">
+        <aside className="min-w-0 lg:sticky lg:top-28 lg:self-start">
+          <div className="lg:rounded-[20px] lg:border lg:border-[#E2EBEF] lg:bg-white lg:p-5">
+            <div className="mb-4 hidden items-center gap-2 lg:flex">
+              <HelpCircle
+                size={17}
+                strokeWidth={1.8}
+                className="text-secondary"
+              />
+
+              <h2 className="font-heading text-primary text-sm font-bold">
+                Browse Topics
+              </h2>
+            </div>
 
             <nav
               aria-label="FAQ sections"
-              className="flex flex-wrap gap-2 lg:flex-col"
+              className="flex [scrollbar-width:none] gap-2 overflow-x-auto pb-2 lg:flex-col lg:overflow-visible lg:pb-0 [&::-webkit-scrollbar]:hidden"
             >
               {groups.map((group, index) => (
                 <a
                   key={group.title}
                   href={`#faq-${index}`}
-                  className="text-primary hover:border-primary rounded-full border border-[#E8DCEA] px-4 py-2.5 text-xs font-semibold transition-colors hover:bg-[#F6E5F7] lg:rounded-xl"
+                  className="group/nav hover:border-primary/30 hover:text-primary inline-flex shrink-0 items-center gap-2 rounded-full border border-[#DCE8ED] bg-white px-4 py-2.5 text-[12px] font-semibold whitespace-nowrap text-[#617987] transition-all duration-200 hover:bg-[#F0F8FA] lg:w-full lg:rounded-xl lg:border-transparent lg:px-3 lg:py-3 lg:text-left"
                 >
+                  <span className="group-hover/nav:bg-secondary hidden h-1.5 w-1.5 shrink-0 rounded-full bg-[#B8D4DE] transition-colors lg:block" />
+
                   {group.title}
                 </a>
               ))}
             </nav>
-          </aside>
+          </div>
 
-          <div className="min-w-0 space-y-12">
-            {groups.map((group, index) => (
-              <section
-                key={group.title}
-                id={`faq-${index}`}
-                aria-labelledby={`faq-heading-${index}`}
-                className="scroll-mt-28"
-              >
+          <div className="mt-5 hidden rounded-[20px] border border-[#D9EAF0] bg-[#EDF7FA] p-5 lg:block">
+            <MessageCircle
+              size={23}
+              strokeWidth={1.6}
+              className="text-secondary"
+            />
+
+            <h3 className="font-heading text-primary mt-3 text-[16px] font-bold">
+              Need more help?
+            </h3>
+
+            <p className="mt-2 text-[12px] leading-6 text-[#617987]">
+              Can't find what you're looking for? We're here to help.
+            </p>
+
+            <Link
+              href="/contact"
+              className="text-primary hover:text-secondary mt-4 inline-flex items-center gap-2 text-[12px] font-semibold transition-colors"
+            >
+              Contact Support
+              <ArrowUpRight size={15} />
+            </Link>
+          </div>
+        </aside>
+
+        <div className="min-w-0 space-y-10 sm:space-y-12">
+          {groups.map((group, index) => (
+            <section
+              key={group.title}
+              id={`faq-${index}`}
+              aria-labelledby={`faq-heading-${index}`}
+              className="scroll-mt-28"
+            >
+              <div className="mb-5 flex items-center gap-3">
+                <div className="text-primary flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#E5F3F7] text-xs font-bold">
+                  {String(index + 1).padStart(2, "0")}
+                </div>
+
                 <h2
                   id={`faq-heading-${index}`}
-                  className="font-heading text-primary mb-5 text-2xl font-bold tracking-tight sm:text-[28px]"
+                  className="font-heading text-primary text-[21px] font-bold tracking-[-0.03em] sm:text-[25px]"
                 >
                   {group.title}
                 </h2>
+              </div>
 
-                <div className="divide-y divide-[#EEE6EF] border-y border-[#EEE6EF]">
-                  {group.items.map((item) => (
-                    <details key={item.question} className="group py-5">
-                      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-left text-sm font-semibold text-[#29232D] marker:content-none sm:text-[15px] [&::-webkit-details-marker]:hidden">
+              <div className="overflow-hidden rounded-[18px] border border-[#E2EBEF] bg-white sm:rounded-[22px]">
+                {group.items.map((item, itemIndex) => (
+                  <details
+                    key={item.question}
+                    className={`group/faq px-4 transition-colors duration-200 open:bg-[#FAFDFE] sm:px-6 ${
+                      itemIndex !== 0 ? "border-t border-[#EAF0F3]" : ""
+                    }`}
+                  >
+                    <summary className="flex min-h-[70px] cursor-pointer list-none items-center justify-between gap-5 py-4 text-left text-[13px] leading-6 font-semibold text-[#173B4A] marker:content-none sm:min-h-[76px] sm:text-[15px] [&::-webkit-details-marker]:hidden">
+                      <span className="group-open/faq:text-primary transition-colors duration-200">
                         {item.question}
+                      </span>
 
-                        <span className="text-primary grid size-8 shrink-0 place-items-center rounded-full bg-[#F6E5F7] transition-transform group-open:rotate-45">
-                          <span className="text-xl leading-none">+</span>
-                        </span>
-                      </summary>
+                      <span className="text-primary group-open/faq:border-primary/20 group-open/faq:bg-primary flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[#DCE8ED] bg-[#F5FAFC] transition-all duration-300 group-open/faq:text-white">
+                        <ChevronDown
+                          size={16}
+                          strokeWidth={2}
+                          className="transition-transform duration-300 group-open/faq:rotate-180"
+                        />
+                      </span>
+                    </summary>
 
-                      <p className="max-w-[720px] pt-3 pr-8 text-sm leading-[1.85] text-[#817586]">
+                    <div className="border-t border-[#EDF2F5] pt-4 pb-6">
+                      <p className="max-w-[760px] text-[13px] leading-7 text-[#617987] sm:text-[14px] sm:leading-8">
                         {item.answer}
                       </p>
-                    </details>
-                  ))}
-                </div>
-              </section>
-            ))}
+                    </div>
+                  </details>
+                ))}
+              </div>
+            </section>
+          ))}
 
-            <section className="flex flex-col justify-between gap-5 rounded-[22px] border border-[#EEE6EF] p-6 sm:flex-row sm:items-center sm:p-8">
-              <div>
+          <section className="relative overflow-hidden rounded-[22px] border border-[#D9EAF0] bg-[linear-gradient(120deg,#EFF8FA_0%,#FFFFFF_100%)] p-6 sm:rounded-[26px] sm:p-8">
+            <div className="relative z-10 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+              <div className="max-w-md">
                 <p className="text-secondary text-[11px] font-bold tracking-[0.14em] uppercase">
-                  Need more help?
+                  We're Here to Help
                 </p>
 
-                <h2 className="font-heading text-primary mt-2 text-[23px] font-bold tracking-tight">
+                <h2 className="font-heading text-primary mt-2 text-[23px] font-bold tracking-[-0.03em] sm:text-[27px]">
                   Still have a question?
                 </h2>
 
-                <p className="mt-2 text-sm text-[#817586]">
-                  Send us your inquiry and we'll point you in the right
-                  direction.
+                <p className="mt-2 text-[13px] leading-6 text-[#617987] sm:text-sm">
+                  Get in touch with our team for help with product information,
+                  orders, or general inquiries.
                 </p>
               </div>
 
               <Link
                 href="/contact"
-                className="group bg-primary inline-flex shrink-0 items-center justify-center gap-3 rounded-full px-6 py-3.5 text-xs font-semibold text-white transition-colors hover:bg-[#35143E]"
+                className="group relative inline-flex h-11 shrink-0 items-center justify-center gap-2 overflow-hidden rounded-full bg-[linear-gradient(110deg,var(--color-primary),var(--color-secondary))] px-6 text-[13px] font-semibold text-white shadow-md transition-all duration-500 ease-out hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.98]"
               >
-                Contact Us
+                <span className="pointer-events-none absolute inset-0 bg-[linear-gradient(110deg,var(--color-primary-dark),var(--color-primary))] opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100" />
+
+                <span className="relative z-10">Contact Us</span>
+
                 <ArrowUpRight
                   size={16}
-                  className="transition-transform group-hover:rotate-45"
+                  className="relative z-10 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                 />
               </Link>
-            </section>
-          </div>
+            </div>
+          </section>
         </div>
       </div>
     </main>

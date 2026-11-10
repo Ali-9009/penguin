@@ -31,6 +31,7 @@ import { products } from "@/data/products";
 import Bestsellers from "./Bestsellers";
 
 import { useCart } from "@/context/CartContext";
+import CardSlider from "./CardSlider";
 
 const money = (value) => formatMoney(Number(value) || 0);
 
@@ -67,7 +68,7 @@ function Gallery({ product }) {
     <div className="w-full min-w-0">
       {/* MAIN PRODUCT IMAGE */}
 
-      <div className="relative h-[350px] w-full overflow-hidden rounded-[26px] bg-[#EAF4F7] sm:h-130 lg:h-150">
+      <div className="relative h-[350px] w-full overflow-hidden rounded-[26px] bg-[#EAF4F7] sm:h-130 lg:h-160">
         {current ? (
           <Image
             key={current}
@@ -76,7 +77,7 @@ function Gallery({ product }) {
             fill
             priority
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 600px"
-            className="object-cover transition-transform duration-700 ease-out hover:scale-105"
+            className="object-fill transition-transform duration-700 ease-out hover:scale-105"
           />
         ) : (
           <div className="flex h-full items-center justify-center">
@@ -180,7 +181,7 @@ function Packs({ product, price, selectedPack, setSelectedPack, stock }) {
             Bundle & Save
           </h2>
         </div>
-        <span className="text-secondary bg-primary rounded-full px-3 py-1.5 text-[11px] font-bold">
+        <span className="bg-primary rounded-full px-3 py-1.5 text-[11px] font-bold text-white">
           UP TO 15% OFF
         </span>
       </div>
@@ -205,7 +206,7 @@ function Packs({ product, price, selectedPack, setSelectedPack, stock }) {
               onClick={() => setSelectedPack(selected ? null : pack.quantity)}
               className={`group flex min-w-0 flex-col items-center justify-center gap-2 rounded-xl border px-2 py-3 text-center transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-40 sm:px-3 ${
                 selected
-                  ? "border-primary bg-[#F8EFF9]"
+                  ? "border-primary bg-[#E3F2FF]"
                   : "hover:border-primary/40 border-[#EAE3EB] bg-white"
               }`}
             >
@@ -358,7 +359,7 @@ function ProductAccordion({ title, children, defaultOpen = false }) {
           {title}
         </span>
 
-        <span className="text-primary flex size-9 shrink-0 items-center justify-center rounded-full bg-[#F8EFF9]">
+        <span className="text-primary flex size-9 shrink-0 items-center justify-center rounded-full bg-[#E3F2FF]">
           <ChevronDown
             size={18}
             className="transition-transform duration-300 group-open:rotate-180"
@@ -540,7 +541,7 @@ export default function ProductDetails({ product }) {
 
   return (
     <main className="min-h-screen">
-      <section className="px-3 pt-30 sm:px-5 sm:pt-32 lg:px-8 lg:pt-36">
+      <section className="px-3 pt-8 sm:px-5 md:pt-10 lg:px-8">
         <div className="mx-auto grid max-w-7xl items-start gap-8 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] lg:gap-10">
           {/* LEFT - STICKY PRODUCT GALLERY */}
           <div className="min-w-0 lg:sticky lg:top-[110px] lg:self-start">
@@ -696,7 +697,7 @@ export default function ProductDetails({ product }) {
               </ProductAccordion>
             </div>
 
-            {/* <div className="bg-[#FAF7FA] p-3 sm:p-6">
+            <div className="bg-[#FAF7FA] p-3 sm:p-6">
               <div className="mx-auto w-full max-w-[700px] overflow-hidden rounded-lg bg-white shadow-sm">
                 <div className="relative aspect-[5/7] w-full md:hidden">
                   <Image
@@ -717,12 +718,12 @@ export default function ProductDetails({ product }) {
                   />
                 </div>
               </div>
-            </div> */}
+            </div>
           </div>
         </div>
       </section>
 
-      <Bestsellers currentProduct={product} />
+      <CardSlider />
 
       <div
         className={`fixed inset-x-0 bottom-0 z-40 border-t border-[#EDE5EE] bg-white/95 px-4 pt-3 pb-[calc(env(safe-area-inset-bottom)+12px)] shadow-[0_-8px_30px_rgba(40,0,45,0.08)] backdrop-blur-xl transition-all duration-300 lg:hidden ${

@@ -1,30 +1,24 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import Image from "next/image";
+import { useRef, useState } from "react";
 import Link from "next/link";
+
 import {
   ArrowRight,
   ArrowUpRight,
   BarChart3,
   Check,
-  ChevronDown,
   FileCheck2,
   Gift,
   Handshake,
   Link2,
-  Minus,
-  Plus,
+  Percent,
   ShieldCheck,
 } from "lucide-react";
-import { products } from "@/data/products";
 
-const usd = (amount) =>
-  new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    maximumFractionDigits: 0,
-  }).format(amount);
+import { TrendingUp, Users } from "lucide-react";
+
+import { products } from "@/data/products";
 
 const tiers = [
   {
@@ -70,33 +64,6 @@ const tiers = [
       "Co-branded materials*",
       "Custom volume discussions",
     ],
-  },
-];
-
-const steps = [
-  {
-    number: "01",
-    title: "Apply",
-    description:
-      "Introduce your organization, research community, or publication and tell us how you plan to share Spectrum.",
-  },
-  {
-    number: "02",
-    title: "Review",
-    description:
-      "Our team reviews your application and confirms program eligibility and the terms available to you.",
-  },
-  {
-    number: "03",
-    title: "Share",
-    description:
-      "Use approved product imagery, your referral link, and available batch documentation in your content.",
-  },
-  {
-    number: "04",
-    title: "Earn",
-    description:
-      "See attributed orders and estimated commission in your partner reporting, once your account is active.",
   },
 ];
 
@@ -164,186 +131,199 @@ function SectionHeading({ eyebrow, title, description }) {
   );
 }
 
-function EarningsEstimator() {
-  const [selected, setSelected] = useState(() =>
-    Object.fromEntries(
-      featured.map(({ product }, i) => [product.id, i === 0 ? 1 : 0]),
-    ),
-  );
-  const [orders, setOrders] = useState(24);
-  const orderValue = useMemo(
-    () =>
-      featured.reduce(
-        (sum, { product, variant }) =>
-          sum + Number(variant.price) * (selected[product.id] || 0),
-        0,
-      ),
-    [selected],
-  );
-  const monthlyRevenue = orderValue * orders;
-  const tier =
-    [...tiers].reverse().find((item) => monthlyRevenue >= item.minimum) ||
-    tiers[0];
-  const commission = monthlyRevenue * tier.rate;
-  const itemsCount = Object.values(selected).reduce((sum, qty) => sum + qty, 0);
+function PartnerHero() {
+  const [referralSales, setReferralSales] = useState(0);
 
-  const changeQuantity = (id, delta) => {
-    setSelected((current) => ({
-      ...current,
-      [id]: Math.max(0, Math.min(10, (current[id] || 0) + delta)),
-    }));
-  };
+  const commissionRate = 20;
+  const estimatedCommission = (referralSales * commissionRate) / 100;
+
+  const formatCurrency = (value) =>
+    new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      maximumFractionDigits: 0,
+    }).format(value);
 
   return (
-    <section
-      id="earnings"
-      className="scroll-mt-24 bg-[#FCF9FD] px-5 py-12 sm:px-8 md:py-16"
-    >
-      <div className="mx-auto max-w-7xl">
-        <SectionHeading
-          eyebrow="Earnings estimator"
-          title="See what referrals could earn."
-          description="Build a sample order using live catalogue prices, then adjust monthly referrals. The calculator uses proposed commission tiers and is an illustration—not an earnings guarantee."
-        />
-        <div className="mt-10 grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_390px] lg:gap-8">
-          <div className="rounded-[24px] border border-[#E9DDEA] bg-white p-5 sm:p-7">
-            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#EEE6EF] pb-5">
+    <section className="overflow-hidden border-b border-[#DCE8ED] bg-[linear-gradient(180deg,#FFFFFF_0%,#F5FAFC_100%)] px-4 py-12 sm:px-6 md:py-16 lg:px-8">
+      <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1fr_1fr] lg:gap-16">
+        <div className="max-w-xl">
+          <h1 className="font-heading text-primary text-[38px] leading-[1.12] font-bold tracking-[-0.045em] sm:text-[48px] lg:text-[58px]">
+            Partner With Us.
+            <span className="text-secondary mt-1 block">Grow Together.</span>
+          </h1>
+
+          <p className="mt-6 max-w-lg font-sans text-[14px] leading-7 text-[#617987] sm:text-[16px] sm:leading-8">
+            Share our research peptides, earn through qualified referrals, and
+            grow with our partner program.
+          </p>
+
+          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div className="flex items-start gap-3">
+              <div className="text-primary flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#E8F5F8]">
+                <Users size={19} strokeWidth={1.8} />
+              </div>
+
               <div>
-                <h3 className="font-heading text-primary text-2xl font-bold">
-                  Your sample order
+                <h3 className="text-primary text-[15px] font-semibold">
+                  Share & Refer
                 </h3>
-                <p className="mt-1 text-sm text-[#857789]">
-                  Choose products and quantities per referred order.
+
+                <p className="mt-1 text-sm leading-5 text-[#718A96]">
+                  Introduce your audience to our research collection.
                 </p>
               </div>
-              <span className="text-primary rounded-full bg-[#F6E5F7] px-4 py-2 text-sm font-semibold">
-                {itemsCount} items
-              </span>
             </div>
-            <div className="divide-y divide-[#EEE6EF]">
-              {featured.map(({ product, variant }) => {
-                const quantity = selected[product.id] || 0;
-                return (
-                  <div
-                    key={product.id}
-                    className="flex items-center gap-3 py-4 sm:gap-5"
-                  >
-                    <div className="relative size-16 shrink-0 overflow-hidden rounded-[14px] bg-[#F8EFF9] sm:size-20">
-                      {product.image && (
-                        <Image
-                          src={product.image}
-                          alt={product.name}
-                          fill
-                          sizes="80px"
-                          className="object-cover"
-                        />
-                      )}
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <p className="font-heading text-primary text-base font-bold sm:text-lg">
-                        {product.name}
-                      </p>
-                      <p className="mt-1 text-sm text-[#8B7B8E]">
-                        {variant.label} · {usd(Number(variant.price))}
-                      </p>
-                    </div>
-                    <div className="flex h-10 shrink-0 items-center rounded-full border border-[#E8DCEA] bg-white p-1">
-                      <button
-                        type="button"
-                        onClick={() => changeQuantity(product.id, -1)}
-                        disabled={quantity === 0}
-                        aria-label={`Remove one ${product.name}`}
-                        className="text-primary grid size-8 place-items-center rounded-full transition-colors hover:bg-[#F6E5F7] disabled:opacity-30"
-                      >
-                        <Minus size={16} />
-                      </button>
-                      <span className="text-primary w-7 text-center text-base font-semibold">
-                        {quantity}
-                      </span>
-                      <button
-                        type="button"
-                        onClick={() => changeQuantity(product.id, 1)}
-                        disabled={quantity === 10}
-                        aria-label={`Add one ${product.name}`}
-                        className="text-primary grid size-8 place-items-center rounded-full transition-colors hover:bg-[#F6E5F7] disabled:opacity-30"
-                      >
-                        <Plus size={16} />
-                      </button>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-            <div className="mt-3 flex items-center justify-between border-t border-[#EEE6EF] pt-5">
-              <span className="text-base font-semibold text-[#625468]">
-                Sample order value
-              </span>
-              <strong className="font-heading text-primary text-3xl font-bold tracking-tight">
-                {usd(orderValue)}
-              </strong>
+
+            <div className="flex items-start gap-3">
+              <div className="text-primary flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#E8F5F8]">
+                <TrendingUp size={19} strokeWidth={1.8} />
+              </div>
+
+              <div>
+                <h3 className="text-primary text-[15px] font-semibold">
+                  Explore Earnings
+                </h3>
+
+                <p className="mt-1 text-sm leading-5 text-[#718A96]">
+                  Estimate potential earnings from qualified referrals.
+                </p>
+              </div>
             </div>
           </div>
-          <aside className="rounded-[24px] border border-[#E9DDEA] bg-white p-5 sm:p-7 lg:sticky lg:top-24">
+
+          <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <Link
+              href="/contact"
+              className="group relative inline-flex h-12 items-center justify-center gap-2 overflow-hidden rounded-full bg-[linear-gradient(110deg,var(--color-primary),var(--color-secondary))] px-7 text-[13px] font-semibold text-white shadow-md transition-all duration-500 ease-out hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.98]"
+            >
+              <span className="pointer-events-none absolute inset-0 bg-[linear-gradient(110deg,var(--color-primary-dark),var(--color-primary))] opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100" />
+
+              <span className="relative z-10">Become a Partner</span>
+
+              <ArrowUpRight
+                size={17}
+                className="relative z-10 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              />
+            </Link>
+
+            <a
+              href="#earnings"
+              className="text-primary hover:border-primary inline-flex h-12 items-center justify-center gap-2 rounded-full border border-[#CBDDE5] bg-white px-7 text-[13px] font-semibold transition-all duration-300 hover:bg-[#EDF8FA]"
+            >
+              How It Works
+              <ArrowRight size={16} />
+            </a>
+          </div>
+
+          <div className="mt-7 flex items-center gap-2 text-[12px] text-[#81939C]">
+            <ShieldCheck size={16} className="text-secondary" />
+
+            <span>
+              Research-focused partnerships. Subject to program approval.
+            </span>
+          </div>
+        </div>
+
+        <div className="relative mx-auto w-full max-w-[520px]">
+          <div className="overflow-hidden rounded-[18px] border border-[#D7E5EF] bg-[linear-gradient(145deg,#FFFFFF_35%,#EDF7FF_100%)] p-5 sm:rounded-[20px] sm:p-7">
             <div className="flex items-center justify-between gap-3">
-              <p className="text-primary text-base font-semibold">
-                Referred orders / month
-              </p>
-              <span className="font-heading text-primary text-3xl font-bold">
-                {orders}
+              <div className="text-primary flex h-11 w-11 items-center justify-center rounded-full bg-[#E4F2FC]">
+                <Percent size={22} strokeWidth={1.8} />
+              </div>
+
+              <div className="flex items-center gap-2">
+                <span className="bg-secondary h-1.5 w-1.5 rounded-full" />
+                <span className="text-[11px] font-medium text-[#59718C]">
+                  Applications open
+                </span>
+              </div>
+            </div>
+
+            <div className="mt-7 flex items-center gap-5">
+              <div className="text-primary flex shrink-0 items-baseline">
+                <span className="font-heading text-[58px] leading-none font-bold tracking-[-0.06em] sm:text-[72px]">
+                  20
+                </span>
+                <span className="font-heading text-[27px] font-bold sm:text-[35px]">
+                  %
+                </span>
+              </div>
+
+              <div className="max-w-[190px]">
+                <h2 className="text-[13px] font-bold text-[#173B4A] sm:text-[14px]">
+                  Affiliate Commission
+                </h2>
+
+                <p className="mt-2 text-[11px] leading-5 text-[#59718C] sm:text-[12px]">
+                  On qualifying, approved referral purchases.
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-7 border-t border-[#D7E5EF] pt-6">
+              <div className="mb-4 flex items-center justify-between gap-3">
+                <label
+                  htmlFor="partner-referral-sales"
+                  className="text-[11px] font-medium text-[#59718C] sm:text-[12px]"
+                >
+                  Qualifying Referral Sales
+                </label>
+
+                <span className="text-[14px] font-bold text-[#173B4A]">
+                  {formatCurrency(referralSales)}
+                </span>
+              </div>
+
+              <input
+                id="partner-referral-sales"
+                type="range"
+                min="0"
+                max="10000"
+                step="100"
+                value={referralSales}
+                onChange={(event) =>
+                  setReferralSales(Number(event.target.value))
+                }
+                className="accent-primary w-full cursor-pointer"
+              />
+            </div>
+
+            <div className="mt-7 flex items-center justify-between gap-4">
+              <span className="text-[11px] font-medium text-[#59718C] sm:text-[12px]">
+                Illustrative Commission
+              </span>
+
+              <span
+                aria-live="polite"
+                className="font-heading text-primary text-[30px] font-bold tracking-tight sm:text-[35px]"
+              >
+                {formatCurrency(estimatedCommission)}
               </span>
             </div>
-            <input
-              type="range"
-              min="1"
-              max="150"
-              value={orders}
-              onChange={(event) => setOrders(Number(event.target.value))}
-              aria-label="Referred orders per month"
-              className="mt-5 w-full cursor-pointer accent-[#55205F]"
-            />
-            <div className="mt-2 flex justify-between text-sm text-[#918394]">
-              <span>1 order</span>
-              <span>150 orders</span>
-            </div>
-            <div className="mt-7 rounded-[20px] bg-[linear-gradient(135deg,#35143E,#55205F_65%,#803685)] p-6 text-white">
-              <p className="text-sm font-semibold text-white/80">
-                Estimated monthly commission
-              </p>
-              <p
-                aria-live="polite"
-                className="font-heading mt-3 text-5xl font-bold tracking-[-0.06em] sm:text-[54px]"
-              >
-                {usd(commission)}
-              </p>
-              <p className="mt-3 text-sm text-white/80">
-                {tier.rate * 100}% of {usd(monthlyRevenue)} referred sales
-              </p>
-            </div>
-            <div className="mt-6 space-y-4 text-base">
-              <div className="flex justify-between gap-4">
-                <span className="text-[#827385]">Illustrative tier</span>
-                <strong className="text-primary">{tier.name}</strong>
+
+            <div className="mt-7 grid grid-cols-2 gap-4 border-t border-[#D7E5EF] pt-6">
+              <div className="border-r border-[#D7E5EF] pr-3">
+                <h3 className="text-[13px] font-bold text-[#173B4A] sm:text-[15px]">
+                  One Flat Rate
+                </h3>
+
+                <p className="mt-2 text-[10px] leading-5 text-[#59718C] sm:text-[11px]">
+                  No tiers or volume targets
+                </p>
               </div>
-              <div className="flex justify-between gap-4">
-                <span className="text-[#827385]">Commission rate</span>
-                <strong className="text-primary">{tier.rate * 100}%</strong>
-              </div>
-              <div className="flex justify-between gap-4">
-                <span className="text-[#827385]">Annual estimate</span>
-                <strong className="text-primary">{usd(commission * 12)}</strong>
-              </div>
-              <div className="flex justify-between gap-4">
-                <span className="text-[#827385]">Average per order</span>
-                <strong className="text-primary">
-                  {usd(orders ? commission / orders : 0)}
-                </strong>
+
+              <div className="pl-1">
+                <h3 className="text-[13px] font-bold text-[#173B4A] sm:text-[15px]">
+                  Manual Review
+                </h3>
+
+                <p className="mt-2 text-[10px] leading-5 text-[#59718C] sm:text-[11px]">
+                  Every application read by our team
+                </p>
               </div>
             </div>
-            <p className="mt-6 border-t border-[#EEE6EF] pt-4 text-sm leading-6 text-[#877889]">
-              Illustrative gross sales. Taxes, returns, exclusions, eligibility,
-              and actual program terms can change payable commissions.
-            </p>
-          </aside>
+          </div>
         </div>
       </div>
     </section>
@@ -351,202 +331,260 @@ function EarningsEstimator() {
 }
 
 export default function PartnerProgramPage() {
-  const [openQuestion, setOpenQuestion] = useState(0);
-  const questions = [
-    {
-      question: "Who can apply?",
-      answer:
-        "Creators, publishers, research communities, and organizations whose activities align with Spectrum's research-use-only positioning may express interest. Participation is subject to approval.",
-    },
-    {
-      question: "How are commissions calculated?",
-      answer:
-        "The estimator uses the example tier rate against an illustrative monthly referred revenue total. Actual payable commission requires an approved agreement, eligible sales, and verified order attribution.",
-    },
-    {
-      question: "Can I make medical or dosing claims?",
-      answer:
-        "No. Partner content must not promote human or veterinary administration, dosing, treatment outcomes, or unsupported medical claims. Products are presented for laboratory research only.",
-    },
-    {
-      question: "Where do I get my referral link?",
-      answer:
-        "Tracking links, codes, reporting, and payouts require an operational partner system. They are not available through this demonstration page until your program is launched.",
-    },
-  ];
-
   return (
     <main className="min-h-screen">
-      <section className="overflow-hidden border-b border-[#EEE6EF] px-4 py-6 md:py-12 sm:px-6 lg:px-10">
-        <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
-          <div>
-            <p className="text-secondary mb-3 text-[11px] font-bold tracking-[0.16em] uppercase">
-              Spectrum Partner Program
-            </p>
-            <h1 className="section-heading">
-              Recommend research.{" "}
-              <span className="text-secondary">Grow together.</span>
-            </h1>
-            <p className="text-md mt-6 max-w-xl text-[#6E6173]">
-              Connect your audience with Spectrum's research catalogue. Explore
-              proposed commission tiers, model potential referrals, and learn
-              how a responsible research partnership could work.
-            </p>
-            <div className="mt-8 flex w-full items-center gap-2 sm:gap-4">
-              <Link
-                href="/contact"
-                className="group bg-primary inline-flex h-11 min-w-0 flex-1 items-center justify-center gap-1.5 rounded-full px-3 text-sm font-semibold whitespace-nowrap text-white transition-colors hover:bg-[#35143E] sm:h-13 sm:flex-none sm:gap-3 sm:px-7 sm:text-base"
-              >
-                Apply / Enquire
-                <ArrowUpRight
-                  size={16}
-                  className="shrink-0 transition-transform group-hover:rotate-45 sm:size-[19px]"
-                />
-              </Link>
+      <PartnerHero />
 
-              <a
-                href="#earnings"
-                className="text-primary inline-flex h-11 min-w-0 flex-1 items-center justify-center gap-1.5 rounded-full border border-[#E0CEE4] px-2 text-sm font-semibold whitespace-nowrap transition-colors hover:bg-[#F8EFF9] sm:h-13 sm:flex-none sm:gap-2 sm:px-6 sm:text-base"
-              >
-                Estimate Earnings
-                <ArrowRight size={16} className="shrink-0 sm:size-[18px]" />
-              </a>
-            </div>
-            <p className="mt-5 text-sm leading-6 text-[#928494]">
-              Program details below are proposed examples and require business
-              approval before launch.
-            </p>
-          </div>
-          <div className="relative min-h-[350px] overflow-hidden rounded-[26px] bg-[#F6E8F8] sm:min-h-[460px]">
-            <Image
-              src="/assets/partner.png"
-              alt="Spectrum BPC-157 research product"
-              fill
-              priority
-              sizes="(max-width:1024px) 100vw, 45vw"
-              className="object-cover object-right"
-            />
-            <div className="absolute right-5 bottom-5 left-5 rounded-[18px] border border-white/70 bg-white/30 p-5 backdrop-blur-md sm:right-7 sm:bottom-7 sm:left-7">
-              <p className="text-secondary text-sm font-semibold">
-                Built for responsible partnerships
-              </p>
-              <p className="font-heading text-primary mt-2 text-2xl font-bold sm:text-3xl">
-                Research-first. Clear by design.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <EarningsEstimator />
-
-      <section className="px-5 py-12 sm:px-8 md:py-16">
+      <section className="bg-[#F7FAFC] px-4 py-12 sm:px-6 md:py-16 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <SectionHeading
-            eyebrow="A clear path to growth"
-            title="Commission tiers."
-            description="These example tiers use trailing 30-day referred revenue. Final rates, thresholds, and benefits must be approved before the partner program launches."
-          />
-          <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-            {tiers.map((tier, index) => (
-              <article
-                key={tier.name}
-                className={`flex h-full flex-col rounded-[23px] border p-6 sm:p-7 ${index === 1 ? "border-primary bg-[#FCF7FD] shadow-[0_16px_40px_rgba(85,32,95,0.07)]" : "border-[#E9DDEA] bg-white"}`}
-              >
-                <div className="flex min-h-7 items-center justify-between gap-2">
-                  <h3 className="font-heading text-primary text-2xl font-bold">
-                    {tier.name}
-                  </h3>
-                  {index === 1 && (
-                    <span className="bg-primary rounded-full px-3 py-1 text-xs font-semibold text-white">
-                      Popular tier
-                    </span>
-                  )}
-                </div>
-                <p className="font-heading text-primary mt-7 text-5xl font-bold tracking-tight">
-                  {tier.rate * 100}%
-                </p>
-                <p className="mt-3 min-h-12 text-base leading-6 text-[#76697B]">
-                  {tier.range}
-                </p>
-                <div className="mt-6 flex-1 space-y-4 border-t border-[#E9DDEA] pt-6">
-                  {tier.perks.map((perk) => (
-                    <div key={perk} className="flex items-start gap-3">
-                      <Check
-                        size={19}
-                        className="text-secondary mt-0.5 shrink-0"
-                      />
-                      <p className="text-base leading-6 text-[#55485A]">
-                        {perk}
+          <SectionHeading title="Commission Tiers." />
+
+          <div className="mt-10 grid items-stretch gap-5 sm:mt-12 md:grid-cols-2 xl:grid-cols-4">
+            {tiers.map((tier, index) => {
+              const featured = index === 1;
+
+              return (
+                <article
+                  key={tier.name}
+                  className={`group relative isolate flex h-full min-w-0 flex-col rounded-[24px] p-px transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_45px_rgba(7,59,104,0.10)] ${
+                    featured
+                      ? "bg-[linear-gradient(145deg,var(--color-primary),var(--color-secondary))] shadow-[0_12px_35px_rgba(7,85,143,0.10)]"
+                      : "bg-[#DCE8ED]"
+                  }`}
+                >
+                  <div
+                    className={`relative flex h-full flex-col overflow-hidden rounded-[23px] p-5 sm:p-6 ${
+                      featured
+                        ? "bg-[linear-gradient(160deg,#F0F9FC_0%,#FFFFFF_55%)]"
+                        : "bg-white"
+                    }`}
+                  >
+                    <div className="flex min-h-7 items-center justify-between gap-2">
+                      <span className="text-[10px] font-bold tracking-[0.15em] text-[#7A929D] uppercase">
+                        Partner Level {String(index + 1).padStart(2, "0")}
+                      </span>
+
+                      {featured && (
+                        <span className="bg-primary rounded-full px-3 py-1.5 text-[9px] font-semibold whitespace-nowrap text-white sm:text-[10px]">
+                          Featured
+                        </span>
+                      )}
+                    </div>
+
+                    <div className="mt-7">
+                      <h3 className="font-heading text-primary text-[22px] font-bold tracking-[-0.03em] sm:text-[24px]">
+                        {tier.name}
+                      </h3>
+
+                      <div className="mt-5 flex items-baseline gap-2">
+                        <span className="font-heading text-primary text-[54px] leading-none font-bold tracking-[-0.06em] sm:text-[62px]">
+                          {tier.rate * 100}%
+                        </span>
+
+                        <span className="text-[11px] font-medium text-[#718A96]">
+                          Commission
+                        </span>
+                      </div>
+
+                      <p className="mt-4 text-[13px] leading-6 text-[#617987]">
+                        {tier.range}
                       </p>
                     </div>
-                  ))}
-                </div>
-              </article>
-            ))}
+
+                    <div className="my-3 h-px w-full bg-[#E4EDF1]" />
+
+                    <div className="flex-1">
+                      <p className="text-primary mb-5 text-[11px] font-bold tracking-[0.12em] uppercase">
+                        Included Benefits
+                      </p>
+
+                      <div className="space-y-4">
+                        {tier.perks.map((perk) => (
+                          <div key={perk} className="flex items-start gap-3">
+                            <span className="text-secondary flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#E8F5F8]">
+                              <Check size={12} strokeWidth={2.5} />
+                            </span>
+
+                            <p className="text-[12px] leading-6 text-[#526C79] sm:text-[13px]">
+                              {perk}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="mt-8 border-t border-[#E4EDF1] pt-6">
+                      <Link
+                        href="/contact"
+                        className={`group/btn relative flex h-11 w-full items-center justify-center gap-2 overflow-hidden rounded-full text-[12px] font-semibold transition-all duration-300 ${
+                          featured
+                            ? "bg-[linear-gradient(110deg,var(--color-primary),var(--color-secondary))] text-white shadow-sm hover:shadow-md"
+                            : "text-primary hover:border-primary border border-[#C8DDE6] bg-[#F5FAFC] hover:bg-[#EAF5F9]"
+                        }`}
+                      >
+                        {featured && (
+                          <span className="pointer-events-none absolute inset-0 bg-[linear-gradient(110deg,var(--color-primary-dark),var(--color-primary))] opacity-0 transition-opacity duration-500 ease-in-out group-hover/btn:opacity-100" />
+                        )}
+
+                        <span className="relative z-10">Become a Partner</span>
+
+                        <ArrowUpRight
+                          size={16}
+                          className="relative z-10 transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"
+                        />
+                      </Link>
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
           </div>
-          <p className="mt-5 text-sm leading-6 text-[#8D8091]">
-            *Availability of codes, managed accounts, and co-branded material
-            depends on the final partner agreement.
+
+          <div className="mt-7 flex items-start gap-3 rounded-xl border border-[#DCE8ED] bg-white px-4 py-4 sm:px-5">
+            <ShieldCheck
+              size={18}
+              className="text-secondary mt-0.5 shrink-0"
+              strokeWidth={1.8}
+            />
+
+            <p className="text-[12px] leading-6 text-[#718A96]">
+              Commission tiers and benefits shown are illustrative and subject
+              to program approval. Final rates, eligibility requirements, and
+              partner benefits will be confirmed in the applicable partner
+              agreement.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <PartnerBenefits benefits={benefits} />
+    </main>
+  );
+}
+
+function BenefitCard({ icon: Icon, title, description, index }) {
+  const cardRef = useRef(null);
+
+  const handleMouseMove = (event) => {
+    const card = cardRef.current;
+    if (!card) return;
+
+    const rect = card.getBoundingClientRect();
+
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+
+    card.style.setProperty("--mouse-x", `${x}px`);
+    card.style.setProperty("--mouse-y", `${y}px`);
+  };
+
+  return (
+    <article
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      className="partner-benefit-card group relative isolate overflow-hidden rounded-[24px] p-px transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-[0_20px_50px_rgba(7,85,143,0.12)]"
+    >
+      <div className="partner-benefit-border pointer-events-none absolute inset-0 rounded-[inherit]" />
+
+      <div className="relative z-10 flex h-full flex-col overflow-hidden rounded-[23px] bg-[linear-gradient(145deg,#FFFFFF_0%,#F6FBFD_100%)] p-6 sm:p-7">
+        <div className="partner-benefit-glow pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+
+        <div className="relative z-10 flex items-start justify-between">
+          <div className="text-primary group-hover:border-secondary/40 relative flex h-14 w-14 items-center justify-center rounded-[18px] border border-[#CFEAF0] bg-[linear-gradient(145deg,#E8F8FB,#D9F1F6)] shadow-[0_6px_18px_rgba(7,85,143,0.08)] transition-all duration-500 group-hover:-translate-y-1 group-hover:shadow-[0_10px_25px_rgba(4,193,202,0.18)]">
+            <Icon
+              size={25}
+              strokeWidth={1.7}
+              className="relative z-10 transition-transform duration-500 group-hover:scale-110"
+            />
+
+            <span className="bg-secondary/10 pointer-events-none absolute inset-0 rounded-[inherit] opacity-0 blur-lg transition-opacity duration-500 group-hover:opacity-100" />
+          </div>
+        </div>
+
+        <div className="relative z-10 mt-auto pt-4">
+          <h3 className="font-heading text-primary text-[22px] font-bold tracking-[-0.035em] sm:text-[24px]">
+            {title}
+          </h3>
+
+          <p className="mt-3 max-w-sm text-[13px] leading-7 text-[#617987] sm:text-[14px]">
+            {description}
           </p>
         </div>
-      </section>
+      </div>
+    </article>
+  );
+}
+function PartnerBenefits({ benefits = [] }) {
+  return (
+    <section className="relative overflow-hidden px-4 py-12 sm:px-6 md:py-16 lg:px-8">
+      <div className="bg-secondary/5 pointer-events-none absolute top-0 left-1/2 h-[450px] w-[700px] -translate-x-1/2 rounded-full blur-[110px]" />
 
-      <section className="bg-[#FCF9FD] px-5 py-12 sm:px-8 md:py-16">
-        <div className="mx-auto max-w-7xl">
-          <SectionHeading
-            eyebrow="Simple process"
-            title="Four steps to partnership."
-            description="A straightforward path from first contact to sharing approved research information."
-          />
-          <div className="mt-11 grid grid-cols-2 gap-8 md:grid-cols-2 lg:grid-cols-4">
-            {steps.map((step, index) => (
-              <article
-                key={step.number}
-                className="border-t-2 border-[#E5D2E9] pt-6"
-              >
-                <h3 className="font-heading text-primary text-2xl font-semibold">
-                  {step.title}
-                </h3>
-                <p className="mt-3 text-base text-[#76697B]">
-                  {step.description}
-                </p>
-                {index < 3 && (
-                  <ArrowRight
-                    size={20}
-                    className="text-primary/30 mt-6 hidden lg:block"
-                  />
-                )}
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
+      <div className="relative mx-auto max-w-7xl">
+        <SectionHeading
+          title="Everything in One Place."
+          description="Discover the tools, resources, and support designed to make sharing research information simple and managing partnerships effortless."
+        />
 
-      <section className="px-5 py-12 sm:px-8 md:py-16">
-        <div className="mx-auto max-w-7xl">
-          <SectionHeading
-            eyebrow="Partner benefits"
-            title="Everything in one place."
-            description="The tools and support proposed for making product information easier to share and partner activity easier to understand."
-          />
-          <div className="mt-10 grid gap-x-9 gap-y-0 md:grid-cols-2 lg:grid-cols-3">
-            {benefits.map(({ icon: Icon, title, description }) => (
-              <article key={title} className="border-t border-[#E9DDEA] py-8">
-                <span className="text-primary flex size-12 items-center justify-center rounded-[14px] bg-[#F6E5F7]">
-                  <Icon size={23} strokeWidth={1.7} />
-                </span>
-                <h3 className="font-heading text-primary mt-5 text-2xl font-bold">
-                  {title}
-                </h3>
-                <p className="mt-3 text-base leading-7 text-[#77697B]">
-                  {description}
-                </p>
-              </article>
-            ))}
-          </div>
+        <div className="mt-10 grid gap-5 sm:mt-12 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+          {benefits.map((benefit, index) => (
+            <BenefitCard key={benefit.title} {...benefit} index={index} />
+          ))}
         </div>
-      </section>
-    </main>
+      </div>
+
+      <style jsx global>{`
+        @keyframes partnerBorderFlow {
+          0% {
+            background-position: 0% 50%;
+          }
+
+          50% {
+            background-position: 100% 50%;
+          }
+
+          100% {
+            background-position: 0% 50%;
+          }
+        }
+
+        .partner-benefit-border {
+          background: linear-gradient(
+            125deg,
+            #dce8ed,
+            var(--color-secondary),
+            var(--color-primary),
+            #dce8ed
+          );
+          background-size: 300% 300%;
+          animation: partnerBorderFlow 8s ease-in-out infinite;
+          opacity: 0.55;
+          transition: opacity 0.5s ease;
+        }
+
+        .partner-benefit-card:hover .partner-benefit-border {
+          opacity: 1;
+          animation-duration: 4s;
+        }
+
+        .partner-benefit-glow {
+          background: radial-gradient(
+            320px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+            rgba(4, 193, 202, 0.12),
+            transparent 65%
+          );
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .partner-benefit-border {
+            animation: none;
+          }
+
+          .partner-benefit-card,
+          .partner-benefit-card * {
+            transition-duration: 0.01ms !important;
+          }
+        }
+      `}</style>
+    </section>
   );
 }

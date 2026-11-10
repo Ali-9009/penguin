@@ -27,13 +27,7 @@ import FreeShippingProgress from "@/components/cart/FreeShippingProgress";
 
 function EmptyCart() {
   return (
-    <div className="relative flex min-h-[430px] flex-col items-center justify-center overflow-hidden rounded-[24px] bg-[#FCF8FD] px-5 py-14 text-center sm:min-h-[480px]">
-      {/* DECORATIVE ELEMENTS */}
-
-      <div className="pointer-events-none absolute -top-20 -right-20 h-[260px] w-[260px] rounded-full bg-[#F4DDF7]/60 blur-[70px]" />
-
-      <div className="pointer-events-none absolute -bottom-24 -left-20 h-[260px] w-[260px] rounded-full bg-[#F6E5F7] blur-[70px]" />
-
+    <div className="relative flex min-h-[430px] flex-col items-center justify-center overflow-hidden rounded-[24px] bg-[linear-gradient(135deg,#FFFFFF_0%,#F0FAFC_50%,#E4F6FA_100%)] px-5 py-14 text-center sm:min-h-[480px]">
       <div className="relative z-10 flex flex-col items-center">
         {/* ICON */}
 
@@ -66,11 +60,17 @@ function EmptyCart() {
 
         <Link
           href="/shop"
-          className="group bg-primary mt-8 inline-flex items-center gap-6 rounded-full p-2 pl-7 font-sans text-[12px] font-bold text-white shadow-[0_12px_30px_rgba(85,32,95,0.16)] transition-all duration-300 hover:bg-[#35143E] hover:shadow-[0_18px_40px_rgba(85,32,95,0.22)] sm:text-[13px]"
+          className="group relative mt-8 inline-flex items-center gap-6 overflow-hidden rounded-full bg-[linear-gradient(110deg,var(--color-primary),var(--color-secondary))] p-2 pl-7 font-sans text-[12px] font-bold text-white shadow-[0_12px_30px_rgba(7,85,143,0.15)] transition-all duration-500 ease-out hover:-translate-y-0.5 hover:shadow-[0_18px_40px_rgba(7,85,143,0.20)] active:scale-[0.98] sm:text-[13px]"
         >
-          Explore Collection
-          <span className="text-primary flex h-11 w-11 items-center justify-center rounded-full bg-white transition-transform duration-300 group-hover:rotate-45">
-            <ArrowUpRight size={20} />
+          <span className="pointer-events-none absolute inset-0 bg-[linear-gradient(110deg,var(--color-primary-dark),var(--color-primary))] opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100" />
+
+          <span className="relative z-10">Explore Collection</span>
+
+          <span className="text-primary relative z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white">
+            <ArrowUpRight
+              size={20}
+              className="transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+            />
           </span>
         </Link>
       </div>
@@ -101,12 +101,12 @@ export default function CartPageClient() {
   }, 0);
 
   return (
-    <main className="min-h-screen pt-25">
+    <main className="min-h-screen pt-8 md:pt-10">
       {/* ==========================================
           PAGE HEADER
       ========================================== */}
 
-      <section className="px-4 py-6 sm:px-6 md:py-12 lg:px-10">
+      <section className="px-4 sm:px-6 lg:px-10">
         <div className="mx-auto max-w-7xl">
           <nav aria-label="Breadcrumb" className="mb-7">
             <ol className="flex items-center gap-2 font-sans text-xs text-[#96899A]">
@@ -157,7 +157,7 @@ export default function CartPageClient() {
           CART CONTENT
       ========================================== */}
 
-      <section className="px-4 pb-12 sm:px-6 lg:px-10">
+      <section className="px-4 py-8 sm:px-6 md:py-12 lg:px-10">
         <div className="mx-auto max-w-7xl">
           <div className="grid items-start gap-7 lg:grid-cols-[minmax(0,1fr)_390px] xl:gap-10">
             {/* ======================================
@@ -228,9 +228,6 @@ export default function CartPageClient() {
                       Review products before payment
                     </p>
                   </div>
-                  <span className="text-primary rounded-full bg-[#F6E5F7] px-3 py-1 text-xs font-semibold">
-                    {itemCount} bottles
-                  </span>
                 </div>
 
                 {/* SUMMARY CONTENT */}
@@ -307,15 +304,16 @@ export default function CartPageClient() {
 
                   <Link
                     href={hasItems ? "/checkout" : "/shop"}
-                    className="group bg-primary hover:bg-primary-dark flex w-full items-center justify-between rounded-full p-2 pl-6 font-sans text-sm font-semibold text-white shadow-[0_12px_25px_rgba(85,32,95,0.17)] transition-all duration-300 hover:shadow-[0_18px_35px_rgba(85,32,95,0.25)]"
+                    className="group relative flex w-full items-center justify-between overflow-hidden rounded-full bg-[linear-gradient(110deg,var(--color-primary),var(--color-secondary))] p-2 pl-6 font-sans text-sm font-semibold text-white shadow-[0_8px_24px_rgba(0,0,0,0.12)] transition-all duration-500 ease-out hover:-translate-y-0.5 hover:shadow-[0_14px_32px_rgba(0,0,0,0.2)] active:scale-[0.98]"
                   >
-                    <span className="flex items-center gap-2">
-                      <LockKeyhole size={16} />
+                    <span className="pointer-events-none absolute inset-0 bg-[linear-gradient(110deg,var(--color-primary-dark),var(--color-primary))] opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100" />
 
+                    <span className="relative z-10 flex items-center gap-2">
+                      <LockKeyhole size={16} />
                       {hasItems ? "Proceed to Checkout" : "Explore Products"}
                     </span>
 
-                    <span className="text-primary flex h-11 w-11 items-center justify-center rounded-full bg-white transition-transform duration-300 group-hover:rotate-45">
+                    <span className="text-primary relative z-10 flex h-11 w-11 items-center justify-center rounded-full bg-white transition-transform duration-500 ease-out group-hover:rotate-45">
                       <ArrowUpRight size={19} />
                     </span>
                   </Link>

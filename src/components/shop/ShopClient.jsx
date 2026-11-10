@@ -8,6 +8,7 @@ import ProductCard from "../ProductCard";
 import QuickView from "../QuickView";
 import CustomSelect from "../CustomSelect";
 import Image from "next/image";
+import PageHero from "../PageHero";
 
 const catalog = products.filter((product) => product.active !== false);
 
@@ -70,69 +71,11 @@ export default function ShopClient({ initialSearch = "" }) {
 
   return (
     <main className="min-h-screen">
-      <section
-        data-aos="fade-up"
-        className="px-3 pt-10 sm:px-5 lg:px-8"
-      >
-        <div className="relative mx-auto w-full max-w-7xl overflow-hidden rounded-3xl bg-[#EAF7FA]">
-          {/* RESPONSIVE BACKGROUND IMAGES */}
-
-          <div className="absolute inset-0">
-            {/* MOBILE + TABLET */}
-            <Image
-              src="/assets/banner-mob.png"
-              alt=""
-              fill
-              priority
-              sizes="(max-width: 1023px) 100vw, 1px"
-              className="object-cover object-bottom lg:hidden"
-            />
-
-            {/* DESKTOP */}
-            <Image
-              src="/assets/banner.png"
-              alt=""
-              fill
-              priority
-              sizes="(min-width: 1024px) 1280px, 1px"
-              className="hidden object-cover object-center lg:block"
-            />
-          </div>
-
-          {/* SUBTLE MOBILE OVERLAY */}
-          <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-[#F2FAFC]/65 via-transparent to-transparent lg:hidden" />
-
-          {/* DESKTOP OVERLAY */}
-          <div className="pointer-events-none absolute inset-0 hidden bg-linear-to-r from-[#F2FAFC]/70 via-[#F2FAFC]/20 to-transparent lg:block" />
-
-          {/* CONTENT */}
-
-          <div className="relative z-10 flex w-full flex-col items-center px-5 pt-9 pb-[320px] text-center sm:px-10 sm:pt-12 sm:pb-[440px] md:px-12 md:pt-14 md:pb-150 lg:min-h-90 lg:items-start lg:justify-center lg:px-16 lg:py-12 lg:text-left">
-            <div className="w-full max-w-[440px] lg:max-w-[480px]">
-              {/* EYEBROW */}
-
-              <span className="text-secondary-dark mb-3 inline-block font-sans text-[10px] font-bold tracking-[0.18em] uppercase sm:text-[11px]">
-                PENGUIN PEPTIDES
-              </span>
-
-              {/* HEADING */}
-
-              <h2 className="font-heading text-primary text-[clamp(2.2rem,5vw,3.8rem)] leading-[1.05] font-extrabold tracking-[-0.055em]">
-                A Different Perspective on{" "}
-                <span className="text-secondary-dark">Research.</span>
-              </h2>
-
-              {/* DESCRIPTION */}
-
-              <p className="text-md mx-auto mt-4 max-w-100 font-sans text-[#587583] lg:mx-0">
-                Penguin Peptides brings together research compounds, thoughtful
-                product presentation, and accessible information in one focused
-                collection.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        title="A Fresh Approach to"
+        highlight="Research."
+        description="Explore quality research compounds, thoughtfully presented with clear, accessible information."
+      />
 
       <section
         id="shop-products"

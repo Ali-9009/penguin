@@ -10,7 +10,7 @@ export default function FreeShippingProgress({ compact = false }) {
 
   return (
     <div
-      className={`bg-primary relative overflow-hidden rounded-[18px] text-white ${
+      className={`relative overflow-hidden rounded-[18px] bg-[linear-gradient(135deg,#041B2D_0%,#073B68_35%,#07558F_70%,#04C1CA_100%)] text-white ${
         compact ? "p-4" : "p-5"
       }`}
     >
@@ -49,7 +49,7 @@ export default function FreeShippingProgress({ compact = false }) {
             className="mt-3 h-[7px] overflow-hidden rounded-full bg-white/20"
           >
             <div
-              className="h-full rounded-full bg-[linear-gradient(90deg,#F47735,#FFB27E)] transition-[width] duration-500 ease-out"
+              className="h-full rounded-full bg-[linear-gradient(90deg,#07558F_0%,#04C1CA_55%,#8DF0F2_100%)] shadow-[0_0_12px_rgba(4,193,202,0.25)] transition-[width] duration-500 ease-out"
               style={{
                 width: `${Math.max(0, Math.min(100, freeShippingProgress))}%`,
               }}

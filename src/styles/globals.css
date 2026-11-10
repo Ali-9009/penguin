@@ -164,18 +164,6 @@
   }
 }
 
-@layer components {
-  /* Primary Button */
-  .btn-primary {
-    @apply bg-primary hover:bg-primary-dark inline-flex items-center justify-center rounded-full px-5 py-3.5 font-sans text-sm font-semibold text-white transition-all duration-300;
-  }
-
-  /* Secondary Button */
-  .btn-secondary {
-    @apply border-primary/20 text-primary hover:border-primary hover:bg-accent-light inline-flex items-center justify-center rounded-full border bg-white px-5 py-3.5 font-sans text-sm font-semibold transition-all duration-300;
-  }
-}
-
 /* cards */
 
 /* =====================================
@@ -296,5 +284,3 @@
   transform: none;
   box-shadow: none;
 }
-
-

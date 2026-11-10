@@ -50,322 +50,263 @@ export default function ContactPage() {
   };
 
   return (
-    <main className="min-h-screen bg-white">
-      <header className="border-b border-[#EEE6EF] px-4 py-6 sm:px-6 md:py-12 lg:px-8">
+    <main className="min-h-screen bg-[#F8FBFC]">
+      <header className="border-b border-[#E2EBEF] bg-white px-4 py-8 sm:px-6 md:py-10 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <nav
-            aria-label="Breadcrumb"
-            className="mb-6 flex items-center gap-2 text-xs text-[#95879A]"
-          >
-            <Link href="/" className="hover:text-primary">
-              Home
-            </Link>
-            <ChevronRight size={13} />
-            <span className="text-primary font-semibold">Contact</span>
-          </nav>
+          <div className="max-w-2xl">
+            <h1 className="font-heading text-primary text-[34px] leading-[1.15] font-bold tracking-[-0.04em] sm:text-[44px] lg:text-[52px]">
+              We're Here to
+              <span className="text-secondary">Help.</span>
+            </h1>
 
-          <p className="text-secondary mb-4 flex items-center gap-2 font-sans text-xs font-bold tracking-[0.15em] uppercase">
-            Get in touch
-          </p>
-          <h1 className="section-heading">
-            We're Here to <span className="text-secondary">Help.</span>
-          </h1>
-          <p className="text-md mt-3 max-w-xl text-[#817586]">
-            Have a question about a product, order, or batch documentation? Send
-            us a message.
-          </p>
+            <p className="mt-5 max-w-xl text-sm leading-7 text-[#617987] sm:text-[15px]">
+              Have a question about our research products, an order, or product
+              documentation? Get in touch with our team.
+            </p>
+          </div>
         </div>
       </header>
 
-      <section className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 sm:py-16 lg:grid-cols-[0.7fr_1.3fr] lg:gap-20 lg:px-8">
-        <aside className="order-2 lg:order-1 lg:pt-2">
-          <h2 className="font-heading text-primary text-2xl font-bold tracking-tight">
-            Contact Spectrum
-          </h2>
-          <p className="text-md mt-3 max-w-sm text-[#817586]">
-            Our team can assist with product information, research
-            documentation, and questions about your order.
-          </p>
-          <div className="mt-8 space-y-6">
-            <div className="flex items-start gap-3">
-              <span className="text-primary grid size-11 shrink-0 place-items-center rounded-2xl bg-[#F6E5F7]">
-                <Mail size={19} />
-              </span>
-              <div>
-                <h3 className="text-md font-semibold text-[#29232D]">
-                  Email us
-                </h3>
-                {email ? (
-                  <a
-                    href={`mailto:${email}`}
-                    className="text-primary hover:text-secondary text-md mt-1 block break-all"
-                  >
-                    {email}
-                  </a>
-                ) : (
-                  <p className="text-sm text-[#817586]">
-                    Email address will appear here once configured.
-                  </p>
-                )}
-              </div>
+      <section
+        aria-label="Contact information"
+        className="px-4 pt-10 sm:px-6 sm:pt-14 lg:px-8"
+      >
+        <div className="mx-auto grid max-w-7xl gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+          <article className="group hover:border-primary/20 rounded-[20px] border border-[#DFEAF0] bg-white p-5 transition-all duration-300 hover:shadow-[0_12px_30px_rgba(7,59,104,0.06)] sm:p-6">
+            <div className="text-primary mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#EAF7FA]">
+              <Mail size={21} strokeWidth={1.7} />
             </div>
-            <div className="flex items-start gap-3">
-              <span className="text-primary grid size-11 shrink-0 place-items-center rounded-2xl bg-[#F6E5F7]">
-                <MessageCircle size={19} />
-              </span>
-              <div>
-                <h3 className="text-md font-semibold text-[#29232D]">
-                  Product questions
-                </h3>
-                <p className="text-md text-[#817586]">
-                  Select a topic and tell us what you'd like to know.
+
+            <h2 className="font-heading text-primary text-[18px] font-bold tracking-[-0.02em]">
+              Email Support
+            </h2>
+
+            <p className="mt-2 text-[13px] leading-6 text-[#617987]">
+              Reach out directly for questions about products, orders, or
+              general inquiries.
+            </p>
+
+            <div className="mt-5 border-t border-[#EDF2F5] pt-4">
+              {email ? (
+                <a
+                  href={`mailto:${email}`}
+                  className="text-primary hover:text-secondary inline-flex max-w-full items-center gap-2 text-[13px] font-semibold break-all transition-colors"
+                >
+                  {email}
+                  <ArrowUpRight size={15} className="shrink-0" />
+                </a>
+              ) : (
+                <p className="text-[12px] text-[#81939C]">
+                  Contact email coming soon
                 </p>
-              </div>
+              )}
             </div>
-            <div className="flex items-start gap-3">
-              <span className="text-primary grid size-11 shrink-0 place-items-center rounded-2xl bg-[#F6E5F7]">
-                <ShieldCheck size={19} />
-              </span>
-              <div>
-                <h3 className="text-md font-semibold text-[#29232D]">
-                  Research use only
-                </h3>
-                <p className="text-sm text-[#817586]">
-                  We do not provide personal use, dosing, or administration
-                  guidance.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="mt-9 border-t border-[#EEE6EF] pt-6">
-            <p className="text-sm font-semibold text-[#29232D]">
-              Looking for quick answers?
-            </p>
-            <Link
-              href="/faqs"
-              className="text-primary hover:text-secondary mt-2 inline-flex items-center gap-2 text-sm font-semibold"
-            >
-              Visit FAQs <ArrowUpRight size={16} />
-            </Link>
-          </div>
-        </aside>
-        <section
-          aria-labelledby="contact-form-heading"
-          className="order-1 rounded-[24px] border border-[#EEE6EF] p-5 sm:p-8 lg:order-2"
-        >
-          <h2
-            id="contact-form-heading"
-            className="font-heading text-primary text-2xl font-semibold tracking-tight"
-          >
-            Send an Inquiry
-          </h2>
-          <p className="text-md mt-2 text-[#817586]">
-            Fill in the details below to prepare your message.
-          </p>
-          <form onSubmit={submit} className="mt-7 space-y-5">
-            <div className="grid gap-5 sm:grid-cols-2">
-              <div>
-                <label
-                  htmlFor="contact-name"
-                  className="mb-2 block text-sm font-semibold text-[#29232D]"
-                >
-                  Full name <span className="text-secondary">*</span>
-                </label>
-                <input
-                  id="contact-name"
-                  name="name"
-                  required
-                  autoComplete="name"
-                  value={form.name}
-                  onChange={update}
-                  placeholder="Your name"
-                  className="focus:border-primary h-12 w-full rounded-xl border border-[#E8DCEA] px-4 text-sm outline-none placeholder:text-[#B2A6B5]"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="contact-email"
-                  className="mb-2 block text-sm font-semibold text-[#29232D]"
-                >
-                  Email address <span className="text-secondary">*</span>
-                </label>
-                <input
-                  id="contact-email"
-                  name="email"
-                  type="email"
-                  required
-                  autoComplete="email"
-                  value={form.email}
-                  onChange={update}
-                  placeholder="you@example.com"
-                  className="focus:border-primary h-12 w-full rounded-xl border border-[#E8DCEA] px-4 text-sm outline-none placeholder:text-[#B2A6B5]"
-                />
-              </div>
-            </div>
-            <div>
-              <label
-                htmlFor="contact-subject"
-                className="mb-2 block text-sm font-semibold text-[#29232D]"
-              >
-                What can we help with?
-              </label>
-              <CustomSelect
-                id="contact-subject"
-                value={form.subject}
-                onChange={(event) =>
-                  update({
-                    target: { name: "subject", value: event.target.value },
-                  })
-                }
-                placeholder="Select a subject"
-                className="w-full"
-                options={subjects.map((subject) => ({
-                  value: subject,
-                  label: subject,
-                }))}
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="contact-message"
-                className="mb-2 block text-sm font-semibold text-[#29232D]"
-              >
-                Your message <span className="text-secondary">*</span>
-              </label>
-              <textarea
-                id="contact-message"
-                name="message"
-                required
-                minLength={10}
-                rows={6}
-                value={form.message}
-                onChange={update}
-                placeholder="Tell us how we can help..."
-                className="focus:border-primary w-full resize-y rounded-xl border border-[#E8DCEA] px-4 py-3 text-sm leading-relaxed outline-none placeholder:text-[#B2A6B5]"
-              />
-            </div>
-            <button
-              type="submit"
-              className="group bg-primary flex h-12 w-full items-center justify-center gap-3 rounded-full px-6 text-sm font-semibold text-white transition-colors hover:bg-[#35143E] sm:w-auto"
-            >
-              Prepare Email{" "}
-              <ArrowUpRight
-                size={17}
-                className="transition-transform group-hover:rotate-45"
-              />
-            </button>
-            {notice && (
-              <p
-                role="status"
-                className="text-primary flex items-start gap-2 text-xs leading-relaxed"
-              >
-                <CheckCircle2 size={16} className="shrink-0" />
-                {notice}
-              </p>
-            )}
-            <p className="text-[11px] leading-relaxed text-[#978A9A]">
-              This form opens your email application; it does not submit
-              messages directly through the website.
-            </p>
-          </form>
-        </section>
-      </section>
+          </article>
 
-      <section className="border-t border-[#EEE6EF] bg-[#FCFAFC] px-4 py-12 sm:px-6 md:py-16 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-10 max-w-2xl">
-            <p className="text-secondary mb-3 text-[11px] font-bold tracking-[0.16em] uppercase">
-              Customer Support
-            </p>
-            <h2 className="section-heading">How Can We Help?</h2>
-            <p className="text-md mt-3 text-[#817586]">
-              Whether you're exploring our collection or have questions about an
-              existing order, we're here to help you find the right information.
-            </p>
-          </div>
+          <article className="group hover:border-primary/20 rounded-[20px] border border-[#DFEAF0] bg-white p-5 transition-all duration-300 hover:shadow-[0_12px_30px_rgba(7,59,104,0.06)] sm:p-6">
+            <div className="text-primary mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#EAF7FA]">
+              <MessageCircle size={21} strokeWidth={1.7} />
+            </div>
 
-          <div className="grid gap-4 md:grid-cols-3">
-            {[
-              {
-                icon: Package,
-                title: "Orders & Shipping",
-                description:
-                  "Questions about order details, shipping information, or an existing purchase.",
-                link: "/faqs",
-                action: "View FAQs",
-              },
-              {
-                icon: FileCheck2,
-                title: "Product Documentation",
-                description:
-                  "Learn about available product specifications, batch information, and laboratory documentation.",
-                link: "/shop",
-                action: "Explore Products",
-              },
-              {
-                icon: Headphones,
-                title: "General Inquiries",
-                description:
-                  "Need assistance with something else? Share your question through our contact form.",
-                link: "#contact-form-heading",
-                action: "Contact Us",
-              },
-            ].map((item) => {
-              const Icon = item.icon;
+            <h2 className="font-heading text-primary text-[18px] font-bold tracking-[-0.02em]">
+              Product Inquiries
+            </h2>
 
-              return (
-                <article
-                  key={item.title}
-                  className="group hover:border-primary/20 rounded-[20px] border border-[#EEE6EF] bg-white p-6 transition-all duration-300 hover:shadow-[0_15px_35px_rgba(85,32,95,0.05)] sm:p-7"
-                >
-                  <div className="text-primary flex size-12 items-center justify-center rounded-2xl bg-[#F6E5F7]">
-                    <Icon size={23} strokeWidth={1.6} />
-                  </div>
-                  <h3 className="font-heading text-primary mt-6 text-xl font-bold tracking-[-0.03em]">
-                    {item.title}
-                  </h3>
-                  <p className="text-md mt-3 min-h-[72px] text-[#817586]">
-                    {item.description}
-                  </p>
-                  <Link
-                    href={item.link}
-                    className="text-primary hover:text-secondary text-md mt-6 inline-flex items-center gap-2 font-semibold transition-colors"
-                  >
-                    {item.action}
-                    <ArrowUpRight
-                      size={16}
-                      className="transition-transform duration-300 group-hover:rotate-45"
-                    />
-                  </Link>
-                </article>
-              );
-            })}
-          </div>
+            <p className="mt-2 text-[13px] leading-6 text-[#617987]">
+              Need information about research compounds, available strengths, or
+              documentation?
+            </p>
+
+            <div className="mt-5 border-t border-[#EDF2F5] pt-4">
+              <a
+                href="#contact-form"
+                className="text-primary hover:text-secondary inline-flex items-center gap-2 text-[13px] font-semibold transition-colors"
+              >
+                Send an Inquiry
+                <ArrowUpRight size={15} />
+              </a>
+            </div>
+          </article>
+
+          <article className="group hover:border-primary/20 rounded-[20px] border border-[#DFEAF0] bg-white p-5 transition-all duration-300 hover:shadow-[0_12px_30px_rgba(7,59,104,0.06)] sm:col-span-2 sm:p-6 lg:col-span-1">
+            <div className="text-primary mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#EAF7FA]">
+              <ShieldCheck size={21} strokeWidth={1.7} />
+            </div>
+
+            <h2 className="font-heading text-primary text-[18px] font-bold tracking-[-0.02em]">
+              Research Information
+            </h2>
+
+            <p className="mt-2 text-[13px] leading-6 text-[#617987]">
+              Our products are intended for laboratory research only. We do not
+              provide personal-use or dosing guidance.
+            </p>
+
+            <div className="mt-5 border-t border-[#EDF2F5] pt-4">
+              <Link
+                href="/faqs"
+                className="text-primary hover:text-secondary inline-flex items-center gap-2 text-[13px] font-semibold transition-colors"
+              >
+                Visit FAQs
+                <ArrowUpRight size={15} />
+              </Link>
+            </div>
+          </article>
         </div>
       </section>
 
-      <section className="px-4 py-12 sm:px-6 md:py-16 lg:px-8">
-        <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-7 border-b border-[#EEE6EF] pb-12 sm:flex-row sm:items-center">
-          <div>
-            <p className="text-secondary mb-3 text-[11px] font-bold tracking-[0.16em] uppercase">
-              Frequently Asked Questions
+      <section
+        id="contact-form"
+        aria-labelledby="contact-form-heading"
+        className="scroll-mt-24 px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20"
+      >
+        <div className="mx-auto max-w-4xl">
+          <div className="mb-8 text-center sm:mb-10">
+            <p className="text-secondary text-[11px] font-bold tracking-[0.16em] uppercase">
+              Contact Form
             </p>
-            <h2 className="section-heading">Need More Information?</h2>
-            <p className="text-md mt-3 max-w-xl text-[#817586]">
-              Find answers to common questions about our research products,
-              ordering, and documentation.
+
+            <h2
+              id="contact-form-heading"
+              className="font-heading text-primary mt-3 text-[28px] font-bold tracking-[-0.035em] sm:text-[36px]"
+            >
+              Send Us a Message
+            </h2>
+
+            <p className="mx-auto mt-3 max-w-lg text-[13px] leading-7 text-[#617987] sm:text-sm">
+              Fill out the form below with your question or inquiry, and we'll
+              help you find the information you need.
             </p>
           </div>
 
-          <Link
-            href="/faqs"
-            className="group bg-primary inline-flex shrink-0 items-center gap-4 rounded-full py-2 pr-2 pl-6 text-sm font-semibold text-white transition-colors duration-300 hover:bg-[#35143E]"
-          >
-            Explore FAQs
-            <span className="text-primary flex size-10 items-center justify-center rounded-full bg-white transition-transform duration-300 group-hover:rotate-45">
-              <ArrowUpRight size={19} />
-            </span>
-          </Link>
+          <div className="overflow-visible rounded-[22px] border border-[#DFEAF0] bg-white p-5 shadow-[0_10px_40px_rgba(7,59,104,0.04)] sm:rounded-[28px] sm:p-8 lg:p-10">
+            <form onSubmit={submit} className="space-y-6">
+              <div className="grid gap-5 sm:grid-cols-2 sm:gap-6">
+                <div>
+                  <label
+                    htmlFor="contact-name"
+                    className="mb-2 block text-[13px] font-semibold text-[#173B4A]"
+                  >
+                    Full Name <span className="text-secondary">*</span>
+                  </label>
+
+                  <input
+                    id="contact-name"
+                    name="name"
+                    required
+                    autoComplete="name"
+                    value={form.name}
+                    onChange={update}
+                    placeholder="Enter your full name"
+                    className="focus:border-primary focus:ring-primary/10 h-12 w-full rounded-xl border border-[#DCE8ED] bg-[#FAFCFD] px-4 text-sm text-[#173B4A] transition-all duration-200 outline-none placeholder:text-[#98ADB6] focus:bg-white focus:ring-2"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="contact-email"
+                    className="mb-2 block text-[13px] font-semibold text-[#173B4A]"
+                  >
+                    Email Address <span className="text-secondary">*</span>
+                  </label>
+
+                  <input
+                    id="contact-email"
+                    name="email"
+                    type="email"
+                    required
+                    autoComplete="email"
+                    value={form.email}
+                    onChange={update}
+                    placeholder="you@example.com"
+                    className="focus:border-primary focus:ring-primary/10 h-12 w-full rounded-xl border border-[#DCE8ED] bg-[#FAFCFD] px-4 text-sm text-[#173B4A] transition-all duration-200 outline-none placeholder:text-[#98ADB6] focus:bg-white focus:ring-2"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label
+                  htmlFor="contact-subject"
+                  className="mb-2 block text-[13px] font-semibold text-[#173B4A]"
+                >
+                  What Can We Help With?
+                </label>
+
+                <CustomSelect
+                  id="contact-subject"
+                  value={form.subject}
+                  onChange={(event) =>
+                    update({
+                      target: {
+                        name: "subject",
+                        value: event.target.value,
+                      },
+                    })
+                  }
+                  placeholder="Select a subject"
+                  className="w-full"
+                  options={subjects.map((subject) => ({
+                    value: subject,
+                    label: subject,
+                  }))}
+                  triggerClassName="!h-12 !rounded-xl !border-[#DCE8ED] !bg-[#FAFCFD] !text-[13px] !font-medium !text-[#173B4A] focus:!border-primary"
+                  dropdownClassName="!border-[#DCE8ED] !shadow-[0_15px_40px_rgba(7,59,104,0.10)]"
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="contact-message"
+                  className="mb-2 block text-[13px] font-semibold text-[#173B4A]"
+                >
+                  Your Message <span className="text-secondary">*</span>
+                </label>
+
+                <textarea
+                  id="contact-message"
+                  name="message"
+                  required
+                  minLength={10}
+                  rows={6}
+                  value={form.message}
+                  onChange={update}
+                  placeholder="Tell us how we can help..."
+                  className="focus:border-primary focus:ring-primary/10 w-full resize-y rounded-xl border border-[#DCE8ED] bg-[#FAFCFD] px-4 py-3.5 text-sm leading-relaxed text-[#173B4A] transition-all duration-200 outline-none placeholder:text-[#98ADB6] focus:bg-white focus:ring-2"
+                />
+              </div>
+
+              <div className="border-t border-[#EDF2F5] pt-6">
+                <button
+                  type="submit"
+                  className="group relative flex h-12 w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-[linear-gradient(110deg,var(--color-primary),var(--color-secondary))] px-7 text-sm font-semibold text-white shadow-md transition-all duration-500 ease-out hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.98] sm:w-auto"
+                >
+                  <span className="pointer-events-none absolute inset-0 bg-[linear-gradient(110deg,var(--color-primary-dark),var(--color-primary))] opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100" />
+
+                  <span className="relative z-10">Prepare Email</span>
+
+                  <ArrowUpRight
+                    size={17}
+                    className="relative z-10 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  />
+                </button>
+
+                {notice && (
+                  <p
+                    role="status"
+                    className="text-primary mt-4 flex items-start gap-2 text-xs leading-relaxed"
+                  >
+                    <CheckCircle2 size={16} className="shrink-0" />
+                    {notice}
+                  </p>
+                )}
+
+                <p className="mt-4 text-[11px] leading-relaxed text-[#81939C]">
+                  This form opens your email application. Messages are not sent
+                  directly through the website.
+                </p>
+              </div>
+            </form>
+          </div>
         </div>
       </section>
     </main>

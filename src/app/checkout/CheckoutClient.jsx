@@ -134,7 +134,7 @@ export default function CheckoutClient() {
   };
 
   return (
-    <main className="min-h-screen bg-white px-4 pt-30 pb-6 sm:px-6 lg:px-10 lg:pt-36">
+    <main className="min-h-screen px-4 pt-8 pb-6 sm:px-6 md:pt-10 lg:px-10">
       <div className="mx-auto max-w-7xl">
         {/* BREADCRUMB */}
 
@@ -422,9 +422,16 @@ export default function CheckoutClient() {
                 <button
                   type="button"
                   onClick={validate}
-                  className="bg-primary hover:bg-primary-dark mt-6 flex h-12 w-full items-center justify-center gap-2 rounded-full px-5 text-sm font-semibold text-white transition-colors"
+                  className="group relative mt-6 flex h-12 w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-[linear-gradient(110deg,var(--color-primary),var(--color-secondary))] px-5 text-sm font-semibold text-white shadow-md transition-all duration-500 ease-out hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.98]"
                 >
-                  Review checkout details <ArrowRight size={17} />
+                  <span className="pointer-events-none absolute inset-0 bg-[linear-gradient(110deg,var(--color-primary-dark),var(--color-primary))] opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100" />
+
+                  <span className="relative z-10">Review checkout details</span>
+
+                  <ArrowRight
+                    size={17}
+                    className="relative z-10 transition-transform duration-300 ease-out group-hover:translate-x-1"
+                  />
                 </button>
                 {reviewed && (
                   <p
@@ -450,9 +457,6 @@ export default function CheckoutClient() {
                     Review products before payment
                   </p>
                 </div>
-                <span className="text-primary rounded-full bg-[#F6E5F7] px-3 py-1 text-xs font-semibold">
-                  {itemCount} bottles
-                </span>
               </div>
               <div className="max-h-[350px] space-y-5 overflow-y-auto px-5 py-5 sm:px-6">
                 {items.map((item) => (

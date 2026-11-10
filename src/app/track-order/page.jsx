@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import {
   ArrowRight,
+  ArrowUpRight,
   Check,
   CheckCircle2,
   Clock3,
@@ -11,10 +12,11 @@ import {
   Mail,
   MapPin,
   Package,
+  PackageCheck,
   Search,
+  ShieldCheck,
   Truck,
 } from "lucide-react";
-import Image from "next/image";
 
 const DEMO_ORDERS = [
   {
@@ -44,17 +46,42 @@ const DEMO_ORDERS = [
 ];
 
 const STEPS = [
-  { key: "placed", label: "Order Placed", icon: Package },
-  { key: "packed", label: "Packed", icon: CheckCircle2 },
-  { key: "shipped", label: "Shipped", icon: Truck },
-  { key: "out_for_delivery", label: "Out for Delivery", icon: MapPin },
-  { key: "delivered", label: "Delivered", icon: Check },
+  {
+    key: "placed",
+    label: "Order Placed",
+    description: "Your order has been received.",
+    icon: Package,
+  },
+  {
+    key: "packed",
+    label: "Packed",
+    description: "Your order is prepared for shipping.",
+    icon: PackageCheck,
+  },
+  {
+    key: "shipped",
+    label: "Shipped",
+    description: "Your package is on its way.",
+    icon: Truck,
+  },
+  {
+    key: "out_for_delivery",
+    label: "Out for Delivery",
+    description: "Your package is with the delivery carrier.",
+    icon: MapPin,
+  },
+  {
+    key: "delivered",
+    label: "Delivered",
+    description: "Your package has arrived.",
+    icon: Check,
+  },
 ];
 
 const statusLabels = {
   placed: "Order Placed",
-  packed: "Packed",
-  shipped: "Shipped",
+  packed: "Order Packed",
+  shipped: "On Its Way",
   out_for_delivery: "Out for Delivery",
   delivered: "Delivered",
 };
@@ -67,6 +94,7 @@ export default function OrderTracker() {
 
   async function handleSubmit(event) {
     event.preventDefault();
+
     if (!orderNumber.trim() || !email.trim()) return;
 
     setPhase("loading");
@@ -92,58 +120,72 @@ export default function OrderTracker() {
     ? STEPS.findIndex((step) => step.key === order.status)
     : -1;
 
+  const progress =
+    currentStep >= 0 ? (currentStep / (STEPS.length - 1)) * 100 : 0;
+
   return (
-    <main className="">
-      <section className="px-4 py-6 sm:px-6 lg:px-10 md:py-12">
-        <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:gap-16">
-          <div className="min-w-0">
-            <h1 className="section-heading">
-              Track your order, <span className="text-primary">live.</span>
-            </h1>
+    <main className="min-h-screen bg-[#F7FAFC]">
+      <section className="border-b border-[#DFEAF0] bg-white px-4 py-12 sm:px-6 md:py-12 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <h1 className="font-heading text-primary text-[36px] leading-[1.12] font-bold tracking-[-0.045em] sm:text-[48px] lg:text-[54px]">
+            Track Your <span className="text-secondary">Order.</span>
+          </h1>
 
-            <p className="mt-5 max-w-[620px] text-sm text-[#687087]">
-              Enter your order number and the email you used at checkout. We'll
-              show the information available in our order system.
-            </p>
+          <p className="mt-4 max-w-xl text-[13px] leading-7 text-[#647D89] sm:text-[15px]">
+            Enter your order details to view its current status and follow your
+            package through each delivery stage.
+          </p>
+        </div>
+      </section>
 
-            <div className="mt-8 rounded-[22px] border border-[#E3E3EC] bg-white p-5 shadow-[0_20px_45px_rgba(25,30,55,0.07)] sm:p-7">
-              <div className="mb-6 flex items-center gap-3">
-                <span className="text-primary flex size-12 shrink-0 items-center justify-center rounded-xl bg-[#F1E5F4]">
-                  <Package size={23} strokeWidth={1.7} />
-                </span>
-                <div>
-                  <h2 className="font-heading text-lg font-bold text-[#29232D]">
-                    Find your order
-                  </h2>
-                  <p className="mt-1 text-sm text-[#777079]">
-                    Both details must match the same order.
-                  </p>
+      <section className="px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-20">
+        <div className="mx-auto grid max-w-7xl items-start gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-10">
+          <div className="space-y-6">
+            <div className="overflow-hidden rounded-[24px] border border-[#DFEAF0] bg-white shadow-[0_12px_45px_rgba(7,59,104,0.04)]">
+              <div className="border-b border-[#EDF2F5] px-5 py-6 sm:px-7 sm:py-7">
+                <div className="flex items-center gap-3">
+                  <span className="text-primary flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#EAF6F9]">
+                    <Search size={21} strokeWidth={1.8} />
+                  </span>
+
+                  <div>
+                    <h2 className="font-heading text-primary text-[19px] font-bold tracking-[-0.025em] sm:text-[21px]">
+                      Find Your Order
+                    </h2>
+
+                    <p className="mt-1 text-[12px] text-[#7A909B]">
+                      Enter your order number and billing email.
+                    </p>
+                  </div>
                 </div>
               </div>
 
-              <form onSubmit={handleSubmit}>
-                <div className="grid gap-4 sm:grid-cols-2">
+              <form onSubmit={handleSubmit} className="p-5 sm:p-7">
+                <div className="space-y-5">
                   <div>
                     <label
                       htmlFor="order-number"
-                      className="mb-2 block text-sm font-semibold text-[#29232D]"
+                      className="mb-2 block text-[13px] font-semibold text-[#173B4A]"
                     >
-                      Order number
+                      Order Number
                     </label>
+
                     <div className="relative">
-                      <Search
+                      <Package
                         size={18}
-                        className="pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 text-[#8B8290]"
+                        strokeWidth={1.8}
+                        className="pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 text-[#8BA2AD]"
                       />
+
                       <input
                         id="order-number"
                         type="text"
                         required
                         value={orderNumber}
-                        onChange={(e) => setOrderNumber(e.target.value)}
+                        onChange={(event) => setOrderNumber(event.target.value)}
                         placeholder="e.g. ORD-1042"
                         autoComplete="off"
-                        className="focus:border-primary h-13 w-full rounded-xl border border-[#E5DCE8] bg-white pr-4 pl-11 text-sm text-[#29232D] transition-colors outline-none placeholder:text-[#A19AA5]"
+                        className="focus:border-primary focus:ring-primary/10 h-12 w-full rounded-xl border border-[#DCE8ED] bg-[#FAFCFD] pr-4 pl-11 text-[13px] text-[#173B4A] transition-all duration-200 outline-none placeholder:text-[#9AAFB8] focus:bg-white focus:ring-2"
                       />
                     </div>
                   </div>
@@ -151,24 +193,27 @@ export default function OrderTracker() {
                   <div>
                     <label
                       htmlFor="billing-email"
-                      className="mb-2 block text-sm font-semibold text-[#29232D]"
+                      className="mb-2 block text-[13px] font-semibold text-[#173B4A]"
                     >
-                      Billing email
+                      Billing Email
                     </label>
+
                     <div className="relative">
                       <Mail
                         size={18}
-                        className="pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 text-[#8B8290]"
+                        strokeWidth={1.8}
+                        className="pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 text-[#8BA2AD]"
                       />
+
                       <input
                         id="billing-email"
                         type="email"
                         required
                         value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder="you@lab.com"
+                        onChange={(event) => setEmail(event.target.value)}
+                        placeholder="you@example.com"
                         autoComplete="email"
-                        className="focus:border-primary h-13 w-full rounded-xl border border-[#E5DCE8] bg-white pr-4 pl-11 text-sm text-[#29232D] transition-colors outline-none placeholder:text-[#A19AA5]"
+                        className="focus:border-primary focus:ring-primary/10 h-12 w-full rounded-xl border border-[#DCE8ED] bg-[#FAFCFD] pr-4 pl-11 text-[13px] text-[#173B4A] transition-all duration-200 outline-none placeholder:text-[#9AAFB8] focus:bg-white focus:ring-2"
                       />
                     </div>
                   </div>
@@ -177,178 +222,328 @@ export default function OrderTracker() {
                 <button
                   type="submit"
                   disabled={phase === "loading"}
-                  className="bg-primary mt-5 flex h-13 w-full items-center justify-center gap-3 rounded-full px-6 text-sm font-bold text-white transition-colors hover:bg-[#35143E] disabled:cursor-not-allowed disabled:opacity-60"
+                  className="group relative mt-6 flex h-12 w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-[linear-gradient(110deg,var(--color-primary),var(--color-secondary))] px-6 text-[13px] font-semibold text-white shadow-md transition-all duration-500 ease-out hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
                 >
-                  {phase === "loading"
-                    ? "Finding your order..."
-                    : "Track my order"}
-                  <ArrowRight size={18} />
+                  <span className="pointer-events-none absolute inset-0 bg-[linear-gradient(110deg,var(--color-primary-dark),var(--color-primary))] opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100 group-disabled:opacity-0" />
+
+                  {phase === "loading" ? (
+                    <span className="relative z-10 flex items-center gap-2">
+                      <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+                      Finding Your Order...
+                    </span>
+                  ) : (
+                    <>
+                      <span className="relative z-10">Track My Order</span>
+
+                      <ArrowRight
+                        size={17}
+                        className="relative z-10 transition-transform duration-300 group-hover:translate-x-1"
+                      />
+                    </>
+                  )}
                 </button>
 
                 {phase === "missing" && (
                   <p
                     role="alert"
-                    className="mt-4 rounded-xl bg-red-50 px-4 py-3 text-sm text-red-600"
+                    className="mt-4 rounded-xl border border-red-100 bg-red-50 px-4 py-3 text-[12px] leading-6 text-red-600"
                   >
-                    No matching demo order was found. Check both details and try
-                    again.
+                    No matching demo order was found. Please check your order
+                    number and email address.
                   </p>
                 )}
 
-                <p className="mt-5 flex items-start gap-2 text-xs leading-5 text-[#777079]">
-                  <LockKeyhole size={15} className="mt-0.5 shrink-0" />
-                  We only show an order when both details match.
-                  <Link
-                    href="/account"
-                    className="text-primary font-semibold underline"
-                  >
-                    See your orders
-                  </Link>
-                </p>
+                <div className="mt-6 flex items-start gap-2 border-t border-[#EDF2F5] pt-5">
+                  <LockKeyhole
+                    size={15}
+                    className="mt-0.5 shrink-0 text-[#8299A4]"
+                  />
+
+                  <p className="text-[11px] leading-5 text-[#8299A4]">
+                    Your order details are only displayed when the order number
+                    and billing email match.
+                  </p>
+                </div>
               </form>
             </div>
 
-            <p className="mt-4 text-xs leading-6 text-[#817586]">
-              Demo only: Try <strong>ORD-1042</strong> with{" "}
-              <strong>demo@yourshop.com</strong>.
+            <div className="rounded-[20px] border border-[#D9EAF0] bg-[#EDF7FA] p-5 sm:p-6">
+              <div className="flex items-start gap-3">
+                <ShieldCheck
+                  size={20}
+                  className="text-primary mt-0.5 shrink-0"
+                  strokeWidth={1.8}
+                />
+
+                <div>
+                  <h3 className="font-heading text-primary text-[14px] font-bold">
+                    Need Help With Your Order?
+                  </h3>
+
+                  <p className="mt-2 text-[12px] leading-6 text-[#617987]">
+                    If you have questions about your shipment, our support team
+                    can help.
+                  </p>
+
+                  <Link
+                    href="/contact"
+                    className="text-primary hover:text-secondary mt-3 inline-flex items-center gap-2 text-[12px] font-semibold transition-colors"
+                  >
+                    Contact Support
+                    <ArrowUpRight size={15} />
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            <p className="px-1 text-[11px] leading-6 text-[#8299A4]">
+              Demo tracking: Try{" "}
+              <strong className="text-primary">ORD-1042</strong> with{" "}
+              <strong className="text-primary">demo@yourshop.com</strong>.
             </p>
           </div>
 
-          <div className="mx-auto w-full max-w-[380px]">
-            <div className="relative overflow-hidden rounded-[48px] border-2 border-[#A577B0] bg-[#FBFCFF] p-2.5 shadow-[0_25px_70px_rgba(85,32,95,0.1)]">
-              <div className="flex min-h-130 flex-col overflow-hidden rounded-[39px] border border-[#E4DEEB] bg-white">
-                <div className="bg-[#F2E8F5] px-6 pt-4 pb-6">
-                  <div className="mx-auto mb-5 h-5 w-23 rounded-full border border-[#E6D9EA] bg-white/60" />
+          <div className="overflow-hidden rounded-[24px] border border-[#DFEAF0] bg-white shadow-[0_12px_45px_rgba(7,59,104,0.04)]">
+            <div className="flex items-center justify-between gap-4 border-b border-[#EDF2F5] px-5 py-5 sm:px-7 sm:py-6">
+              <div>
+                <p className="text-secondary text-[10px] font-bold tracking-[0.15em] uppercase">
+                  Shipment Status
+                </p>
 
-                  <div className="relative h-12 w-45">
-                    <Image
-                      src="/assets/spectrum-logo.png"
-                      alt="Spectrum Biosciences"
-                      fill
-                      priority
-                      sizes="190px"
-                      className="object-contain object-left"
+                <h2 className="font-heading text-primary mt-1 text-[19px] font-bold tracking-[-0.03em] sm:text-[21px]">
+                  Tracking Details
+                </h2>
+              </div>
+
+              <span className="text-primary flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#EAF6F9]">
+                <Truck size={20} strokeWidth={1.8} />
+              </span>
+            </div>
+
+            <div className="p-5 sm:p-7">
+              {phase === "idle" && (
+                <div className="flex min-h-[420px] flex-col items-center justify-center text-center">
+                  <div className="flex h-20 w-20 items-center justify-center rounded-[24px] border border-[#DCE8ED] bg-[#F1F8FA]">
+                    <Package
+                      size={36}
+                      strokeWidth={1.3}
+                      className="text-primary"
                     />
                   </div>
 
-                  <p className="text-primary mt-3 flex items-center gap-2 text-xs font-medium">
-                    Your order, connected.
-                    <LockKeyhole size={13} />
+                  <h3 className="font-heading text-primary mt-6 text-[22px] font-bold tracking-[-0.03em]">
+                    Ready to Track
+                  </h3>
+
+                  <p className="mt-3 max-w-[290px] text-[13px] leading-7 text-[#718A96]">
+                    Enter your order details to see its current status and
+                    delivery progress.
+                  </p>
+
+                  <div className="mt-8 flex items-center gap-3 rounded-full border border-[#DCE8ED] bg-[#F7FBFC] px-4 py-2.5">
+                    <LockKeyhole size={14} className="text-secondary" />
+
+                    <span className="text-[11px] font-medium text-[#718A96]">
+                      Secure Order Lookup
+                    </span>
+                  </div>
+                </div>
+              )}
+
+              {phase === "loading" && (
+                <div className="flex min-h-[420px] flex-col items-center justify-center text-center">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#EDF7FA]">
+                    <div className="border-t-primary h-8 w-8 animate-spin rounded-full border-[3px] border-[#D6EAF0]" />
+                  </div>
+
+                  <h3 className="font-heading text-primary mt-6 text-[20px] font-bold">
+                    Looking Up Your Order
+                  </h3>
+
+                  <p className="mt-2 text-[13px] text-[#718A96]">
+                    Checking the available tracking details.
                   </p>
                 </div>
+              )}
 
-                <div className="flex flex-1 flex-col px-5 py-8">
-                  {phase === "idle" && (
-                    <div className="flex flex-1 flex-col items-center justify-center text-center">
-                      <span className="bg-primary flex size-15 items-center justify-center rounded-full text-white">
-                        <Search size={24} />
+              {phase === "missing" && (
+                <div className="flex min-h-[420px] flex-col items-center justify-center text-center">
+                  <div className="text-primary flex h-20 w-20 items-center justify-center rounded-[24px] bg-[#F1F8FA]">
+                    <Search size={32} strokeWidth={1.5} />
+                  </div>
+
+                  <h3 className="font-heading text-primary mt-6 text-[22px] font-bold">
+                    Order Not Found
+                  </h3>
+
+                  <p className="mt-3 max-w-[300px] text-[13px] leading-7 text-[#718A96]">
+                    We couldn't find a matching demo order. Please double-check
+                    your details and try again.
+                  </p>
+                </div>
+              )}
+
+              {phase === "found" && order && (
+                <div>
+                  <div className="rounded-[18px] border border-[#DCE8ED] bg-[#F5FAFC] p-5">
+                    <div className="flex flex-wrap items-center justify-between gap-3">
+                      <span className="text-[11px] font-medium text-[#718A96]">
+                        Order #{order.id}
                       </span>
-                      <h3 className="font-heading mt-5 text-2xl font-bold text-[#29232D]">
-                        Ready to track
-                      </h3>
-                      <p className="mt-3 max-w-[230px] text-sm leading-7 text-[#687087]">
-                        Enter your order number and billing email to see your
-                        order here.
-                      </p>
-                    </div>
-                  )}
 
-                  {phase === "loading" && (
-                    <div className="flex flex-1 flex-col items-center justify-center text-center">
-                      <div className="border-t-primary size-12 animate-spin rounded-full border-[3px] border-[#EEDCF1]" />
-                      <p className="text-primary mt-5 text-sm font-semibold">
-                        Looking up your order...
-                      </p>
-                    </div>
-                  )}
-
-                  {phase === "missing" && (
-                    <div className="flex flex-1 flex-col items-center justify-center text-center">
-                      <span className="text-primary flex size-15 items-center justify-center rounded-full bg-[#F9EDF9]">
-                        <Search size={24} />
+                      <span className="inline-flex items-center gap-1.5 rounded-full border border-[#CBE5DD] bg-[#EAF8F1] px-3 py-1.5 text-[10px] font-semibold text-emerald-700">
+                        <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                        Demo Order
                       </span>
-                      <h3 className="font-heading mt-5 text-xl font-bold text-[#29232D]">
-                        Order not found
-                      </h3>
-                      <p className="mt-3 text-sm leading-7 text-[#687087]">
-                        Please check your order number and billing email.
-                      </p>
                     </div>
-                  )}
 
-                  {phase === "found" && order && (
-                    <div>
-                      <div className="flex items-center justify-between gap-3">
-                        <span className="text-xs font-semibold text-[#817586]">
-                          Order #{order.id}
+                    <h3 className="font-heading text-primary mt-4 text-[25px] font-bold tracking-[-0.035em] sm:text-[29px]">
+                      {statusLabels[order.status]}
+                    </h3>
+
+                    <p className="mt-2 text-[12px] text-[#718A96]">
+                      {order.carrier} · {order.eta}
+                    </p>
+
+                    <div className="mt-6">
+                      <div className="mb-2 flex items-center justify-between">
+                        <span className="text-[11px] font-medium text-[#718A96]">
+                          Delivery Progress
                         </span>
-                        <span className="rounded-full bg-[#EAF8F1] px-3 py-1 text-[10px] font-bold text-emerald-700">
-                          Demo order
+
+                        <span className="text-primary text-[11px] font-bold">
+                          {Math.round(progress)}%
                         </span>
                       </div>
 
-                      <h3 className="font-heading text-primary mt-3 text-2xl font-bold">
-                        {statusLabels[order.status]}
-                      </h3>
-                      <p className="mt-2 text-sm text-[#817586]">
-                        {order.carrier} · {order.eta}
-                      </p>
+                      <div
+                        role="progressbar"
+                        aria-label="Order delivery progress"
+                        aria-valuenow={progress}
+                        aria-valuemin={0}
+                        aria-valuemax={100}
+                        className="h-2 overflow-hidden rounded-full bg-[#DCE8ED]"
+                      >
+                        <div
+                          className="h-full rounded-full bg-[linear-gradient(90deg,var(--color-primary),var(--color-secondary))] transition-[width] duration-700 ease-out"
+                          style={{ width: `${progress}%` }}
+                        />
+                      </div>
+                    </div>
+                  </div>
 
-                      <div className="mt-7 space-y-0">
-                        {STEPS.map((step, index) => {
-                          const Icon = step.icon;
-                          const completed = index <= currentStep;
-                          const last = index === STEPS.length - 1;
+                  <div className="mt-8">
+                    <div className="mb-6 flex items-center justify-between">
+                      <h4 className="font-heading text-primary text-[16px] font-bold">
+                        Shipment Journey
+                      </h4>
 
-                          return (
-                            <div key={step.key} className="flex gap-4">
-                              <div className="flex flex-col items-center">
-                                <span
-                                  className={`flex size-9 shrink-0 items-center justify-center rounded-full border ${
-                                    completed
-                                      ? "border-primary bg-primary text-white"
-                                      : "border-[#E9E1E9] bg-white text-[#B0A4B3]"
+                      <span className="text-[11px] text-[#8BA0AA]">
+                        {currentStep + 1} of {STEPS.length}
+                      </span>
+                    </div>
+
+                    <ol className="space-y-0">
+                      {STEPS.map((step, index) => {
+                        const Icon = step.icon;
+                        const completed = index < currentStep;
+                        const current = index === currentStep;
+                        const reached = index <= currentStep;
+                        const last = index === STEPS.length - 1;
+
+                        return (
+                          <li key={step.key} className="flex gap-4">
+                            <div className="flex flex-col items-center">
+                              <span
+                                className={`relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border transition-colors ${
+                                  reached
+                                    ? "border-primary bg-primary text-white"
+                                    : "border-[#DCE8ED] bg-[#F7FAFC] text-[#A1B3BB]"
+                                }`}
+                              >
+                                <Icon size={18} strokeWidth={1.8} />
+                              </span>
+
+                              {!last && (
+                                <div
+                                  className={`h-14 w-[2px] ${
+                                    completed ? "bg-primary" : "bg-[#E2EBEF]"
                                   }`}
-                                >
-                                  <Icon size={16} />
-                                </span>
-                                {!last && (
-                                  <div
-                                    className={`h-10 w-0.5 ${index < currentStep ? "bg-primary" : "bg-[#E9E1E9]"}`}
-                                  />
-                                )}
-                              </div>
-                              <div className="pt-2">
+                                />
+                              )}
+                            </div>
+
+                            <div className="min-w-0 flex-1 pt-1.5">
+                              <div className="flex flex-wrap items-center gap-2">
                                 <p
-                                  className={`text-sm font-semibold ${completed ? "text-[#29232D]" : "text-[#A49AA7]"}`}
+                                  className={`text-[13px] font-semibold sm:text-[14px] ${
+                                    reached ? "text-primary" : "text-[#98ABB5]"
+                                  }`}
                                 >
                                   {step.label}
                                 </p>
-                                {index === currentStep && (
-                                  <p className="text-primary mt-1 text-xs">
-                                    Current status
-                                  </p>
+
+                                {current && (
+                                  <span className="text-secondary rounded-full bg-[#E7F5F8] px-2.5 py-1 text-[9px] font-bold">
+                                    {last ? "Completed" : "Current"}
+                                  </span>
                                 )}
                               </div>
-                            </div>
-                          );
-                        })}
-                      </div>
 
-                      <div className="mt-5 rounded-xl bg-[#FAF7FA] p-4">
-                        <p className="text-primary mb-2 text-xs font-bold">
-                          Order items
-                        </p>
-                        {order.items.map((item) => (
-                          <p key={item.name} className="text-sm text-[#777079]">
-                            {item.qty} × {item.name}
-                          </p>
-                        ))}
-                      </div>
+                              <p
+                                className={`mt-1 text-[11px] leading-5 ${
+                                  reached ? "text-[#718A96]" : "text-[#ACBBC2]"
+                                }`}
+                              >
+                                {step.description}
+                              </p>
+                            </div>
+                          </li>
+                        );
+                      })}
+                    </ol>
+                  </div>
+
+                  <div className="mt-7 rounded-[18px] border border-[#DFEAF0] bg-[#F8FBFC] p-4 sm:p-5">
+                    <div className="mb-4 flex items-center gap-2">
+                      <Package size={17} className="text-secondary" />
+
+                      <h4 className="text-primary text-[13px] font-bold">
+                        Order Items
+                      </h4>
                     </div>
-                  )}
+
+                    <div className="space-y-3">
+                      {order.items.map((item) => (
+                        <div
+                          key={item.name}
+                          className="flex items-center justify-between gap-3"
+                        >
+                          <span className="text-[12px] text-[#617987]">
+                            {item.name}
+                          </span>
+
+                          <span className="text-primary rounded-lg border border-[#DCE8ED] bg-white px-2.5 py-1 text-[11px] font-semibold">
+                            Qty: {item.qty}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="mt-5 flex items-start gap-2">
+                    <Clock3
+                      size={15}
+                      className="text-secondary mt-0.5 shrink-0"
+                    />
+
+                    <p className="text-[11px] leading-5 text-[#8299A4]">
+                      This is a demonstration order. Shipping stages reflect
+                      sample data, not live carrier updates.
+                    </p>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
         </div>

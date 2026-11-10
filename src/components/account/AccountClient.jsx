@@ -86,10 +86,24 @@ function Button({ children, busy = false }) {
     <button
       type="submit"
       disabled={busy}
-      className="bg-primary inline-flex h-12 items-center justify-center gap-2 rounded-full px-7 text-[14px] font-semibold text-white hover:bg-[#35143E] disabled:opacity-50"
+      className="group relative inline-flex h-12 items-center justify-center gap-2 overflow-hidden rounded-full bg-[linear-gradient(110deg,var(--color-primary),var(--color-secondary))] px-7 text-[14px] font-semibold text-white shadow-md transition-all duration-500 ease-out hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0"
     >
-      {busy ? "Please wait..." : children}
-      <ArrowUpRight size={17} />
+      <span className="pointer-events-none absolute inset-0 bg-[linear-gradient(110deg,var(--color-primary-dark),var(--color-primary))] opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100 group-disabled:opacity-0" />
+
+      <span className="relative z-10">
+        {busy ? "Please wait..." : children}
+      </span>
+
+      {!busy && (
+        <ArrowUpRight
+          size={17}
+          className="relative z-10 transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+        />
+      )}
+
+      {busy && (
+        <span className="relative z-10 h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+      )}
     </button>
   );
 }
@@ -126,10 +140,16 @@ function Empty({ icon: Icon, title, description, href, action }) {
       {href && (
         <Link
           href={href}
-          className="bg-primary mt-5 inline-flex items-center gap-2 rounded-full px-6 py-3 text-[14px] font-semibold text-white"
+          className="group relative mt-5 inline-flex h-11 items-center justify-center gap-2 overflow-hidden rounded-full bg-[linear-gradient(110deg,var(--color-primary),var(--color-secondary))] px-6 text-[14px] font-semibold text-white shadow-md transition-all duration-500 ease-out hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.98]"
         >
-          {action}
-          <ArrowUpRight size={16} />
+          <span className="pointer-events-none absolute inset-0 bg-[linear-gradient(110deg,var(--color-primary-dark),var(--color-primary))] opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100" />
+
+          <span className="relative z-10">{action}</span>
+
+          <ArrowUpRight
+            size={16}
+            className="relative z-10 transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+          />
         </Link>
       )}
     </div>
@@ -202,10 +222,7 @@ function AuthForms({ section, onSuccess }) {
   return (
     <div className="grid gap-6 py-10 lg:grid-cols-2 lg:gap-8 lg:py-14">
       <section className="rounded-[22px] border border-[#ECE2ED] bg-white p-6 sm:p-9">
-        <span className="text-secondary text-[13px] font-bold tracking-widest uppercase">
-          Existing record
-        </span>
-        <h2 className="font-heading text-primary mt-3 text-[32px] font-bold">
+        <h2 className="font-heading text-primary text-[32px] font-bold">
           Welcome back.
         </h2>
         <p className="mt-2 text-[15px] text-[#817586]">
@@ -239,11 +256,8 @@ function AuthForms({ section, onSuccess }) {
           </div>
         </form>
       </section>
-      <section className="rounded-[22px] border border-[#ECE2ED] bg-[#FCF9FD] p-6 sm:p-9">
-        <span className="text-secondary text-[13px] font-bold tracking-widest uppercase">
-          New to Spectrum?
-        </span>
-        <h2 className="font-heading text-primary mt-3 text-[32px] font-bold">
+      <section className="rounded-[22px] border border-[#ECE2ED] bg-[#E3F2FF] p-6 sm:p-9">
+        <h2 className="font-heading text-primary text-[32px] font-bold">
           Open an Account.
         </h2>
         <p className="mt-2 text-[15px] leading-7 text-[#817586]">
@@ -705,17 +719,6 @@ export default function AccountClient({ section = "dashboard" }) {
     <main className="min-h-screen bg-white">
       <header className="border-b border-[#EEE6EF] px-5 py-6 sm:px-8 md:py-12">
         <div className="mx-auto max-w-7xl">
-          <nav
-            className="mb-5 flex items-center gap-2 text-[13px] text-[#817586]"
-            aria-label="Breadcrumb"
-          >
-            <Link href="/">Home</Link>
-            <ChevronRight size={14} />
-            <span className="text-primary font-semibold">My Account</span>
-          </nav>
-          <p className="text-secondary mb-4 flex items-center gap-2 font-sans text-xs font-bold tracking-[0.15em] uppercase">
-            Spectrum Biosciences
-          </p>
           <h1 className="section-heading">
             {user && section !== "dashboard" ? active.label : "My Account"}
             <span className="text-secondary">.</span>
@@ -768,7 +771,7 @@ export default function AccountClient({ section = "dashboard" }) {
                     href={
                       slug === "dashboard" ? "/account" : `/account/${slug}`
                     }
-                    className={`flex items-center gap-2 rounded-xl px-3 py-3 text-[14px] font-semibold ${active.slug === slug ? "bg-primary text-white" : "hover:text-primary text-[#635367] hover:bg-[#F8EFF9]"}`}
+                    className={`flex items-center gap-2 rounded-xl px-3 py-3 text-[14px] font-semibold ${active.slug === slug ? "bg-primary text-white" : "hover:text-primary text-[#635367] hover:bg-[#E3F2FF]"}`}
                   >
                     <Icon size={18} className="shrink-0" />
                     {label}
@@ -786,10 +789,7 @@ export default function AccountClient({ section = "dashboard" }) {
             <div className="min-w-0 space-y-5">
               {active.slug === "dashboard" && (
                 <>
-                  <div className="rounded-[22px] bg-[linear-gradient(110deg,#35143E,#55205F)] p-6 text-white sm:p-8">
-                    <p className="text-[13px] font-bold tracking-widest text-[#F6B17D] uppercase">
-                      Account overview
-                    </p>
+                  <div className="rounded-[22px] bg-[linear-gradient(110deg,var(--color-primary),var(--color-secondary))] p-6 text-white sm:p-8">
                     <h2 className="font-heading mt-3 text-[34px] font-bold">
                       Welcome, {user.first_name}.
                     </h2>

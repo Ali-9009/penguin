@@ -26,7 +26,8 @@ export default function CartSuggestions() {
           product.variants?.[product.defaultVariant] || product.variants?.[0];
         if (!variant) return null;
         const available =
-          variant.inStock !== false && (variant.stock == null || variant.stock > 0);
+          variant.inStock !== false &&
+          (variant.stock == null || variant.stock > 0);
         return (
           <article
             key={product.id}
@@ -40,7 +41,7 @@ export default function CartSuggestions() {
                     alt=""
                     fill
                     sizes="48px"
-                    className="object-cover rounded-xl"
+                    className="rounded-xl object-cover"
                   />
                 )}
               </div>
@@ -58,9 +59,13 @@ export default function CartSuggestions() {
               type="button"
               disabled={!available}
               onClick={() => addItem(product, variant, 1)}
-              className="mt-2 flex h-8 w-full items-center justify-center gap-1.5 rounded-full bg-[#0b1b3f] text-[11px] font-semibold text-white transition-colors hover:bg-[#2463a9] disabled:cursor-not-allowed disabled:opacity-40"
+              className="group relative mt-2 flex h-9 w-full items-center justify-center overflow-hidden rounded-full bg-[linear-gradient(110deg,var(--color-primary),var(--color-secondary))] px-4 text-[12px] font-semibold text-white shadow-md transition-all duration-500 ease-out hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:translate-y-0 sm:h-10"
             >
-              <Plus size={13} /> {available ? "Add" : "Unavailable"}
+              <span className="absolute inset-0 bg-[linear-gradient(110deg,var(--color-primary-dark),var(--color-primary))] opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100 group-disabled:opacity-0" />
+
+              <span className="relative z-10">
+                {available ? "Add to Cart" : "Unavailable"}
+              </span>
             </button>
           </article>
         );

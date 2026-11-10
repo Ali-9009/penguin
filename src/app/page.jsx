@@ -1,7 +1,8 @@
-import Bestsellers from "@/components/Bestsellers";
+// import Bestsellers from "@/components/Bestsellers";
+import CardSlider from "@/components/CardSlider";
 import CTASection from "@/components/CTASection";
 import Faqs from "@/components/Faqs";
-import Hero from "@/components/Hero";
+// import Hero from "@/components/Hero";
 import HowItWorks from "@/components/HowItWorks";
 import ProductGrid from "@/components/ProductGrid";
 import ProductVerification from "@/components/ProductVerification";
@@ -176,14 +177,7 @@ export default function HomePage() {
       <ProductGrid />
       <WhyChooseUs />
 
-      <HowItWorks />
-      <Bestsellers />
-
-      <ProductVerification />
-
-      <ResearchShowcase />
-
-      <section className="relative overflow-hidden bg-white px-4 py-12 sm:px-6 md:py-16 lg:px-8">
+      <section className="relative overflow-hidden px-4 py-12 sm:px-6 md:py-16 lg:px-8">
         <div className="mx-auto grid w-full max-w-7xl items-center gap-14 lg:grid-cols-2 lg:gap-20">
           <div className="relative mx-auto w-full max-w-[540px] px-5 pt-7 pb-10 sm:px-10 sm:pt-10 sm:pb-14">
             <div className="relative aspect-[1.12/1] overflow-hidden rounded-[26px] bg-[#E8F7FA] shadow-[0_20px_55px_rgba(7,85,143,0.12)] sm:rounded-[34px]">
@@ -203,20 +197,6 @@ export default function HomePage() {
                 <br />
                 Focused
               </span>
-            </div>
-
-            <div className="absolute right-0 bottom-0 z-10 w-[175px] rounded-[20px] border border-[#D5EBEF] bg-white p-4 shadow-[0_15px_45px_rgba(7,85,143,0.13)] sm:w-[220px] sm:rounded-[24px] sm:p-5">
-              <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-[#E4F8FA] text-[#07558F]">
-                <FlaskConical size={21} />
-              </div>
-
-              <p className="font-heading text-[15px] font-bold text-[#073B68] sm:text-[19px]">
-                Made for Research
-              </p>
-
-              <p className="mt-1.5 text-[11px] leading-[1.6] text-[#718792] sm:text-[13px]">
-                Explore our collection of research-focused peptides.
-              </p>
             </div>
           </div>
 
@@ -245,6 +225,14 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <CardSlider />
+
+      <ProductVerification />
+
+      <HowItWorks />
+
+      <ResearchShowcase />
 
       <Faqs />
       <USShippingCoverage />
