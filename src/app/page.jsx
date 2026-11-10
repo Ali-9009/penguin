@@ -178,7 +178,31 @@ export default function HomePage() {
       <WhyChooseUs />
 
       <section className="relative overflow-hidden px-4 py-12 sm:px-6 md:py-16 lg:px-8">
-        <div className="mx-auto grid w-full max-w-7xl items-center gap-14 lg:grid-cols-2 lg:gap-20">
+        <div className="mx-auto grid w-full max-w-7xl items-center lg:grid-cols-2 lg:gap-10 gap-10">
+          <div className="">
+            <span className="mb-5 inline-flex rounded-full border border-[#D7EAF0] bg-[#F2FAFC] px-4 py-2 text-[10px] font-bold tracking-[0.14em] text-[#07558F] uppercase">
+              Discover Penguin Peptides
+            </span>
+
+            <h2 className="section-heading">
+              Built for
+              <br />
+              <span className="text-[#009CA9]">Scientific Discovery.</span>
+            </h2>
+
+            <p className="text-md mt-6 font-sans leading-[1.9] text-[#607F8B]">
+              At Penguin Peptides, we focus on providing a diverse selection of
+              research peptides for scientific and laboratory applications.
+              Explore our collection of compounds, available in different
+              strengths and formulations to support your research needs.
+            </p>
+
+            <Link href="/shop" className="btn-gradient mt-7">
+              Explore Collection
+              <ArrowUpRight size={18} />
+            </Link>
+          </div>
+
           <div className="relative mx-auto w-full max-w-[540px] px-5 pt-7 pb-10 sm:px-10 sm:pt-10 sm:pb-14">
             <div className="relative aspect-[1.12/1] overflow-hidden rounded-[26px] bg-[#E8F7FA] shadow-[0_20px_55px_rgba(7,85,143,0.12)] sm:rounded-[34px]">
               <Image
@@ -198,30 +222,6 @@ export default function HomePage() {
                 Focused
               </span>
             </div>
-          </div>
-
-          <div className="max-w-[570px]">
-            <span className="mb-5 inline-flex rounded-full border border-[#D7EAF0] bg-[#F2FAFC] px-4 py-2 text-[10px] font-bold tracking-[0.14em] text-[#07558F] uppercase">
-              Discover Penguin Peptides
-            </span>
-
-            <h2 className="section-heading">
-              Built for
-              <br />
-              <span className="text-[#009CA9]">Scientific Discovery.</span>
-            </h2>
-
-            <p className="text-md mt-6 max-w-[510px] font-sans leading-[1.9] text-[#607F8B]">
-              At Penguin Peptides, we focus on providing a diverse selection of
-              research peptides for scientific and laboratory applications.
-              Explore our collection of compounds, available in different
-              strengths and formulations to support your research needs.
-            </p>
-
-            <Link href="/shop" className="btn-gradient mt-7">
-              Explore Collection
-              <ArrowUpRight size={18} />
-            </Link>
           </div>
         </div>
       </section>
