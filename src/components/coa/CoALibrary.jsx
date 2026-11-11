@@ -154,7 +154,7 @@ function CoACard({ product }) {
             href={pdfUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="group/btn relative flex h-9 w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-[linear-gradient(110deg,var(--color-primary),var(--color-secondary))] px-2 text-[11px] font-semibold text-white shadow-md transition-all duration-500 ease-out hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.98] sm:h-11 sm:px-4 sm:text-sm"
+            className="group/btn relative flex h-9 w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-[linear-gradient(110deg,var(--color-primary),var(--color-secondary))] px-2 text-sm font-semibold text-white shadow-md transition-all duration-500 ease-out hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.98] sm:h-11 sm:px-4"
           >
             <span className="pointer-events-none absolute inset-0 bg-[linear-gradient(110deg,var(--color-primary-dark),var(--color-primary))] opacity-0 transition-opacity duration-500 ease-in-out group-hover/btn:opacity-100" />
 

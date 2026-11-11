@@ -328,11 +328,11 @@ function Assurance({ product }) {
               </span>
 
               <div className="min-w-0 flex-1">
-                <h3 className="font-heading text-primary text-[11px] leading-5 font-bold sm:text-[12px]">
+                <h3 className="font-heading text-primary text-xs leading-5 font-semibold sm:text-sm">
                   {row.title}
                 </h3>
 
-                <p className="mt-0.5 text-[10px] leading-[1.5] text-[#68818D] sm:text-[11px]">
+                <p className="mt-0.5 text-[11px] leading-[1.5] text-[#68818D] sm:text-xs">
                   {row.description}
                 </p>
               </div>

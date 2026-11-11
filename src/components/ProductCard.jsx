@@ -222,22 +222,26 @@ export default function ProductCard({ product, onQuickView }) {
               onClick={handleAddToCart}
               disabled={!canAdd || adding}
               aria-label={`Add ${product.name} to cart`}
-              className="btn-gradient mt-3 !h-10 w-full !gap-2 !px-2 !text-[11px] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0 sm:!h-11 sm:!text-[13px]"
+              className="group relative mt-3 flex h-10 w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-[linear-gradient(110deg,var(--color-primary),var(--color-secondary))] px-2 text-sm font-semibold text-white shadow-md transition-all duration-500 ease-out hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0 disabled:hover:shadow-md sm:h-11"
             >
+              <span className="pointer-events-none absolute inset-0 bg-[linear-gradient(110deg,var(--color-primary-dark),var(--color-primary))] opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100 group-disabled:opacity-0" />
+
               {adding ? (
-                <>
+                <span className="relative z-10 flex items-center gap-2">
                   <span
                     className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white"
                     aria-hidden="true"
                   />
                   Adding...
-                </>
-              ) : !inStock ? (
-                "Out of Stock"
-              ) : !hasPrice ? (
-                "Unavailable"
+                </span>
               ) : (
-                <>Add to Cart</>
+                <span className="relative z-10">
+                  {!inStock
+                    ? "Out of Stock"
+                    : !hasPrice
+                      ? "Unavailable"
+                      : "Add to Cart"}
+                </span>
               )}
             </button>
           </div>

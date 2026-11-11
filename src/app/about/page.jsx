@@ -168,7 +168,7 @@ export default function AboutUsPage() {
         <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-2 lg:gap-20">
           {/* LEFT CONTENT */}
 
-          <div>
+          <div className="order-1 lg:order-2">
             <h2 className="section-heading max-w-[570px]">
               Built for{" "}
               <span className="text-secondary-dark">Curious Minds.</span>
@@ -208,7 +208,7 @@ export default function AboutUsPage() {
 
           {/* RIGHT VISUAL */}
 
-          <div className="relative">
+          <div className="relative order-2 lg:order-1">
             <div className="relative min-h-[420px] overflow-hidden rounded-3xl bg-linear-to-br from-[#07558F] via-[#087BA5] to-[#04C1CA] p-6 sm:p-9">
               {/* DECORATIVE CIRCLES */}
 
@@ -257,17 +257,17 @@ export default function AboutUsPage() {
 
       <section className="bg-white px-4 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-7xl items-center gap-8 lg:grid-cols-2 lg:gap-14">
-          <div className="relative min-h-90 overflow-hidden rounded-[22px] bg-[linear-gradient(135deg,#FFFFFF_0%,#E8F7FA_100%)] sm:min-h-130 lg:min-h-[480px]">
+          <div className="relative order-2 min-h-90 overflow-hidden rounded-[22px] bg-[linear-gradient(135deg,#FFFFFF_0%,#E8F7FA_100%)] sm:min-h-130 lg:order-2 lg:min-h-[480px]">
             <Image
               src="/assets/about-penguin.png"
               alt="Penguin Peptides research products"
               fill
-              sizes="(max-width: 767px) 100vw, 50vw"
+              sizes="(max-width: 1023px) 100vw, 50vw"
               className="object-cover"
             />
           </div>
 
-          <div className="min-w-0">
+          <div className="order-1 min-w-0 lg:order-1">
             <h2 className="font-heading text-primary text-[32px] leading-[1.15] font-bold tracking-[-0.04em] sm:text-[42px] lg:text-[48px]">
               About Penguin Peptides
             </h2>
@@ -287,7 +287,7 @@ export default function AboutUsPage() {
 
       <section className="bg-white px-4 py-12 sm:px-6 md:py-16 lg:px-8">
         <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-14">
-          <div className="order-2 min-w-0 lg:order-1">
+          <div className="order-1 min-w-0 lg:order-2">
             <h2 className="font-heading text-primary text-[32px] leading-[1.15] font-bold tracking-[-0.04em] sm:text-[42px] lg:text-[48px]">
               Trusted Peptides, Secure Ordering, Exceptional Service
             </h2>
@@ -310,7 +310,7 @@ export default function AboutUsPage() {
             </p>
           </div>
 
-          <div className="relative order-1 min-h-90 overflow-hidden rounded-[22px] bg-[linear-gradient(135deg,#FFFFFF_0%,#E8F7FA_100%)] sm:min-h-130 lg:order-2 lg:min-h-[480px]">
+          <div className="relative order-2 min-h-90 overflow-hidden rounded-[22px] bg-[linear-gradient(135deg,#FFFFFF_0%,#E8F7FA_100%)] sm:min-h-130 lg:order-1 lg:min-h-[480px]">
             <Image
               src="/assets/about-penguin-1.png"
               alt="Penguin Peptides research products"
