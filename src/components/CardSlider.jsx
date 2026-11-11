@@ -154,7 +154,7 @@ function ProductCard({ product }) {
 
       <div className="flex flex-1 flex-col p-3 sm:p-4 lg:p-5">
         <Link href={productUrl} className="block">
-          <h3 className="font-heading line-clamp-2 text-[15px] leading-[1.3] font-bold tracking-[-0.035em] text-[#102E38] transition-colors duration-300 hover:text-[#07558F] sm:text-[18px] lg:text-[20px]">
+          <h3 className="font-heading line-clamp-2 text-[15px] leading-[1.3] font-bold tracking-[-0.035em] text-[#102E38] transition-colors duration-300 hover:text-[#07558F] sm:text-[18px]">
             {product.name}
           </h3>
         </Link>
@@ -346,9 +346,9 @@ export default function CardSlider({ currentProduct = null }) {
     <section
       id="bestsellers"
       aria-labelledby="bestsellers-title"
-      className="relative overflow-hidden bg-[#F5FAFC] py-12 md:py-16"
+      className="relative overflow-hidden py-12 md:py-16"
     >
-      <div className="mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <header className="mx-auto mb-8 max-w-[700px] text-center md:mb-12">
           <h2 id="bestsellers-title" className="section-heading">
             Explore Our <span className="text-secondary-dark">Products.</span>
@@ -375,32 +375,14 @@ export default function CardSlider({ currentProduct = null }) {
           observer={true}
           observeParents={true}
           breakpoints={{
-            480: {
-              slidesPerView: 2,
-              spaceBetween: 12,
-            },
-            640: {
-              slidesPerView: 3,
-              spaceBetween: 16,
-            },
-            768: {
-              slidesPerView: 4,
-              spaceBetween: 18,
-            },
-            1024: {
-              slidesPerView: 5,
-              spaceBetween: 18,
-            },
-            1280: {
-              slidesPerView: 6,
-              spaceBetween: 20,
-            },
-            1440: {
-              slidesPerView: 7,
-              spaceBetween: 20,
-            },
+            480: { slidesPerView: 2, spaceBetween: 12 },
+            640: { slidesPerView: 3, spaceBetween: 16 },
+            768: { slidesPerView: 4, spaceBetween: 18 },
+            1024: { slidesPerView: 5, spaceBetween: 18 },
+            1280: { slidesPerView: 6, spaceBetween: 20 },
+            1440: { slidesPerView: 7, spaceBetween: 20 },
           }}
-          className="!overflow-visible"
+          className="!overflow-hidden"
           aria-label="Research peptide product slider"
         >
           {sliderProducts.map((product) => (

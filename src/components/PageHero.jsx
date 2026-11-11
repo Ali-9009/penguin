@@ -1,6 +1,26 @@
 "use client";
 
-import { Snowflake, ShieldCheck, Sparkles } from "lucide-react";
+import {
+  Snowflake,
+  ShieldCheck,
+  Sparkles,
+  FileCheck2,
+  FlaskConical,
+  Headphones,
+  PackageSearch,
+  SunSnow,
+  CloudSnow,
+} from "lucide-react";
+
+const HERO_ICONS = {
+  snowflake: Snowflake,
+  file: FileCheck2,
+  flask: FlaskConical,
+  headphones: Headphones,
+  package: PackageSearch,
+  sun: SunSnow,
+  cloud: CloudSnow,
+};
 
 const heroStars = Array.from({ length: 45 }, (_, i) => ({
   id: i,
@@ -24,7 +44,9 @@ export default function PageHero({
   highlight,
   description,
   features = [],
+  icon = "snowflake",
 }) {
+  const HeroIcon = HERO_ICONS[icon] || Snowflake;
   return (
     <header className="relative isolate overflow-hidden border-b border-white/10 bg-[linear-gradient(125deg,#020B1C_0%,#041B35_35%,#073B68_75%,#07558F_100%)] px-4 py-12 sm:px-6 md:py-16 lg:px-8">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_80%_45%,rgba(4,193,202,0.15),transparent_45%),radial-gradient(ellipse_at_15%_100%,rgba(7,85,143,0.3),transparent_50%)]" />
@@ -118,19 +140,19 @@ export default function PageHero({
           <div className="absolute h-[280px] w-[280px] rounded-full bg-cyan-400/10 blur-[65px]" />
 
           <div className="coa-main-flake relative flex h-[250px] w-[250px] items-center justify-center">
-            <Snowflake
+            <HeroIcon
               size={245}
               strokeWidth={0.7}
               className="absolute text-cyan-300/15 blur-[9px]"
             />
 
-            <Snowflake
+            <HeroIcon
               size={235}
               strokeWidth={0.8}
               className="absolute text-cyan-100/90 drop-shadow-[0_0_25px_rgba(103,232,249,0.55)]"
             />
 
-            <Snowflake
+            <HeroIcon
               size={140}
               strokeWidth={0.65}
               className="absolute text-white/50"

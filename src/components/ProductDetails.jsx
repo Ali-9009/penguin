@@ -587,11 +587,19 @@ export default function ProductDetails({ product }) {
 
             {/* PRODUCT NAME */}
 
-            <h1 className="font-heading mt-4 text-[clamp(30px,3.5vw,48px)] leading-[1.1] font-semibold tracking-[-0.06em] text-[#29232D]">
-              {product.name}
-            </h1>
+            <div className="flex flex-col items-start gap-2 mt-2">
+              <h1 className="font-heading text-[clamp(30px,3.5vw,48px)] leading-[1.1] font-semibold tracking-[-0.06em] text-[#29232D]">
+                {product.name}
+              </h1>
 
-            <div className="my-5 h-px bg-[#EEE7EF]" />
+              <div className="text-left">
+                <p className="font-heading text-primary text-[28px] font-semibold tracking-tight lg:text-[clamp(18px,1.8vw,28px)]">
+                  {hasPrice ? money(totalPrice) : "Unavailable"}
+                </p>
+              </div>
+            </div>
+
+            <div className="my-3 h-px bg-[#EEE7EF]" />
 
             {/* STRENGTHS */}
             <Strengths
@@ -631,12 +639,6 @@ export default function ProductDetails({ product }) {
                     <ShoppingBag size={17} className="shrink-0" />
                     <span>{canAdd ? "Add to Cart" : "Unavailable"}</span>
                   </button>
-                </div>
-
-                <div className="order-1 ml-auto shrink-0 text-right lg:order-none">
-                  <p className="font-heading text-primary text-[28px] font-semibold tracking-tight whitespace-nowrap lg:text-[clamp(18px,1.8vw,28px)]">
-                    {hasPrice ? money(totalPrice) : "Unavailable"}
-                  </p>
                 </div>
               </div>
             </div>

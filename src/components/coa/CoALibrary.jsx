@@ -7,7 +7,7 @@ import {
   FileCheck2,
   FileSearch,
   Search,
-  FileText,
+  SunSnow,
 } from "lucide-react";
 
 import { products } from "@/data/products";
@@ -218,6 +218,7 @@ export default function CoALibrary() {
         highlight="Analysis."
         description="Explore available product testing documentation and batch-specific analysis reports."
         features={["Batch Information", "Research Documentation"]}
+        icon="sun"
       />
 
       <section

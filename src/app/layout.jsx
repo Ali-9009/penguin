@@ -1,4 +1,5 @@
 import CartShell from "@/components/cart/CartShell";
+import FloatingCart from "@/components/FloatingCart";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import NewsletterPopup from "@/components/NewsletterPopup";
@@ -66,6 +67,7 @@ export default function RootLayout({ children }) {
         <CartShell>
           <ResearcherGate />
           <NewsletterPopup />
+          <FloatingCart />
           <Header />
           {children}
           <Footer />

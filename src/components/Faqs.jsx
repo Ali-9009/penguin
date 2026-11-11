@@ -115,7 +115,7 @@ export default function FAQ() {
     <section
       id="faqs"
       aria-labelledby="faq-heading"
-      className="bg-white px-4 py-12 sm:px-6 md:py-16 lg:px-8"
+      className="bg-[#F5FAFC] px-4 py-12 sm:px-6 md:py-16 lg:px-8"
     >
       <div className="mx-auto max-w-7xl">
         <header className="mx-auto mb-9 max-w-[650px] text-center sm:mb-12">

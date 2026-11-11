@@ -102,7 +102,7 @@ export default function ResearchCTA() {
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
-      className="relative isolate mt-10 flex min-h-110 w-full items-center justify-center overflow-hidden bg-[#041625] px-4 py-12 sm:min-h-120 sm:px-6 lg:min-h-140 lg:px-8"
+      className="relative isolate flex min-h-110 w-full items-center justify-center overflow-hidden bg-[#041625] px-4 py-12 sm:min-h-120 sm:px-6 lg:min-h-140 lg:px-8"
     >
       {/* =====================================
           BACKGROUND GRADIENT

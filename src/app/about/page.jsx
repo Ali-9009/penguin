@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import {
-  ArrowRight,
+ CloudSnow,
   ArrowUpRight,
   ChevronRight,
   FlaskConical,
@@ -57,6 +57,7 @@ export default function AboutUsPage() {
         title="About Penguin"
         highlight="Peptides."
         description="At Penguin Peptides, we believe meaningful scientific progress begins with curiosity, precision, and access to reliable research materials."
+        icon="cloud"
       />
 
       <section className="px-4 py-12 sm:px-6 md:py-16 lg:px-10">
