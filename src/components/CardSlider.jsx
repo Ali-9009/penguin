@@ -1,9 +1,12 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
-// import { useRouter } from "next/navigation";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+
+import "swiper/css";
 
 import {
   ArrowUpRight,
@@ -85,34 +88,34 @@ function ProductCard({ product }) {
 
   const productUrl = `/products/${product.slug}`;
 
-const handleAddToCart = async () => {
-  const inStock =
-    selectedVariant?.inStock !== false &&
-    (selectedVariant?.stock == null || Number(selectedVariant.stock) > 0);
+  const handleAddToCart = async () => {
+    const inStock =
+      selectedVariant?.inStock !== false &&
+      (selectedVariant?.stock == null || Number(selectedVariant.stock) > 0);
 
-  const hasPrice =
-    selectedVariant?.price != null &&
-    Number.isFinite(Number(selectedVariant.price));
+    const hasPrice =
+      selectedVariant?.price != null &&
+      Number.isFinite(Number(selectedVariant.price));
 
-  if (adding || !inStock || !hasPrice) return;
+    if (adding || !inStock || !hasPrice) return;
 
-  setAdding(true);
+    setAdding(true);
 
-  try {
-    await addItem(product, selectedVariant, 1);
+    try {
+      await addItem(product, selectedVariant, 1);
 
-    setAdded(true);
-    setPanelOpen(false);
+      setAdded(true);
+      setPanelOpen(false);
 
-    window.setTimeout(() => {
-      setAdded(false);
-    }, 1800);
-  } catch (error) {
-    console.error("Unable to add product to cart:", error);
-  } finally {
-    setAdding(false);
-  }
-};
+      window.setTimeout(() => {
+        setAdded(false);
+      }, 1800);
+    } catch (error) {
+      console.error("Unable to add product to cart:", error);
+    } finally {
+      setAdding(false);
+    }
+  };
 
   const handlePrimaryAction = () => {
     if (hasMultipleVariants && !panelOpen) {
@@ -124,7 +127,7 @@ const handleAddToCart = async () => {
   };
 
   return (
-    <article className="group relative flex h-full min-h-[240px] min-w-0 flex-col overflow-hidden rounded-[18px] border border-[#DCEAF0] bg-white shadow-[0_5px_20px_rgba(7,85,143,0.045)] sm:min-h-[490px] sm:rounded-[22px]">
+    <article className="group relative flex h-full min-h-50 min-w-0 flex-col overflow-hidden rounded-[18px] border border-[#DCEAF0] bg-white shadow-[0_5px_20px_rgba(7,85,143,0.045)] sm:min-h-80 sm:rounded-[22px]">
       <Link
         href={productUrl}
         aria-label={`View ${product.name}`}
@@ -174,19 +177,19 @@ const handleAddToCart = async () => {
           )}
         </div>
 
-        <p className="mt-1 text-xs font-medium text-[#009CA9]">
+        {/* <p className="mt-1 text-xs font-medium text-[#009CA9]">
           {hasMultipleVariants
             ? `${variants.length} Strength Options`
             : selectedVariant?.label === "Standard"
               ? "Research Peptide"
               : selectedVariant?.label}
-        </p>
+        </p> */}
 
-        <p className="mt-3 line-clamp-2 min-h-[34px] font-sans text-[11px] leading-[1.6] text-[#718792] sm:min-h-[42px] sm:text-[13px]">
+        {/* <p className="mt-3 line-clamp-2 min-h-[34px] font-sans text-[11px] leading-[1.6] text-[#718792] sm:min-h-[42px] sm:text-[13px]">
           {product.shortDescription ||
             product.description ||
             "Research-focused peptide for laboratory applications."}
-        </p>
+        </p> */}
 
         <div className="mt-auto pt-5">
           <button
@@ -309,56 +312,35 @@ const handleAddToCart = async () => {
 }
 
 export default function CardSlider({ currentProduct = null }) {
-  const sliderRef = useRef(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(true);
+  const sortedProducts = useMemo(() => {
+    const displayProducts = products.filter(
+      (product) =>
+        product.active !== false && product.slug !== currentProduct?.slug,
+    );
 
-  const displayProducts = products.filter(
-    (product) =>
-      product.active !== false && product.slug !== currentProduct?.slug,
-  );
-
-  const sortedProducts = currentProduct
-    ? [...displayProducts]
-        .sort((a, b) => {
+    return currentProduct
+      ? [...displayProducts].sort((a, b) => {
           const aMatch = a.category === currentProduct.category ? 1 : 0;
+
           const bMatch = b.category === currentProduct.category ? 1 : 0;
 
           return bMatch - aMatch;
         })
-        .slice(0, 8)
-    : displayProducts;
+      : displayProducts;
+  }, [currentProduct?.slug, currentProduct?.category]);
 
-  const updateScrollButtons = () => {
-    const slider = sliderRef.current;
+  const sliderProducts = useMemo(() => {
+    if (!sortedProducts.length) return [];
 
-    if (!slider) return;
+    return Array.from({ length: 4 }, (_, repeatIndex) =>
+      sortedProducts.map((product) => ({
+        ...product,
+        sliderKey: `${product.id ?? product.slug}-${repeatIndex}`,
+      })),
+    ).flat();
+  }, [sortedProducts]);
 
-    setCanScrollLeft(slider.scrollLeft > 5);
-
-    setCanScrollRight(
-      slider.scrollLeft + slider.clientWidth < slider.scrollWidth - 5,
-    );
-  };
-
-  const scrollSlider = (direction) => {
-    const slider = sliderRef.current;
-
-    if (!slider) return;
-
-    const card = slider.querySelector("[data-slider-item]");
-
-    if (!card) return;
-
-    const gap = parseFloat(window.getComputedStyle(slider).columnGap) || 0;
-
-    const scrollAmount = card.getBoundingClientRect().width + gap;
-
-    slider.scrollBy({
-      left: direction * scrollAmount,
-      behavior: "smooth",
-    });
-  };
+  if (!sortedProducts.length) return null;
 
   return (
     <section
@@ -366,62 +348,69 @@ export default function CardSlider({ currentProduct = null }) {
       aria-labelledby="bestsellers-title"
       className="relative overflow-hidden bg-[#F5FAFC] py-12 md:py-16"
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-8">
         <header className="mx-auto mb-8 max-w-[700px] text-center md:mb-12">
-          <h2 id="why-title" className="section-heading">
+          <h2 id="bestsellers-title" className="section-heading">
             Explore Our <span className="text-secondary-dark">Products.</span>
           </h2>
         </header>
 
-        <div className="relative">
-          <div
-            ref={sliderRef}
-            onScroll={updateScrollButtons}
-            className="flex snap-x snap-mandatory [scrollbar-width:none] items-stretch gap-3 overflow-x-auto scroll-smooth pb-5 sm:gap-5 lg:gap-6 [&::-webkit-scrollbar]:hidden"
-            aria-label="Research peptide product slider"
-          >
-            {sortedProducts.map((product) => (
-              <div
-                key={product.id ?? product.slug}
-                data-slider-item
-                className="w-[calc((100%-24px)/2.25)] min-w-0 shrink-0 snap-start sm:w-[calc((100%-40px)/2.5)] lg:w-[calc((100%-72px)/4)]"
-              >
+        <Swiper
+          modules={[Autoplay]}
+          loop={true}
+          speed={1000}
+          autoplay={{
+            delay: 1800,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: false,
+            waitForTransition: true,
+          }}
+          allowTouchMove={true}
+          simulateTouch={true}
+          grabCursor={true}
+          slidesPerView={2}
+          slidesPerGroup={1}
+          spaceBetween={10}
+          watchOverflow={false}
+          observer={true}
+          observeParents={true}
+          breakpoints={{
+            480: {
+              slidesPerView: 2,
+              spaceBetween: 12,
+            },
+            640: {
+              slidesPerView: 3,
+              spaceBetween: 16,
+            },
+            768: {
+              slidesPerView: 4,
+              spaceBetween: 18,
+            },
+            1024: {
+              slidesPerView: 5,
+              spaceBetween: 18,
+            },
+            1280: {
+              slidesPerView: 6,
+              spaceBetween: 20,
+            },
+            1440: {
+              slidesPerView: 7,
+              spaceBetween: 20,
+            },
+          }}
+          className="!overflow-visible"
+          aria-label="Research peptide product slider"
+        >
+          {sliderProducts.map((product) => (
+            <SwiperSlide key={product.sliderKey} className="!h-auto">
+              <div className="h-full">
                 <ProductCard product={product} />
               </div>
-            ))}
-          </div>
-
-          <div className="mt-4 flex items-center justify-between gap-4">
-            <div className="flex items-center gap-2">
-              <span className="h-1.5 w-10 rounded-full bg-linear-to-r from-[#07558F] to-[#04C1CA]" />
-            </div>
-
-            <nav
-              aria-label="Product slider controls"
-              className="flex items-center gap-2"
-            >
-              <button
-                type="button"
-                aria-label="Previous products"
-                onClick={() => scrollSlider(-1)}
-                disabled={!canScrollLeft}
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-[#DCEAF0] bg-white text-[#07558F] transition-all duration-300 hover:border-[#04C1CA] hover:bg-[#EAF8FA] disabled:cursor-not-allowed disabled:opacity-35 sm:h-11 sm:w-11"
-              >
-                <ChevronLeft size={20} />
-              </button>
-
-              <button
-                type="button"
-                aria-label="Next products"
-                onClick={() => scrollSlider(1)}
-                disabled={!canScrollRight}
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-r from-[#07558F] to-[#04AEBB] text-white shadow-[0_5px_15px_rgba(7,85,143,0.15)] transition-all duration-300 hover:from-[#073B68] hover:to-[#07558F] disabled:cursor-not-allowed disabled:opacity-35 sm:h-11 sm:w-11"
-              >
-                <ChevronRight size={20} />
-              </button>
-            </nav>
-          </div>
-        </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
     </section>
   );

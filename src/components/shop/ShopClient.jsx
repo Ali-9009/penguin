@@ -176,9 +176,11 @@ export default function ShopClient({ initialSearch = "" }) {
                   setSearch("");
                   setSort("featured");
                 }}
-                className="bg-primary hover:bg-primary-dark mt-5 rounded-full px-6 py-3 text-xs font-semibold text-white transition-colors"
+                className="group relative mt-5 inline-flex items-center justify-center overflow-hidden rounded-full bg-[linear-gradient(110deg,var(--color-primary),var(--color-secondary))] px-6 py-3 text-xs font-semibold text-white shadow-md transition-all duration-500 ease-out hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.98]"
               >
-                Clear Search
+                <span className="pointer-events-none absolute inset-0 bg-[linear-gradient(110deg,var(--color-primary-dark),var(--color-primary))] opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100" />
+
+                <span className="relative z-10">Clear Search</span>
               </button>
             </div>
           )}

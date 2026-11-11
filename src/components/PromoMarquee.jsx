@@ -54,8 +54,8 @@ function PromoItem({ promotion }) {
     <div className="flex shrink-0 items-center gap-6 pr-6 sm:gap-10 sm:pr-10 lg:gap-14 lg:pr-14">
       {/* ICON + TEXT */}
       <div className="flex shrink-0 items-center gap-3 sm:gap-4">
-        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/20 bg-white/10 text-[#8AF0F1] backdrop-blur-sm sm:h-10 sm:w-10">
-          <Icon size={18} strokeWidth={1.7} />
+        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/20 bg-white/10 text-[#8AF0F1] backdrop-blur-sm sm:h-8 sm:w-8">
+          <Icon size={16} strokeWidth={1.7} />
         </span>
 
         <span className="font-heading text-[13px] font-semibold tracking-[-0.02em] whitespace-nowrap text-white sm:text-[16px] lg:text-[18px]">
@@ -79,7 +79,7 @@ export default function PromoMarquee() {
   return (
     <section
       aria-label="Penguin Peptides highlights"
-      className="relative z-30 w-full overflow-hidden bg-gradient-to-r from-[#073B68] via-[#07558F] to-[#009CA9] py-4 sm:py-5"
+      className="relative z-30 w-full overflow-hidden bg-linear-to-r from-[#073B68] via-[#07558F] to-[#009CA9] py-3 sm:py-3"
     >
       {/* SUBTLE BACKGROUND GLOW */}
       <div

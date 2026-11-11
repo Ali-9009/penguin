@@ -1,15 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-import {
-  Plus,
-  ArrowUpRight,
-  Headphones,
-  Sparkles,
-  MessageCircle,
-  FlaskConical,
-} from "lucide-react";
+import { Plus } from "lucide-react";
 
 const faqs = [
   {
@@ -59,21 +51,7 @@ function FAQItem({ faq, index, isOpen, onToggle }) {
   const buttonId = `faq-button-${index}`;
 
   return (
-    <article
-      className={`group relative overflow-hidden rounded-[18px] border transition-all duration-300 sm:rounded-[22px] ${
-        isOpen
-          ? "border-[#B8DFE9] bg-gradient-to-br from-[#F1FAFC] via-white to-white shadow-[0_12px_35px_rgba(7,85,143,0.05)]"
-          : "border-[#E2EDF2] bg-white hover:border-[#BDDDE6] hover:bg-[#FAFDFE]"
-      } `}
-    >
-      {/* ACCENT BAR */}
-
-      <div
-        className={`from-primary to-secondary absolute top-0 left-0 h-full w-[3px] bg-gradient-to-b transition-opacity duration-300 ${isOpen ? "opacity-100" : "opacity-0"} `}
-      />
-
-      {/* QUESTION */}
-
+    <article className="group border-b border-[#E2EAF0] first:border-t">
       <h3>
         <button
           id={buttonId}
@@ -81,37 +59,35 @@ function FAQItem({ faq, index, isOpen, onToggle }) {
           aria-expanded={isOpen}
           aria-controls={contentId}
           onClick={onToggle}
-          className="flex w-full items-center justify-between gap-4 px-4 py-5 text-left sm:gap-6 sm:px-6 sm:py-6 lg:px-7"
+          className="flex w-full items-center justify-between gap-5 py-5 text-left sm:py-6"
         >
-          {/* NUMBER + QUESTION */}
-
-          <span className="flex min-w-0 items-start gap-3 sm:gap-5">
-            <span
-              className={`font-heading text-[14px] leading-[1.5] font-semibold tracking-[-0.025em] transition-colors duration-300 sm:text-[17px] lg:text-[18px] ${
-                isOpen
-                  ? "text-primary"
-                  : "group-hover:text-primary text-[#163443]"
-              } `}
-            >
-              {faq.question}
-            </span>
+          <span
+            className={`font-heading text-[15px] leading-6 font-semibold tracking-[-0.02em] transition-colors duration-200 sm:text-[17px] ${
+              isOpen
+                ? "text-primary"
+                : "group-hover:text-primary text-[#183846]"
+            }`}
+          >
+            {faq.question}
           </span>
 
-          {/* PLUS ICON */}
-
           <span
-            className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border transition-all duration-300 sm:h-10 sm:w-10 ${
+            className={`flex size-8 shrink-0 items-center justify-center rounded-full transition-colors duration-200 ${
               isOpen
-                ? "border-primary bg-primary rotate-45 text-white"
-                : "text-primary group-hover:border-primary/20 border-[#DCEAF0] bg-[#F4F9FB] group-hover:bg-[#E8F5F9]"
-            } `}
+                ? "text-primary bg-[#E8F5F9]"
+                : "bg-[#F3F7F9] text-[#68808C]"
+            }`}
           >
-            <Plus size={17} strokeWidth={1.8} />
+            <Plus
+              size={18}
+              strokeWidth={1.8}
+              className={`transition-transform duration-300 ${
+                isOpen ? "rotate-45" : ""
+              }`}
+            />
           </span>
         </button>
       </h3>
-
-      {/* ANSWER */}
 
       <div
         id={contentId}
@@ -120,18 +96,12 @@ function FAQItem({ faq, index, isOpen, onToggle }) {
         inert={!isOpen}
         className={`grid transition-[grid-template-rows,opacity] duration-300 ease-in-out ${
           isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-        } `}
+        }`}
       >
         <div className="min-h-0 overflow-hidden">
-          <div className="px-4 pb-6 sm:px-6 sm:pb-7 lg:px-7">
-            <div className="">
-              <div className="mb-4 h-px w-full bg-[#E4EFF2]" />
-
-              <p className="max-w-[600px] font-sans text-sm leading-[1.85] text-[#637985]">
-                {faq.answer}
-              </p>
-            </div>
-          </div>
+          <p className="max-w-[720px] pr-8 pb-6 text-[13px] leading-7 text-[#6B808A] sm:text-[14px] sm:leading-8">
+            {faq.answer}
+          </p>
         </div>
       </div>
     </article>
@@ -139,24 +109,16 @@ function FAQItem({ faq, index, isOpen, onToggle }) {
 }
 
 export default function FAQ() {
-  const [openIndex, setOpenIndex] = useState(0);
+  const [openIndex, setOpenIndex] = useState(null);
 
   return (
     <section
       id="faqs"
       aria-labelledby="faq-heading"
-      className="relative overflow-hidden bg-white px-4 py-12 sm:px-6 md:py-16 lg:px-8"
+      className="bg-white px-4 py-12 sm:px-6 md:py-16 lg:px-8"
     >
-      {/* BACKGROUND GLOW */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute top-0 -right-40 h-[500px] w-[500px] rounded-full bg-[#E9FAFC]/60 blur-[120px]"
-      />
-
-      <div className="relative mx-auto w-full max-w-7xl">
-        {/* SECTION HEADING */}
-
-        <div className="mx-auto mb-10 max-w-[650px] text-center sm:mb-14">
+      <div className="mx-auto max-w-7xl">
+        <header className="mx-auto mb-9 max-w-[650px] text-center sm:mb-12">
           <h2 id="faq-heading" className="section-heading">
             Frequently Asked{" "}
             <span className="text-secondary-dark">
@@ -164,16 +126,13 @@ export default function FAQ() {
             </span>
           </h2>
 
-          <p className="text-md mx-auto mt-4 max-w-[540px] font-sans leading-[1.8] text-[#6B808A]">
+          <p className="mx-auto mt-4 max-w-[540px] text-[13px] leading-7 text-[#6B808A] sm:text-[15px]">
             Find answers to common questions about our research products,
             ordering, and shipping.
           </p>
-        </div>
+        </header>
 
-        {/* FAQ GRID */}
-
-        {/* FAQ GRID - 2 COLUMNS WITH ACCORDION */}
-        <div className="mx-auto flex w-full max-w-4xl flex-col gap-3 sm:gap-4">
+        <div className="mx-auto w-full max-w-4xl">
           {faqs.map((faq, index) => (
             <FAQItem
               key={faq.question}

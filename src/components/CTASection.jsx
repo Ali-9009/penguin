@@ -221,7 +221,7 @@ export default function ResearchCTA() {
           {/* SECONDARY */}
 
           <Link
-            href="/about-us"
+            href="/about"
             className="group inline-flex h-10 items-center justify-center gap-2.5 rounded-full border border-white/20 bg-white/10 px-4 text-[12px] font-semibold text-white backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-white/50 hover:bg-white/15 sm:h-12 sm:px-8 sm:text-[13px]"
           >
             <FlaskConical size={17} />

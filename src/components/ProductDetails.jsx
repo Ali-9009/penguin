@@ -182,11 +182,11 @@ function Packs({ product, price, selectedPack, setSelectedPack, stock }) {
           </h2>
         </div>
         <span className="bg-primary rounded-full px-3 py-1.5 text-[11px] font-bold text-white">
-          UP TO 15% OFF
+          UP TO 20% OFF
         </span>
       </div>
 
-      <div className="grid grid-cols-3 gap-1.5 sm:gap-2">
+      <div className="grid grid-cols-2 gap-1.5 sm:gap-2 md:grid-cols-4">
         {PACK_OPTIONS.map((pack) => {
           const selected = selectedPack === pack.quantity;
           const unavailable = pack.quantity > stock;
@@ -242,7 +242,7 @@ function Packs({ product, price, selectedPack, setSelectedPack, stock }) {
 
               <div className="flex min-w-0 flex-col items-center gap-1">
                 <p className="font-heading text-primary text-sm leading-tight font-semibold whitespace-nowrap">
-                  {pack.quantity} Vials
+                  {pack.label}
                 </p>
                 <p className="text-xs font-bold whitespace-nowrap text-emerald-600">
                   {pack.discountPercent}% OFF
@@ -264,7 +264,7 @@ function Quantity({ value, onChange, max = 99 }) {
         aria-label="Decrease quantity"
         disabled={value <= 1}
         onClick={() => onChange(Math.max(1, value - 1))}
-        className="text-primary grid size-7 shrink-0 place-items-center rounded-full transition-colors hover:bg-[#F6E5F7] disabled:opacity-30 sm:size-8"
+        className="text-primary grid size-7 shrink-0 place-items-center rounded-full transition-colors hover:bg-[#e4f2fc] disabled:opacity-30 sm:size-8"
       >
         <Minus size={14} />
       </button>
@@ -278,7 +278,7 @@ function Quantity({ value, onChange, max = 99 }) {
         aria-label="Increase quantity"
         disabled={value >= max}
         onClick={() => onChange(Math.min(max, value + 1))}
-        className="text-primary grid size-7 shrink-0 place-items-center rounded-full transition-colors hover:bg-[#F6E5F7] disabled:opacity-30 sm:size-8"
+        className="text-primary grid size-7 shrink-0 place-items-center rounded-full transition-colors hover:bg-[#e4f2fc] disabled:opacity-30 sm:size-8"
       >
         <Plus size={14} />
       </button>
@@ -290,12 +290,12 @@ function Assurance({ product }) {
   const rows = [
     {
       icon: Package,
-      title: "Packaging",
-      description: "Securely packed for delivery.",
+      title: "Secure Packaging",
+      description: "Carefully packed for delivery.",
     },
     {
       icon: Truck,
-      title: "Shipping",
+      title: "Reliable Shipping",
       description: "Options shown at checkout.",
     },
     {
@@ -305,41 +305,70 @@ function Assurance({ product }) {
         ? "Certificate available."
         : "Available on request.",
       href: product.coa || "/contact",
-      text: product.coa ? "View Certificate" : "Contact Us",
       external: Boolean(product.coa),
     },
     {
       icon: Headphones,
-      title: "Support",
-      description: "Questions? We're here to help.",
+      title: "Customer Support",
+      description: "We're here to help.",
       href: "/contact",
-      text: "Contact Us",
     },
   ];
 
   return (
-    <section aria-label="Product services" className="mt-8">
-      <div className="grid grid-cols-2 gap-2">
+    <section aria-label="Product services" className="mt-5">
+      <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
         {rows.map((row) => {
           const Icon = row.icon;
-          return (
-            <article
-              key={row.title}
-              className="flex min-w-0 items-start gap-2.5 rounded-xl border border-[#E9E1E9] bg-[#FAF7FA] p-3"
-            >
-              <Icon
-                size={20}
-                strokeWidth={1.7}
-                className="text-primary mt-0.5 shrink-0"
-              />
-              <div className="min-w-0">
-                <h3 className="font-heading text-primary text-sm font-semibold">
+
+          const content = (
+            <div className="flex min-w-0 items-start gap-2.5">
+              <span className="text-primary flex size-8 shrink-0 items-center justify-center rounded-lg border border-[#D0EAF0] bg-white sm:size-9">
+                <Icon size={17} strokeWidth={1.7} />
+              </span>
+
+              <div className="min-w-0 flex-1">
+                <h3 className="font-heading text-primary text-[11px] leading-5 font-bold sm:text-[12px]">
                   {row.title}
                 </h3>
-                <p className="text-muted mt-1 text-xs leading-5">
+
+                <p className="mt-0.5 text-[10px] leading-[1.5] text-[#68818D] sm:text-[11px]">
                   {row.description}
                 </p>
               </div>
+            </div>
+          );
+
+          const className =
+            "block min-w-0 rounded-xl border border-[#D7EAF0] bg-[linear-gradient(135deg,#FFFFFF_0%,#EFF9FB_100%)] p-3 transition-colors duration-200 hover:border-[#B8DCE6] sm:p-3.5";
+
+          if (row.href) {
+            return row.external ? (
+              <a
+                key={row.title}
+                href={row.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={className}
+                aria-label={row.title}
+              >
+                {content}
+              </a>
+            ) : (
+              <Link
+                key={row.title}
+                href={row.href}
+                className={className}
+                aria-label={row.title}
+              >
+                {content}
+              </Link>
+            );
+          }
+
+          return (
+            <article key={row.title} className={className}>
+              {content}
             </article>
           );
         })}
@@ -348,12 +377,9 @@ function Assurance({ product }) {
   );
 }
 
-function ProductAccordion({ title, children, defaultOpen = false }) {
+function ProductAccordion({ title, children }) {
   return (
-    <details
-      open={defaultOpen ? true : undefined}
-      className="group border-b border-[#EEE7EF]"
-    >
+    <details className="group border-b border-[#EEE7EF]">
       <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 marker:hidden [&::-webkit-details-marker]:hidden">
         <span className="font-heading text-primary text-[16px] font-semibold sm:text-[17px]">
           {title}
@@ -541,8 +567,8 @@ export default function ProductDetails({ product }) {
 
   return (
     <main className="min-h-screen">
-      <section className="px-3 pt-8 sm:px-5 md:pt-10 lg:px-8">
-        <div className="mx-auto grid max-w-7xl items-start gap-8 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] lg:gap-10">
+      <section className="px-3 py-8 sm:px-5 md:py-12 lg:px-8">
+        <div className="mx-auto grid max-w-7xl items-start gap-8 lg:grid-cols-2 lg:gap-10">
           {/* LEFT - STICKY PRODUCT GALLERY */}
           <div className="min-w-0 lg:sticky lg:top-[110px] lg:self-start">
             <Gallery product={product} />
@@ -648,7 +674,7 @@ export default function ProductDetails({ product }) {
                         <tr
                           key={row.label}
                           className={
-                            index % 2 === 0 ? "bg-[#FBF8FC]" : "bg-white"
+                            index % 2 === 0 ? "bg-[#f0fffe]" : "bg-white"
                           }
                         >
                           <th
@@ -669,7 +695,7 @@ export default function ProductDetails({ product }) {
 
               {/* RESEARCH USE */}
               <ProductAccordion title="Research Use">
-                <div className="rounded-xl border border-[#EEE7EF] bg-[#FBF8FC] p-4">
+                <div className="rounded-xl border border-[#EEE7EF] p-4">
                   <div className="flex items-start gap-3">
                     <FileCheck2
                       size={20}

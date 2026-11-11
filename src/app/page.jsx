@@ -21,10 +21,6 @@ export default function HomePage() {
         aria-labelledby="hero-heading"
         className="relative h-[calc(100svh-110px)] w-full overflow-hidden bg-[#EAF7FA] sm:h-[calc(100svh-115px)] lg:h-[calc(100svh-110px)]"
       >
-        {/* =====================================
-      BACKGROUND IMAGES
-  ===================================== */}
-
         <div className="absolute inset-0">
           {/* MOBILE + TABLET */}
           <Image
@@ -88,7 +84,7 @@ export default function HomePage() {
               <h1
                 id="hero-heading"
                 data-hero-heading
-                className="font-heading text-primary max-w-[620px] text-[clamp(2rem,8vw,3.3rem)] leading-[1.08] font-extrabold tracking-[-0.055em] sm:text-[clamp(2.8rem,5vw,4rem)] lg:text-[clamp(3.2rem,4vw,4.8rem)]"
+                className="font-heading text-primary max-w-[620px] text-[clamp(2.5rem,10vw,3.3rem)] leading-[1.08] font-extrabold tracking-[-0.055em] sm:text-[clamp(2.8rem,5vw,4rem)] lg:text-[clamp(3.2rem,4vw,4.8rem)]"
               >
                 Precision in
                 <br />
@@ -101,7 +97,7 @@ export default function HomePage() {
 
               <p
                 data-hero-description
-                className="mx-auto mt-4 max-w-[530px] font-sans text-[13px] leading-[1.7] sm:mt-6 sm:text-[16px] lg:mx-0"
+                className="mx-auto mt-4 max-w-[530px] font-sans text-sm leading-[1.7] sm:mt-6 sm:text-[16px] lg:mx-0"
               >
                 Discover premium research peptides in a variety of strengths and
                 formulations for laboratory research.
@@ -125,7 +121,7 @@ export default function HomePage() {
                 {/* SECONDARY BUTTON */}
 
                 <Link
-                  href="/about-us"
+                  href="/about"
                   className="group text-primary hover:border-primary inline-flex h-10 items-center justify-center gap-3 rounded-full border border-[#C8DEE8] bg-white/80 px-5 text-[12px] font-semibold shadow-[0_4px_15px_rgba(7,85,143,0.04)] backdrop-blur-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:bg-[#EAF7FA] hover:shadow-[0_10px_25px_rgba(7,85,143,0.10)] active:translate-y-0 sm:h-[52px] sm:px-8 sm:text-[14px]"
                 >
                   <span>Learn More</span>
@@ -178,7 +174,7 @@ export default function HomePage() {
       <WhyChooseUs />
 
       <section className="relative overflow-hidden px-4 py-12 sm:px-6 md:py-16 lg:px-8">
-        <div className="mx-auto grid w-full max-w-7xl items-center lg:grid-cols-2 lg:gap-10 gap-10">
+        <div className="mx-auto grid w-full max-w-7xl items-center gap-10 lg:grid-cols-2 lg:gap-10">
           <div className="">
             <span className="mb-5 inline-flex rounded-full border border-[#D7EAF0] bg-[#F2FAFC] px-4 py-2 text-[10px] font-bold tracking-[0.14em] text-[#07558F] uppercase">
               Discover Penguin Peptides
@@ -203,7 +199,7 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div className="relative mx-auto w-full max-w-[540px] px-5 pt-7 pb-10 sm:px-10 sm:pt-10 sm:pb-14">
+          <div className="relative mx-auto w-full max-w-[540px]">
             <div className="relative aspect-[1.12/1] overflow-hidden rounded-[26px] bg-[#E8F7FA] shadow-[0_20px_55px_rgba(7,85,143,0.12)] sm:rounded-[34px]">
               <Image
                 src="/assets/home-info.png"
@@ -214,7 +210,7 @@ export default function HomePage() {
               />
             </div>
 
-            <div className="absolute top-0 left-0 z-10 flex h-[100px] w-[100px] flex-col items-center justify-center rounded-full border-[5px] border-white bg-gradient-to-br from-[#073B68] to-[#04C1CA] text-center text-white shadow-[0_12px_30px_rgba(7,85,143,0.2)] sm:h-[130px] sm:w-[130px]">
+            <div className="absolute -top-3 -left-3 z-10 flex h-[100px] w-[100px] flex-col items-center justify-center rounded-full border-[5px] border-white bg-gradient-to-br from-[#073B68] to-[#04C1CA] text-center text-white shadow-[0_12px_30px_rgba(7,85,143,0.2)] sm:h-[130px] sm:w-[130px]">
               <ShieldCheck size={24} strokeWidth={1.7} />
               <span className="mt-1.5 text-[10px] font-bold tracking-[0.08em] uppercase sm:text-[12px]">
                 Research

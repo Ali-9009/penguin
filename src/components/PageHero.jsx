@@ -67,11 +67,11 @@ export default function PageHero({
 
       <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.15fr_0.85fr]">
         <div className="max-w-2xl">
-          <h1 className="font-heading text-[42px] leading-[1.1] font-bold tracking-tight text-white sm:text-5xl lg:text-[64px]">
+          <h1 className="font-heading text-[clamp(38px,10vw,48px)] leading-[1.1] font-bold tracking-tight text-white sm:text-[52px] lg:text-[64px]">
             {title}
 
             {highlight && (
-              <span className="to-secondary mt-1 block bg-gradient-to-r from-cyan-200 via-cyan-300 bg-clip-text text-transparent">
+              <span className="mt-1 block bg-gradient-to-r from-cyan-200 via-cyan-300 bg-clip-text text-transparent">
                 {highlight}
               </span>
             )}

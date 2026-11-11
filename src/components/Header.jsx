@@ -72,7 +72,7 @@ function AnnouncementBar() {
 
       <div className="relative z-10 mx-auto flex max-w-7xl items-center justify-center px-2">
         <div className="font-heading flex flex-wrap items-center justify-center gap-x-2 gap-y-2 text-center sm:gap-x-3">
-          <span className="inline-flex shrink-0 items-center rounded-lg bg-gradient-to-r from-[#A3F7F4] to-[#04C1CA] px-3.5 py-1.5 text-[11px] font-extrabold tracking-[0.02em] text-[#073B68] shadow-[0_4px_14px_rgba(4,193,202,0.25)] sm:text-[12px]">
+          <span className="inline-flex shrink-0 items-center rounded-lg bg-gradient-to-r from-[#A3F7F4] to-[#04C1CA] px-2 py-1.5 text-[11px] font-extrabold tracking-[0.02em] text-[#073B68] shadow-[0_4px_14px_rgba(4,193,202,0.25)] sm:text-[12px]">
             40% OFF
           </span>
 
@@ -83,11 +83,9 @@ function AnnouncementBar() {
             +
           </span>
 
-          <p className="text-[11px] leading-relaxed text-white sm:text-[13px]">
+          <p className="text-sm leading-relaxed text-white">
             <span className="font-bold text-white">FREE Peptide</span>{" "}
-            <span className="font-medium text-white/80">
-              per $150 Spent After Discount
-            </span>
+            <span className="font-medium">per $150 Spent</span>
           </p>
         </div>
       </div>
@@ -178,7 +176,7 @@ function MobileSidebar({ open, onClose, pathname }) {
             type="button"
             onClick={onClose}
             aria-label="Close menu"
-            className="text-primary hover:bg-primary flex size-9 items-center justify-center rounded-full bg-[#F6E5F7] transition-colors hover:text-white"
+            className="text-primary hover:bg-primary flex size-9 items-center justify-center rounded-full bg-[#E3F2FF] transition-colors hover:text-white"
           >
             <X size={20} />
           </button>
@@ -206,8 +204,8 @@ function MobileSidebar({ open, onClose, pathname }) {
                   aria-current={active ? "page" : undefined}
                   className={`flex items-center justify-between rounded-xl px-4 py-3.5 font-sans text-sm font-semibold transition-colors ${
                     active
-                      ? "text-primary bg-[#F6E5F7]"
-                      : "hover:text-primary text-[#514653] hover:bg-[#FAF5FB]"
+                      ? "text-primary bg-[#E3F2FF]"
+                      : "hover:text-primary text-[#514653]"
                   }`}
                 >
                   {link.name}
@@ -335,7 +333,7 @@ export default function Header() {
             })}
           </nav>
 
-          <div className="flex items-center justify-end gap-1 sm:gap-2">
+          <div className="flex items-center justify-end">
             <button
               type="button"
               data-header-search-trigger
@@ -383,7 +381,7 @@ export default function Header() {
               aria-label="Open navigation menu"
               aria-expanded={menuOpen}
               aria-controls="mobile-navigation"
-              className="text-primary flex h-10 w-10 items-center justify-center rounded-full transition-all duration-300 hover:bg-[#F6E5F7] sm:h-11 sm:w-11 lg:hidden"
+              className="text-primary flex h-10 w-10 items-center justify-center rounded-full transition-all duration-300 hover:bg-[#E3F2FF] sm:h-11 sm:w-11 lg:hidden"
             >
               <Menu size={24} strokeWidth={1.8} />
             </button>

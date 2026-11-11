@@ -101,7 +101,7 @@ export default function QuickView({ product, onClose }) {
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-[#1B1020]/65 p-3 backdrop-blur-sm sm:p-5"
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-[#1B1020]/65 p-2 backdrop-blur-sm sm:p-5"
       onMouseDown={(event) => {
         if (event.target === event.currentTarget) onClose();
       }}
@@ -110,18 +110,18 @@ export default function QuickView({ product, onClose }) {
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
-        className="relative max-h-[95dvh] w-full max-w-[1040px] overflow-y-auto rounded-[22px] bg-white p-3 shadow-2xl sm:p-4 lg:rounded-[26px]"
+        className="relative max-h-[95dvh] w-full max-w-[1040px] overflow-y-auto rounded-[22px] bg-white p-2 shadow-2xl sm:p-4 lg:rounded-[26px]"
       >
         <button
           type="button"
           onClick={onClose}
           aria-label="Close quick view"
-          className="text-primary hover:bg-primary absolute top-5 right-5 z-30 flex size-10 items-center justify-center rounded-full bg-[#F7F3F8] shadow-sm transition-all duration-300 hover:text-white sm:top-4 sm:right-4"
+          className="text-primary hover:bg-primary absolute top-5 right-5 z-30 flex size-10 items-center justify-center rounded-full bg-[#e5f0f7] shadow-sm transition-all duration-300 hover:text-white sm:top-4 sm:right-4"
         >
           <X size={20} />
         </button>
 
-        <div className="grid gap-4 md:grid-cols-[40%_minmax(0,1fr)]">
+        <div className="grid gap-3 md:grid-cols-[40%_minmax(0,1fr)]">
           <div className="relative flex min-h-[260px] flex-col overflow-hidden rounded-[20px] border border-[#EEE7F0] bg-[#FBF9FC] sm:min-h-[340px] md:min-h-[440px]">
             <div className="relative flex flex-1 items-center justify-center p-5 sm:p-8">
               {product.image ? (
@@ -160,7 +160,7 @@ export default function QuickView({ product, onClose }) {
               </h2>
             </div>
 
-            <div className="my-4 h-px w-full bg-[#F0EAF1]" />
+            <div className="my-2 h-px w-full bg-[#F0EAF1]" />
 
             <div className="flex flex-wrap items-center gap-3">
               <span className="text-muted w-[70px] shrink-0 font-sans text-xs font-semibold tracking-[0.12em] uppercase">
@@ -198,12 +198,12 @@ export default function QuickView({ product, onClose }) {
                 Bundle & Save
               </h3>
 
-              <span className="text-secondary rounded-full bg-[#FFF0E5] px-3 py-1.5 font-sans text-[10px] font-bold">
-                Up to 15% OFF
+              <span className="bg-primary rounded-full px-3 py-1.5 font-sans text-[10px] font-bold text-white">
+                Up to 20% OFF
               </span>
             </div>
 
-            <div className="grid grid-cols-3 gap-1.5 sm:gap-2">
+            <div className="grid grid-cols-2 gap-1.5 sm:gap-2 md:grid-cols-4">
               {PACK_OPTIONS.map((item) => {
                 const selected = selectedPack === item.quantity;
 
@@ -270,7 +270,7 @@ export default function QuickView({ product, onClose }) {
                     {/* BUNDLE DETAILS */}
                     <div className="flex flex-col items-center gap-1">
                       <p className="font-heading text-primary text-sm leading-tight font-semibold whitespace-nowrap">
-                        {item.quantity} Vials
+                        {item.label}
                       </p>
 
                       <p className="text-xs font-bold whitespace-nowrap text-emerald-600">
@@ -290,7 +290,7 @@ export default function QuickView({ product, onClose }) {
                     onClick={() => setQuantity((q) => Math.max(1, q - 1))}
                     disabled={quantity <= 1}
                     aria-label="Decrease quantity"
-                    className="text-primary flex size-8 shrink-0 items-center justify-center rounded-full transition-colors hover:bg-[#F6E5F7] disabled:opacity-30"
+                    className="text-primary flex size-8 shrink-0 items-center justify-center rounded-full transition-colors hover:bg-[#e5f0f7] disabled:opacity-30"
                   >
                     <Minus size={15} />
                   </button>
@@ -304,7 +304,7 @@ export default function QuickView({ product, onClose }) {
                     onClick={() => setQuantity((q) => Math.min(stock, q + 1))}
                     disabled={variant?.inStock === false || quantity >= stock}
                     aria-label="Increase quantity"
-                    className="text-primary flex size-8 shrink-0 items-center justify-center rounded-full transition-colors hover:bg-[#F6E5F7] disabled:opacity-30"
+                    className="text-primary flex size-8 shrink-0 items-center justify-center rounded-full transition-colors hover:bg-[#e5f0f7] disabled:opacity-30"
                   >
                     <Plus size={15} />
                   </button>

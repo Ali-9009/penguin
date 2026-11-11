@@ -48,7 +48,9 @@ export default function ResearcherGate() {
       localStorage.setItem(STORAGE_KEY, "accepted");
     } catch {}
 
-    window.location.reload();
+    setPhase("accepted");
+
+    window.dispatchEvent(new Event("researcher-gate:accepted"));
   };
 
   if (phase === "accepted" || phase === "checking") return null;
@@ -56,9 +58,7 @@ export default function ResearcherGate() {
   return (
     <div
       className={`fixed inset-0 z-[99999] flex items-center justify-center px-4 py-6 sm:px-6 ${
-        phase === "prompt"
-          ? "bg-[#211126]/70 backdrop-blur-md"
-          : "bg-transparent"
+        phase === "prompt" ? "bg-black/70 backdrop-blur-md" : "bg-transparent"
       }`}
     >
       {phase === "prompt" && (
@@ -67,12 +67,12 @@ export default function ResearcherGate() {
           aria-modal="true"
           aria-labelledby="verification-title"
           aria-describedby="verification-description"
-          className="w-full max-w-[540px] rounded-[24px] border border-[#EADDEC] bg-white p-6 shadow-[0_30px_90px_rgba(30,10,40,0.25)] sm:p-9"
+          className="w-full max-w-[540px] rounded-3xl border border-[#EADDEC] bg-white p-6 shadow-[0_30px_90px_rgba(30,10,40,0.25)] sm:p-9"
         >
           <div className="mb-6 flex justify-center">
             <Image
-              src="/assets/spectrum-logo.png"
-              alt="Spectrum Biosciences"
+              src="/assets/penguin-logo.png"
+              alt="penguin"
               width={200}
               height={70}
               priority
@@ -102,7 +102,7 @@ export default function ResearcherGate() {
                 type="checkbox"
                 checked={ageConfirmed}
                 onChange={(event) => setAgeConfirmed(event.target.checked)}
-                className="mt-1 size-5 shrink-0 accent-[#55205F]"
+                className="accent-primary mt-1 size-5 shrink-0"
               />
 
               <span className="text-[14px] leading-6 text-[#443849] sm:text-[15px]">
@@ -118,7 +118,7 @@ export default function ResearcherGate() {
                 type="checkbox"
                 checked={researchConfirmed}
                 onChange={(event) => setResearchConfirmed(event.target.checked)}
-                className="mt-1 size-5 shrink-0 accent-[#55205F]"
+                className="accent-primary mt-1 size-5 shrink-0"
               />
 
               <span className="text-[14px] text-[#443849] sm:text-[15px]">
@@ -139,10 +139,16 @@ export default function ResearcherGate() {
             type="button"
             onClick={handleContinue}
             disabled={!ageConfirmed || !researchConfirmed}
-            className="bg-primary mt-6 flex h-13 w-full items-center justify-center gap-3 rounded-full text-sm font-semibold text-white transition-all duration-300 hover:bg-[#35143E] disabled:cursor-not-allowed disabled:bg-[#DDD3E0] disabled:text-[#8E8292]"
+            className="group relative mt-6 flex h-13 w-full items-center justify-center gap-3 overflow-hidden rounded-full bg-[linear-gradient(110deg,var(--color-primary),var(--color-secondary))] text-sm font-semibold text-white shadow-md transition-all duration-500 ease-out hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.98] disabled:cursor-not-allowed disabled:bg-[#DDD3E0] disabled:bg-none disabled:text-[#8E8292] disabled:shadow-none disabled:hover:translate-y-0"
           >
-            Enter Spectrum
-            <ArrowRight size={19} />
+            <span className="pointer-events-none absolute inset-0 bg-[linear-gradient(110deg,var(--color-primary-dark),var(--color-primary))] opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100 group-disabled:opacity-0" />
+
+            <span className="relative z-10">Enter Penguin Peptides</span>
+
+            <ArrowRight
+              size={19}
+              className="relative z-10 transition-transform duration-300 group-hover:translate-x-1 group-disabled:translate-x-0"
+            />
           </button>
 
           <p className="mt-6 text-[12px] text-[#8A7D8F]">

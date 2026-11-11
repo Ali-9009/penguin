@@ -8,6 +8,7 @@ import {
   FileCheck2,
   Microscope,
   ShieldCheck,
+  Check,
 } from "lucide-react";
 import { ScanLine, ArrowDownRight, Sparkles } from "lucide-react";
 import PageHero from "@/components/PageHero";
@@ -250,6 +251,73 @@ export default function AboutUsPage() {
                 </p>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto grid max-w-7xl items-center gap-8 lg:grid-cols-2 lg:gap-14">
+          <div className="relative min-h-90 overflow-hidden rounded-[22px] bg-[linear-gradient(135deg,#FFFFFF_0%,#E8F7FA_100%)] sm:min-h-130 lg:min-h-[480px]">
+            <Image
+              src="/assets/about-penguin.png"
+              alt="Penguin Peptides research products"
+              fill
+              sizes="(max-width: 767px) 100vw, 50vw"
+              className="object-cover"
+            />
+          </div>
+
+          <div className="min-w-0">
+            <h2 className="font-heading text-primary text-[32px] leading-[1.15] font-bold tracking-[-0.04em] sm:text-[42px] lg:text-[48px]">
+              About Penguin Peptides
+            </h2>
+
+            <p className="mt-5 max-w-xl text-sm leading-8 text-[#617987] sm:text-[15px]">
+              At Penguin Peptides, our mission is to fuel scientific progress by
+              delivering top-tier peptides at prices that make research
+              accessible. We are committed to sourcing premium-grade peptides
+              from certified North American manufacturers who adhere to
+              stringent WHO/GMP and ISO 9001:2008 standards. By prioritizing
+              quality and affordability, we empower researchers to push the
+              boundaries of discovery without compromise.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white px-4 py-12 sm:px-6 md:py-16 lg:px-8">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-14">
+          <div className="order-2 min-w-0 lg:order-1">
+            <h2 className="font-heading text-primary text-[32px] leading-[1.15] font-bold tracking-[-0.04em] sm:text-[42px] lg:text-[48px]">
+              Trusted Peptides, Secure Ordering, Exceptional Service
+            </h2>
+
+            <p className="mt-5 max-w-xl text-sm leading-8 text-[#617987] sm:text-[15px]">
+              As a trusted U.S.-based supplier, we ensure every peptide
+              undergoes rigorous third-party testing for purity and reliability,
+              giving you confidence in your results. Our streamlined, secure
+              online platform makes ordering simple and discreet, with
+              cutting-edge SSL encryption safeguarding your data. At Penguin
+              Peptides, we blend exceptional customer service with competitive
+              pricing, offering a seamless experience for researchers seeking
+              high-purity peptides.
+            </p>
+
+            <p className="mt-5 max-w-xl text-sm leading-8 text-[#617987] sm:text-[15px]">
+              We’re proud to support the scientific community with dependable
+              products and unwavering dedication. Choose Penguin Peptides as
+              your partner in advancing knowledge, one breakthrough at a time.
+            </p>
+          </div>
+
+          <div className="relative order-1 min-h-90 overflow-hidden rounded-[22px] bg-[linear-gradient(135deg,#FFFFFF_0%,#E8F7FA_100%)] sm:min-h-130 lg:order-2 lg:min-h-[480px]">
+            <Image
+              src="/assets/about-penguin-1.png"
+              alt="Penguin Peptides research products"
+              fill
+              sizes="(max-width: 1023px) 100vw, 50vw"
+              className="object-cover"
+            />
           </div>
         </div>
       </section>

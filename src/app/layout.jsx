@@ -1,6 +1,8 @@
 import CartShell from "@/components/cart/CartShell";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import NewsletterPopup from "@/components/NewsletterPopup";
+import ResearcherGate from "@/components/ResearcherGate";
 import "@/styles/globals.css";
 
 import { Geist, Outfit } from "next/font/google";
@@ -59,12 +61,11 @@ const bodyFont = Geist({
 
 export default function RootLayout({ children }) {
   return (
-    <html
-      lang="en"
-      className={`${headingFont.variable} ${bodyFont.variable}`}
-    >
+    <html lang="en" className={`${headingFont.variable} ${bodyFont.variable}`}>
       <body className="antialiased">
         <CartShell>
+          <ResearcherGate />
+          <NewsletterPopup />
           <Header />
           {children}
           <Footer />
