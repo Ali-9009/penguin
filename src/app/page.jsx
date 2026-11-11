@@ -175,7 +175,6 @@ export default function HomePage() {
 
       <ProductGrid />
       <WhyChooseUs />
-      <AnimatedIcon  src="/assets/wired.json" size={65} color="#009CA9" />
 
       <section className="relative overflow-hidden px-4 pt-12 sm:px-6 md:pt-16 lg:px-8">
         <div className="mx-auto grid w-full max-w-7xl items-center gap-10 lg:grid-cols-2 lg:gap-10">
