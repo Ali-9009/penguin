@@ -97,11 +97,13 @@ function CoACard({ product }) {
       </div>
 
       <div className="flex min-w-0 flex-1 flex-col px-2.5 pt-3 pb-3 sm:px-5 sm:pt-5 sm:pb-5">
-        <h2 className="font-heading text-primary group-hover:text-secondary text-[13px] leading-[1.3] font-semibold tracking-[-0.03em] transition-colors sm:text-[18px]">
+        <h2 className="font-heading text-primary group-hover:text-secondary text-md leading-[1.3] font-semibold tracking-[-0.03em] transition-colors">
           {product.name}
         </h2>
 
-        <div className="mt-3 min-h-[26px] min-w-0 sm:min-h-[32px]">
+        <p className="text-sm text-gray-500 font-sans mt-2">Certificate added August 2026</p>
+
+        {/* <div className="mt-3 min-h-[26px] min-w-0 sm:min-h-[32px]">
           {variants.length > 1 && (
             <div
               role="group"
@@ -147,7 +149,7 @@ function CoACard({ product }) {
               )}
             </div>
           )}
-        </div>
+        </div> */}
 
         <div className="mt-auto pt-4 sm:pt-5">
           <a
