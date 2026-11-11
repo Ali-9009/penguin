@@ -181,16 +181,16 @@ export default function HomePage() {
             </span>
 
             <h2 className="section-heading">
-              Built for
+              Third Party Lab
               <br />
-              <span className="text-[#009CA9]">Scientific Discovery.</span>
+              <span className="text-[#009CA9]">Tested.</span>
             </h2>
 
             <p className="text-md mt-6 font-sans leading-[1.9] text-[#607F8B]">
-              At Penguin Peptides, we focus on providing a diverse selection of
-              research peptides for scientific and laboratory applications.
-              Explore our collection of compounds, available in different
-              strengths and formulations to support your research needs.
+              Third-party lab testing provides a neutral, unbiased source of
+              information. It benefits the consumer because it’s the most
+              transparent method. With an independent test, the company can’t
+              alter in-house results or publish inaccurate information.
             </p>
 
             <Link href="/shop" className="btn-gradient mt-7">
