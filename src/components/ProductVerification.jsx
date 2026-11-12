@@ -134,17 +134,14 @@ export default function ProductVerification() {
             </span>
           </div>
 
-          <h2
-            id="verification-heading"
-            className="section-heading"
-          >
+          <h2 id="verification-heading" className="section-heading">
             How to verify{" "}
             <span className="bg-gradient-to-r from-[#07558F] to-[#04C1CA] bg-clip-text text-transparent">
               each product.
             </span>
           </h2>
 
-          <p className="mt-4 max-w-[780px] font-sans text-md leading-[1.8] text-[#456E7C]">
+          <p className="text-md mt-4 max-w-[780px] font-sans leading-[1.8] text-[#456E7C]">
             Each compound comes with a scannable QR code, batch number, and COA
             number to help you verify its testing information.
           </p>

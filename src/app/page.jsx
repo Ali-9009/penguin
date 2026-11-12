@@ -3,6 +3,7 @@ import CardSlider from "@/components/CardSlider";
 import CTASection from "@/components/CTASection";
 import Faqs from "@/components/Faqs";
 import FiveChecks from "@/components/FiveChecks";
+import HowItWork from "@/components/HowItWork";
 // import Hero from "@/components/Hero";
 import HowItWorks from "@/components/HowItWorks";
 import AnimatedIcon from "@/components/PlayOnce";
@@ -229,9 +230,8 @@ export default function HomePage() {
 
       <ProductVerification />
 
-      <HowItWorks />
-
       <ResearchShowcase />
+      <HowItWork />
 
       <FiveChecks />
 
