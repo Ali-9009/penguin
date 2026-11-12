@@ -4,7 +4,6 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import AnimatedIcon from "@/components/PlayOnce";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -49,6 +48,27 @@ const checks = [
       "left-[72%] top-[76%] -translate-x-1/2 md:left-[74%] md:top-[77%]",
   },
 ];
+
+import { LordIcon } from "@lordicon/react";
+
+function AnimatedIcon({
+  src = "/assets/wired.json",
+  size = 60,
+  color = "#009CA9",
+}) {
+  return (
+    <LordIcon
+      src={src}
+      trigger="loop"
+      colorize={color}
+      style={{
+        width: size,
+        height: size,
+        display: "inline-block",
+      }}
+    />
+  );
+}
 
 function CheckItem({ check, iconRef }) {
   return (

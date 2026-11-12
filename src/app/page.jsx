@@ -1,13 +1,9 @@
-// import Bestsellers from "@/components/Bestsellers";
 import CardSlider from "@/components/CardSlider";
 import CTASection from "@/components/CTASection";
 import Faqs from "@/components/Faqs";
 import FiveChecks from "@/components/FiveChecks";
 import HowItWork from "@/components/HowItWork";
-// import Hero from "@/components/Hero";
-import HowItWorks from "@/components/HowItWorks";
-import AnimatedIcon from "@/components/PlayOnce";
-import PlayOnce from "@/components/PlayOnce";
+
 import ProductGrid from "@/components/ProductGrid";
 import ProductVerification from "@/components/ProductVerification";
 import PromoMarquee from "@/components/PromoMarquee";
