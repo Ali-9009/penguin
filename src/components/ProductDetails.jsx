@@ -587,7 +587,7 @@ export default function ProductDetails({ product }) {
 
             {/* PRODUCT NAME */}
 
-            <div className="flex flex-col items-start gap-2 mt-2">
+            <div className="mt-2 flex flex-col items-start gap-2">
               <h1 className="font-heading text-[clamp(30px,3.5vw,48px)] leading-[1.1] font-semibold tracking-[-0.06em] text-[#29232D]">
                 {product.name}
               </h1>
@@ -619,7 +619,7 @@ export default function ProductDetails({ product }) {
 
             {/* QUANTITY + PRICE + CART */}
             <div className="mt-6">
-              <div className="flex w-full min-w-0 flex-wrap items-center justify-between gap-4 lg:flex-nowrap lg:gap-3">
+              <div className="flex w-full min-w-0 flex-nowrap items-center gap-2 sm:gap-3">
                 <div className="shrink-0">
                   <Quantity
                     value={quantity}
@@ -628,16 +628,21 @@ export default function ProductDetails({ product }) {
                   />
                 </div>
 
-                <div className="order-2 w-full lg:order-none lg:min-w-0 lg:flex-1">
+                <div className="min-w-0 flex-1">
                   <button
                     ref={addToCartRef}
                     type="button"
                     disabled={!canAdd}
                     onClick={handleAddToCart}
-                    className="bg-primary hover:bg-primary-dark flex h-10 w-full items-center justify-center gap-2 rounded-full px-4 text-sm font-semibold text-white transition-all disabled:cursor-not-allowed disabled:opacity-50 sm:h-13"
+                    className="group relative flex h-10 w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-[linear-gradient(110deg,var(--color-primary),var(--color-secondary))] px-3 text-sm font-semibold text-white shadow-md transition-all duration-500 ease-out hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0 sm:h-13 sm:px-4"
                   >
-                    <ShoppingBag size={17} className="shrink-0" />
-                    <span>{canAdd ? "Add to Cart" : "Unavailable"}</span>
+                    <span className="pointer-events-none absolute inset-0 bg-[linear-gradient(110deg,var(--color-primary-dark),var(--color-primary))] opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100 group-disabled:opacity-0" />
+
+                    <ShoppingBag size={17} className="relative z-10 shrink-0" />
+
+                    <span className="relative z-10 whitespace-nowrap">
+                      {canAdd ? "Add to Cart" : "Unavailable"}
+                    </span>
                   </button>
                 </div>
               </div>
